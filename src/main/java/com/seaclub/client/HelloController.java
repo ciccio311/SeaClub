@@ -1,4 +1,4 @@
-package com.seaclub.seaclub;
+package com.seaclub.client;
 
 import com.seaclub.Model.ClubMember;
 import javafx.fxml.FXML;
@@ -14,10 +14,6 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        ClubMember m1 = new ClubMember();
-        m1.setName("BEPPE");
-        mimmo.setText("CIAO "+m1.getName());
-        welcomeText.setText("Welcome to JavaFX Application!");
     }
 
 }

@@ -6,6 +6,6 @@ module com.seaclub.seaclub {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.seaclub.seaclub to javafx.fxml;
-    exports com.seaclub.seaclub;
+    opens com.seaclub.client to javafx.fxml;
+    exports com.seaclub.client;
 }
