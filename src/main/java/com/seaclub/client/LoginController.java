@@ -1,5 +1,6 @@
 package com.seaclub.client;
 
+import com.seaclub.Model.ClubMember;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,14 +28,20 @@ public class LoginController {
         }
         else
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sign up.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
+            ClubMember clubMember = new ClubMember();
+            clubMember.setCF(username.getText());
+            clubMember.setPassword(password.getText());
+            clubMember = Client.getInstance().login(clubMember);
+            if(clubMember!=null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sign up.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
 
-            SignUpController hc = fxmlLoader.getController();
-            hc.show(username.getText());
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+                SignUpController hc = fxmlLoader.getController();
+                hc.show(clubMember.getAddress());
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
         }
     }
 }
