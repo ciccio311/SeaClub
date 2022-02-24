@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TextField fx:id="username" layoutX="175.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" promptText="Insert here your username..." AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="191.0">
+            <font>
+                <Font name="Verdana" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="63.0" layoutY="65.0" prefHeight="72.0" prefWidth="473.0" style="-fx-background-color: #AFEEEE; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="65.0" />
+        <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="46.0" prefWidth="413.0" text="Circolo velico ZaMa" textAlignment="CENTER" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="77.0">
+            <font>
+                <Font name="Verdana Bold" size="36.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="174.0" layoutY="161.0" prefHeight="26.0" prefWidth="240.0" text="Username" textAlignment="CENTER" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="161.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="176.0" layoutY="237.0" prefHeight="26.0" prefWidth="240.0" text="Password" textAlignment="CENTER" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="237.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="btnSignup" layoutX="227.0" layoutY="438.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Sign up" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="236.0">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnLogin" layoutX="223.0" layoutY="307.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="236.0" AnchorPane.topAnchor="307.0">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
+        <PasswordField fx:id="password" layoutX="176.0" layoutY="262.0" prefHeight="26.0" prefWidth="240.0" promptText="Insert here your password..." AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="262.0">
+            <font>
+                <Font name="Verdana" size="12.0" />
+            </font>
+        </PasswordField>
+      <Label alignment="CENTER" layoutX="177.0" layoutY="396.0" prefHeight="27.0" prefWidth="240.0" text="If you are not registered" textAlignment="CENTER" AnchorPane.bottomAnchor="76.8" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="183.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
