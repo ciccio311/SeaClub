@@ -1,4 +1,5 @@
 package com.seaclub.server;
+import com.seaclub.Manager.ClubMemberManager;
 import com.seaclub.Model.ClubMember;
 
 import java.sql.Connection;
@@ -69,12 +70,37 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
                         rset.getString("Nome"), rset.getString("Cognome"),
                         rset.getString("Indirizzo"), rset.getString("Password"));
                 members.add(member);
-
             }
+
+            ClubMemberManager.getInstance().setMembers(members);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addNewMember(ClubMember member){
+
+        String insertSql = "insert into socio values (?, ?, ?, ?, ?, ?)";
+
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new member
+            pstmt.setString(1, member.getCF());
+            pstmt.setInt(2,  member.getDipendente());
+            pstmt.setString(3, member.getName());
+            pstmt.setString(4, member.getSurname());
+            pstmt.setString(5, member.getAddress());
+            pstmt.setString(6, member.getPassword());
+
+            pstmt.execute();
+            System.out.println("User added to DB => " + member.getName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

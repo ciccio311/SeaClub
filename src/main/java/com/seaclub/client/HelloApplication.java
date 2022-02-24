@@ -1,4 +1,6 @@
 package com.seaclub.client;
+import com.seaclub.Manager.ClubMemberManager;
+import com.seaclub.Model.ClubMember;
 import com.seaclub.server.DB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +15,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setScene(scene);
-
-        DB.getInstance();
         stage.show();
     }
 

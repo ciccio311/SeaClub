@@ -1,12 +1,14 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * The class {@code ClubMember} provides an implementation of a
  * Member of secific Club.
  *
  **/
-public class ClubMember {
+public class ClubMember implements Serializable {
     private String CF;
     private int dipendente;
     private String name;

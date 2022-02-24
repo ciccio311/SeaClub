@@ -14,6 +14,8 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
+        ClubMember c1 = new ClubMember("ano",0,"gino","rino","via 2","2");
+        Client.getInstance().addMember(c1);
     }
 
 }
