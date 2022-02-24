@@ -57,7 +57,9 @@ public class DB {
         String selectString = "SELECT * FROM barca;";
         try {
 
-            ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
 
             List<Boat> boats = new ArrayList<Boat>();
 
@@ -69,7 +71,7 @@ public class DB {
             }
 
             BoatManager.getInstance().setBoats(boats);
-
+            stmt2.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,8 +98,7 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
                 ClubMember member = new ClubMember(rset.getString("CF"),rset.getInt("Dipendente"),
                         rset.getString("Nome"), rset.getString("Cognome"),
                         rset.getString("Indirizzo"), rset.getString("Password"));
-                //getBoats();
-                //member.setBoats(BoatManager.getInstance().getMemberBoatsFromIDMember(member));
+                member.setBoats(BoatManager.getInstance().getMemberBoatsFromIDMember(member));
                 members.add(member);
             }
 

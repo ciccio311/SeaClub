@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" fx:controller="com.seaclub.client.LoginController" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TextField fx:id="username" layoutX="175.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" promptText="Insert here your username..." AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="191.0">
             <font>
@@ -32,7 +32,7 @@
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <Button fx:id="btnLogin" layoutX="223.0" layoutY="307.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="236.0" AnchorPane.topAnchor="307.0">
+        <Button fx:id="btnLogin" onAction="#onLoginButtonClick" layoutX="223.0" layoutY="307.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="236.0" AnchorPane.topAnchor="307.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>

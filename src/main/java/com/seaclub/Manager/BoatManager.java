@@ -2,6 +2,7 @@ package com.seaclub.Manager;
 
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
+import com.seaclub.server.DB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class BoatManager {
     }
 
     public List<Boat> getMemberBoatsFromIDMember(ClubMember clubMember){
+        updateList();
         List<Boat> membersBoat = new ArrayList<Boat>();
         for(var x:this.boats){
             if(x.getIdClubMember().equals(clubMember.getCF())){
@@ -46,5 +48,9 @@ public class BoatManager {
 
     public void setBoats(List<Boat> boats) {
         this.boats = boats;
+    }
+
+    public void updateList(){
+        DB.getInstance().getBoats();
     }
 }

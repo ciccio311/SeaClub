@@ -37,7 +37,7 @@ public class LoginController {
                 Parent root = (Parent) fxmlLoader.load();
 
                 SignUpController hc = fxmlLoader.getController();
-                hc.show(clubMember.getAddress());
+                hc.show(String.valueOf(clubMember.getBoats().size()));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
