@@ -8,10 +8,10 @@ import java.sql.Statement;
 public class DB {
 
     /* SQL DB ELEMENTS */
-    private static final String DBURL = "jdbc:mysql://localhost:3306/circolovelico?";
+    private static final String DBURL = "jdbc:mysql://localhost:3306/circolovelico";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
-    private static final String ARG = "createDatabaseIfNotExist=true&serverTimezone=UTC";
+    //private static final String ARG = "createDatabaseIfNotExist=true&serverTimezone=UTC";
 
     private Statement stmt;
     private Connection conn;
@@ -21,9 +21,9 @@ public class DB {
     private DB(){
         try{
             conn = DriverManager.getConnection(
-                    DBURL + ARG, LOGIN, PASSWORD);
+                    DBURL, LOGIN, PASSWORD);
             stmt = (Statement) conn.createStatement();
-            System.out.println("CONNSESSO!");
+            System.out.println("CONNESSO!");
 
         }catch (Exception e){
             System.out.println(e);
