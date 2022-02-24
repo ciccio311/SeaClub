@@ -33,8 +33,10 @@ public class MessageProcessing {
 
     public Message getActionFromRequest(Message mex){
         try{
-            if(mex.getAction().equals("newUserRegistration"))
+            if(mex.getAction().equals(mex.getActionNewUserRegistration()))
                 return addMember(mex);
+            if(mex.getAction().equals(mex.getActionLogin()))
+                return login(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -48,5 +50,14 @@ public class MessageProcessing {
         ClubMemberManager.getInstance().addMember(member);
 
         return new Message("Aggiunto new member", null);
+    }
+
+    public Message login(Message mex){
+        ClubMember member = (ClubMember) mex.getValue();
+        ClubMember loggedMember = ClubMemberManager.getInstance().login(member);
+        if(loggedMember != null)
+            return new Message("User logged", loggedMember);
+        else
+            return new Message("User doesn t exist", null);
     }
 }

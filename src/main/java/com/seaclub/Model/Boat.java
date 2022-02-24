@@ -1,16 +1,18 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * The class {@code Boat} provides an implementation of a
  * Member's boat.
  *
  **/
-public class Boat {
+public class Boat implements Serializable {
     private int id;
     private String name;
     private float width;
-    private int idClubMember;
+    private String idClubMember;
 
 
     /**
@@ -26,7 +28,7 @@ public class Boat {
      * @param width the boat's width.
      * @param idClubMember the boat's Clubmember.
      */
-    public Boat(int id, String name, float width, int idClubMember){
+    public Boat(int id, String name, float width, String idClubMember){
         this.id = id;
         this.name = name;
         this.width = width;
@@ -61,7 +63,7 @@ public class Boat {
      * @return the id of ClubMember.
      *
      **/
-    public int getIdClubMember() {
+    public String getIdClubMember() {
         return idClubMember;
     }
 
@@ -94,7 +96,7 @@ public class Boat {
      * @param idClubMember the id of clubMember.
      *
      **/
-    public void setIdClubMember(int idClubMember) {
+    public void setIdClubMember(String idClubMember) {
         this.idClubMember = idClubMember;
     }
 

@@ -1,5 +1,7 @@
 package com.seaclub.server;
+import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.ClubMemberManager;
+import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 
 import java.sql.Connection;
@@ -49,6 +51,31 @@ public class DB {
     }
 
     /**
+     * Method used to get the whole Boat table
+     */
+    public void getBoats(){
+        String selectString = "SELECT * FROM barca;";
+        try {
+
+            ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
+
+            List<Boat> boats = new ArrayList<Boat>();
+
+            while(rset.next()) {
+                Boat boat = new Boat(rset.getInt("IDBarca"),
+                        rset.getString("Nome"),rset.getFloat("Lunghezza"),
+                        rset.getString("IDProprietario"));
+                boats.add(boat);
+            }
+
+            BoatManager.getInstance().setBoats(boats);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method used to get the whole clubMember table
      */
     public void getClubMembers() {
@@ -69,6 +96,8 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
                 ClubMember member = new ClubMember(rset.getString("CF"),rset.getInt("Dipendente"),
                         rset.getString("Nome"), rset.getString("Cognome"),
                         rset.getString("Indirizzo"), rset.getString("Password"));
+                //getBoats();
+                //member.setBoats(BoatManager.getInstance().getMemberBoatsFromIDMember(member));
                 members.add(member);
             }
 

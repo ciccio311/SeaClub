@@ -53,7 +53,9 @@ public class Client {
             ObjectInputStream is = null;
 
             while(true) {
-                Message request = new Message(Message.getActionNewUserRegistration(),member);
+                Message request = new Message();
+                request.setAction(request.getActionNewUserRegistration());
+                request.setValue(member);
 
                 System.out.println("Client sends: " + request.getAction()  + " action to Server");
 
@@ -87,5 +89,53 @@ public class Client {
         }
 
         return false;
+    }
+
+    public ClubMember login(ClubMember cm){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionLogin());
+                request.setValue(cm);
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+                    client.close();
+                    if(response.getValue()!=null){
+                        ClubMember memberLogged = (ClubMember) response.getValue();
+                        return memberLogged;
+                    }else
+                        return null;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return null;
+            }
+
+            e.printStackTrace();
+        }
+        return null;
     }
 }

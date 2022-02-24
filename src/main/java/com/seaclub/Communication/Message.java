@@ -6,7 +6,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action login. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_LOGIN = "login";
+    private String ACTION_LOGIN = "login";
     /**
      *  Represents the String of the action check the existence of the username. Used for communicating the type of action to be performed.
      **/
@@ -14,7 +14,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action add partner. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_NEW_USER_REGISTRATION = "newUserRegistration";
+    private String ACTION_NEW_USER_REGISTRATION = "newUserRegistration";
     /**
      *  Represents the String of the action get user logged information. Used for communicating the type of action to be performed.
      **/
@@ -205,7 +205,7 @@ public class Message implements Serializable {
         return ACTION_GET_TO_PAY_PARTNER;
     }
 
-    public static String getActionLogin() {
+    public String getActionLogin() {
         return ACTION_LOGIN;
     }
 
@@ -213,7 +213,7 @@ public class Message implements Serializable {
         return ACTION_LOGOUT;
     }
 
-    public static String getActionNewUserRegistration() {
+    public String getActionNewUserRegistration() {
         return ACTION_NEW_USER_REGISTRATION;
     }
 

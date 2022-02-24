@@ -1,6 +1,8 @@
 package com.seaclub.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,13 +17,16 @@ public class ClubMember implements Serializable {
     private String surname;
     private String address;
     private String password;
+    private List<Boat> boats;
 
 
     /**
      * First class constructor.
      *
      **/
-    public ClubMember(){}
+    public ClubMember(){
+        this.boats = new ArrayList<Boat>();
+    }
 
     /**
      * Second class constructor.
@@ -39,6 +44,7 @@ public class ClubMember implements Serializable {
         this.surname = surname;
         this.address = addres;
         this.password = pswd;
+        this.boats = new ArrayList<Boat>();
     }
 
 
@@ -169,4 +175,24 @@ public class ClubMember implements Serializable {
         this.surname = surname;
     }
 
+
+    /**
+     * Gets the member's boats.
+     *
+     * @return the boats.
+     *
+     **/
+    public List<Boat> getBoats() {
+        return boats;
+    }
+
+    /**
+     * Sets the member's boats.
+     *
+     * @param boats the boats.
+     *
+     **/
+    public void setBoats(List<Boat> boats) {
+        this.boats = boats;
+    }
 }

@@ -1,5 +1,6 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * The class {@code StorageRegister} provides a register of the storage.
  *
  **/
-public class StorageRegister {
+public class StorageRegister implements Serializable {
     private int id;
     private int idQuote;
     private int idBoat;

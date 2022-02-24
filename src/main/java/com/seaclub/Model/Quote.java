@@ -1,11 +1,14 @@
 package com.seaclub.Model;
+
+import java.io.Serializable;
+
 /**
  *
  * The class {@code Quote} provides an implementation of a
  * general quote.
  *
  **/
-public class Quote {
+public class Quote implements Serializable {
     private int id;
     private String name;
     private String duration;

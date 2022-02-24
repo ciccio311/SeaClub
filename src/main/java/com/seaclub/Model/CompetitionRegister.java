@@ -1,5 +1,6 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * The class {@code CompetitionRegister} provides a register of the competition.
  *
  **/
-public class CompetitionRegister {
+public class CompetitionRegister implements Serializable {
     private int id;
     private int idCompetition;
     private int idBoat;

@@ -57,5 +57,15 @@ public class ClubMemberManager {
             System.out.println(e);
         }
     }
+
+    public ClubMember login(ClubMember cm){
+        updateList();
+        for(var x:this.members){
+            if(x.getCF().equals(cm.getCF()) && x.getPassword().equals(cm.getPassword())){
+                return x;
+            }
+        }
+        return null;
+    }
 }
 

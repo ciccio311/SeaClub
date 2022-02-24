@@ -14,8 +14,13 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        ClubMember c1 = new ClubMember("ano",0,"gino","rino","via 2","2");
-        Client.getInstance().addMember(c1);
+        ClubMember c1 = new ClubMember("fffanokkk",0,"gino","rino","via 2","2");
+        ClubMember clogged = Client.getInstance().login(c1);
+        if(clogged!=null)
+            System.out.println(clogged.getBoats().size());
+        else
+            System.out.println("NULL");
+
     }
 
 }

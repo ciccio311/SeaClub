@@ -1,5 +1,6 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * boat's competition.
  *
  **/
-public class Competition {
+public class Competition implements Serializable {
     private int id;
     private float price;
     private Date date;
