@@ -35,7 +35,7 @@ public class BoatManager {
         updateList();
         List<Boat> membersBoat = new ArrayList<Boat>();
         for(var x:this.boats){
-            if(x.getIdClubMember().equals(clubMember.getCF())){
+            if(x.getIdClubMember() == clubMember.getId()){
                 membersBoat.add(x);
             }
         }

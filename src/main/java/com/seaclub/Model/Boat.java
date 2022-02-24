@@ -12,7 +12,7 @@ public class Boat implements Serializable {
     private int id;
     private String name;
     private float width;
-    private String idClubMember;
+    private int idClubMember;
 
 
     /**
@@ -28,7 +28,7 @@ public class Boat implements Serializable {
      * @param width the boat's width.
      * @param idClubMember the boat's Clubmember.
      */
-    public Boat(int id, String name, float width, String idClubMember){
+    public Boat(int id, String name, float width, int idClubMember){
         this.id = id;
         this.name = name;
         this.width = width;
@@ -63,7 +63,7 @@ public class Boat implements Serializable {
      * @return the id of ClubMember.
      *
      **/
-    public String getIdClubMember() {
+    public int getIdClubMember() {
         return idClubMember;
     }
 
@@ -96,7 +96,7 @@ public class Boat implements Serializable {
      * @param idClubMember the id of clubMember.
      *
      **/
-    public void setIdClubMember(String idClubMember) {
+    public void setIdClubMember(int idClubMember) {
         this.idClubMember = idClubMember;
     }
 

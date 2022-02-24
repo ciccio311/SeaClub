@@ -11,6 +11,7 @@ import java.util.List;
  *
  **/
 public class ClubMember implements Serializable {
+    private int id;
     private String CF;
     private int dipendente;
     private String name;
@@ -37,7 +38,8 @@ public class ClubMember implements Serializable {
      * @param addres the member's address.
      * @param pswd the member's password.
      **/
-    public  ClubMember(String cf, int dipendente, String name, String surname, String addres, String pswd){
+    public  ClubMember(int id,String cf, int dipendente, String name, String surname, String addres, String pswd){
+        this.id = id;
         this.CF = cf;
         this.dipendente = dipendente;
         this.name = name;
@@ -45,6 +47,14 @@ public class ClubMember implements Serializable {
         this.address = addres;
         this.password = pswd;
         this.boats = new ArrayList<Boat>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

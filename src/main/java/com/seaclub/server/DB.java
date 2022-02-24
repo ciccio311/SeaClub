@@ -31,7 +31,6 @@ public class DB {
             conn = DriverManager.getConnection(
                     DBURL, LOGIN, PASSWORD);
             stmt = (Statement) conn.createStatement();
-            System.out.println("CONNESSO!");
 
         }catch (Exception e){
             System.out.println(e);
@@ -66,7 +65,7 @@ public class DB {
             while(rset.next()) {
                 Boat boat = new Boat(rset.getInt("IDBarca"),
                         rset.getString("Nome"),rset.getFloat("Lunghezza"),
-                        rset.getString("IDProprietario"));
+                        rset.getInt("IDProprietario"));
                 boats.add(boat);
             }
 
@@ -95,7 +94,7 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
             List<ClubMember> members = new ArrayList<ClubMember>();
 
             while(rset.next()) {
-                ClubMember member = new ClubMember(rset.getString("CF"),rset.getInt("Dipendente"),
+                ClubMember member = new ClubMember(rset.getInt("ID"),rset.getString("CF"),rset.getInt("Dipendente"),
                         rset.getString("Nome"), rset.getString("Cognome"),
                         rset.getString("Indirizzo"), rset.getString("Password"));
                 member.setBoats(BoatManager.getInstance().getMemberBoatsFromIDMember(member));

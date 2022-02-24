@@ -29,7 +29,7 @@ public class LoginController {
         else
         {
             ClubMember clubMember = new ClubMember();
-            clubMember.setCF(username.getText());
+            clubMember.setId(Integer.valueOf(username.getText()));
             clubMember.setPassword(password.getText());
             clubMember = Client.getInstance().login(clubMember);
             if(clubMember!=null) {
