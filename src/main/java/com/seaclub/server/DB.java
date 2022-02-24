@@ -1,10 +1,15 @@
 package com.seaclub.server;
+import com.seaclub.Model.ClubMember;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DB {
 
     /* SQL DB ELEMENTS */
@@ -40,6 +45,36 @@ public class DB {
         if (instance == null)
             instance = new DB();
         return instance;
+    }
+
+    /**
+     * Method used to get the whole clubMember table
+     */
+    public void getClubMembers() {
+        String selectString = "SELECT * FROM socio;";
+        /*
+        *
+        * SELECT socio.CF, socio.Dipendente, socio.Nome, socio.Cognome, socio.Indirizzo, socio.Password
+FROM socio,quota_associazione,registro_associazioni
+WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_ass = registro_associazioni.IDQuota_ass AND DATEDIFF(NOW(),registro_associazioni.Data_pagamento)<365; * */
+
+        try {
+
+            ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
+
+            List<ClubMember> members = new ArrayList<ClubMember>();
+
+            while(rset.next()) {
+                ClubMember member = new ClubMember(rset.getString("CF"),rset.getInt("Dipendente"),
+                        rset.getString("Nome"), rset.getString("Cognome"),
+                        rset.getString("Indirizzo"), rset.getString("Password"));
+                members.add(member);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
