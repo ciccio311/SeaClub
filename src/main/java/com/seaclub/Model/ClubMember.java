@@ -8,6 +8,7 @@ package com.seaclub.Model;
  **/
 public class ClubMember {
     private String CF;
+    private int dipendente;
     private String name;
     private String surname;
     private String address;
@@ -23,13 +24,15 @@ public class ClubMember {
     /**
      * Second class constructor.
      * @param cf the member's id.
+     * @param dipendente 0 if he is only a club member, 1 if he is an employee
      * @param name the member's name.
      * @param surname the member's surname.
      * @param addres the member's address.
      * @param pswd the member's password.
      **/
-    public  ClubMember(String cf, String name, String surname, String addres, String pswd){
+    public  ClubMember(String cf, int dipendente, String name, String surname, String addres, String pswd){
         this.CF = cf;
+        this.dipendente = dipendente;
         this.name = name;
         this.surname = surname;
         this.address = addres;
@@ -57,6 +60,25 @@ public class ClubMember {
         return name;
     }
 
+    /**
+     * Sets the type of the club member.
+     *
+     * @param dip 0 or 1.
+     *
+     **/
+    public void setDipendente(int dip) {
+        this.dipendente = dip;
+    }
+
+    /**
+     * Gets the type of the club member.
+     *
+     * @return the 0 or 1.
+     *
+     **/
+    public int getDipendente() {
+        return dipendente;
+    }
 
     /**
      * Gets the member's address.
