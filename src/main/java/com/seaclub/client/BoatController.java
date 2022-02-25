@@ -48,6 +48,9 @@ public class BoatController {
             this.clubMember.getBoats().add(b);
             tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
             tableViewBoats.refresh();
+
+            name.setText("");
+            width.setText("");
         }
     }
 
