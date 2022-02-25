@@ -94,7 +94,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action add race. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_ADD_RACE = "addRace";
+    private String ACTION_ADD_RACE = "addRace";
 
     private static final long serialVersionUID = 1L;
     /**
@@ -157,7 +157,7 @@ public class Message implements Serializable {
         return ACTION_ADD_BOAT;
     }
 
-    public static String getActionAddRace() {
+    public String getActionAddRace() {
         return ACTION_ADD_RACE;
     }
 

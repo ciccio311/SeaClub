@@ -42,4 +42,9 @@ public class CompetitionManager {
     public void updateList(){
         DB.getInstance().getCompetition();
     }
+
+    public void addCompetition(Competition competition){
+        DB.getInstance().addNewCompetition(competition);
+        updateList();
+    }
 }

@@ -6,12 +6,7 @@ import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,6 +166,23 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
             pstmt.setInt(4, boat.getIdClubMember());
             pstmt.execute();
             System.out.println("Boat added to DB => " + boat.getName());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addNewCompetition(Competition competition){
+        try {
+            String insertSql = "insert into gara values (?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new boat
+            pstmt.setInt(1, competition.getId());
+            pstmt.setFloat(2,  competition.getPrice());
+            pstmt.setDate(3, (Date) competition.getDate());
+            pstmt.execute();
+            System.out.println("Competition added to DB => " + competition.getId());
 
         } catch (SQLException e) {
             e.printStackTrace();

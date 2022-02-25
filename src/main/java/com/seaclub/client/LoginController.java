@@ -16,7 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LoginController {
@@ -30,7 +34,7 @@ public class LoginController {
     private Button btnLogin;
 
     @FXML
-    protected void onLoginButtonClick() throws IOException {
+    protected void onLoginButtonClick() throws IOException, ParseException {
         if(username.getText().length()==0 || password.getText().length()==0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Inserisci tutti i campi!");
@@ -42,6 +46,14 @@ public class LoginController {
             clubMember.setId(Integer.valueOf(username.getText()));
             clubMember.setPassword(password.getText());
             clubMember = Client.getInstance().login(clubMember);
+
+            /*Competition cp = new Competition();
+            Date date = new Date(System.currentTimeMillis());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            cp.setDate(sqlDate);
+            cp.setPrice((float) 6.35);
+            Client.getInstance().addNewCompetition(cp);*/
+
             if(clubMember!=null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sign up.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
