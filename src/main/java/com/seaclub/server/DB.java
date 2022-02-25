@@ -5,6 +5,7 @@ import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
+import com.seaclub.Model.CompetitionRegister;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -177,12 +178,31 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
             String insertSql = "insert into gara values (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
-            //configure PreparedStatement with values of new boat
+            //configure PreparedStatement with values of new competition
             pstmt.setInt(1, competition.getId());
             pstmt.setFloat(2,  competition.getPrice());
             pstmt.setDate(3, (Date) competition.getDate());
             pstmt.execute();
             System.out.println("Competition added to DB => " + competition.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addNewBoatInCompetition(CompetitionRegister compRegister){
+        try {
+            String insertSql = "insert into registro_gare values (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new competition register
+            pstmt.setInt(1, compRegister.getID());
+            pstmt.setInt(2,  compRegister.getIdCompetition());
+            pstmt.setInt(3, compRegister.getIdBoat());
+            pstmt.setInt(4, compRegister.getIdClubMember());
+            pstmt.setString(5, compRegister.getPaymentMethod());
+            pstmt.execute();
+            System.out.println("Competition added to DB => " + compRegister.getID());
 
         } catch (SQLException e) {
             e.printStackTrace();

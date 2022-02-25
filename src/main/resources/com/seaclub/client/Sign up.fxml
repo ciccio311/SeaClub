@@ -62,7 +62,7 @@
                 <Font name="Verdana" size="12.0" />
             </font>
         </PasswordField>
-        <Button fx:id="btnSignUp" layoutX="223.0" layoutY="402.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Sign Up" textFill="WHITE" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="220.0">
+        <Button fx:id="btnSignUp" layoutX="223.0" layoutY="402.0" mnemonicParsing="false" onAction="#SignUpOnClick" prefHeight="48.0" prefWidth="157.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Sign Up" textFill="WHITE" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="220.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>

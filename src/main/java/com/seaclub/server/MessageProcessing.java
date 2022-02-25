@@ -7,6 +7,7 @@ import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
+import com.seaclub.Model.CompetitionRegister;
 
 public class MessageProcessing {
 
@@ -47,6 +48,8 @@ public class MessageProcessing {
                 return getCompetitions(mex);
             if(mex.getAction().equals(mex.getActionAddRace()))
                 return addNewCompetition(mex);
+            if(mex.getAction().equals(mex.getActionAddBoatToCompetition()))
+                return addBoatToCompetition(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -92,5 +95,14 @@ public class MessageProcessing {
         Competition cp = (Competition) mex.getValue();
         CompetitionManager.getInstance().addCompetition(cp);
         return new Message("New competition added!",null);
+    }
+
+    public Message addBoatToCompetition(Message mex){
+        if(mex.getValue() instanceof CompetitionRegister == false)
+            return null;
+
+        CompetitionRegister cp = (CompetitionRegister) mex.getValue();
+        CompetitionManager.getInstance().addBoatToCompetition(cp);
+        return new Message("New boat to competition added!",null);
     }
 }

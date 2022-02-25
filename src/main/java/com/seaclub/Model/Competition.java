@@ -1,7 +1,9 @@
 package com.seaclub.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,6 +15,7 @@ public class Competition implements Serializable {
     private int id;
     private float price;
     private Date date;
+    private List<Boat> boats;
 
     /**
      * First class constructor
@@ -28,6 +31,7 @@ public class Competition implements Serializable {
         this.id= id;
         this.price = price;
         this.date = date;
+        this.boats = new ArrayList<Boat>();
     }
 
 
@@ -96,4 +100,19 @@ public class Competition implements Serializable {
         this.date = date;
     }
 
+    /**
+     * Sets the list of the boats in the competition.
+     *
+     * @param boats the list of the boats.
+     *
+     **/
+    public void setBoats(List<Boat> boats) { this.boats = boats; }
+
+    /**
+     * Gets the list of the boats in the competition.
+     *
+     * @return the lis of the boats.
+     *
+     **/
+    public List<Boat> getBoats() { return boats; }
 }

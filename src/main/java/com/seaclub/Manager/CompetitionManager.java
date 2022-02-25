@@ -2,6 +2,7 @@ package com.seaclub.Manager;
 
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.Competition;
+import com.seaclub.Model.CompetitionRegister;
 import com.seaclub.server.DB;
 
 import java.util.ArrayList;
@@ -46,5 +47,27 @@ public class CompetitionManager {
     public void addCompetition(Competition competition){
         DB.getInstance().addNewCompetition(competition);
         updateList();
+    }
+
+    public void updateBoatList(CompetitionRegister c) {
+        Competition comp = getCompetitionById(c.getIdCompetition());
+        competitionList.remove(comp);
+        Boat boat = BoatManager.getInstance().getBoatById(c.getIdBoat());
+        comp.getBoats().add(boat);
+        competitionList.add(comp);
+    }
+
+    public void addBoatToCompetition(CompetitionRegister competitionR){
+        DB.getInstance().addNewBoatInCompetition(competitionR);
+        updateBoatList(competitionR);
+    }
+
+    public Competition getCompetitionById(int id){
+        for(var x: this.competitionList){
+            if(x.getId() == id){
+                return x;
+            }
+        }
+        return null;
     }
 }

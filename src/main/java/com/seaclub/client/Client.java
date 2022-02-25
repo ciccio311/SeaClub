@@ -5,6 +5,7 @@ import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
+import com.seaclub.Model.CompetitionRegister;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -248,6 +249,53 @@ public class Client {
                 Message request = new Message();
                 request.setAction(request.getActionAddRace());
                 request.setValue(competition);
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+
+                    client.close();
+                    return true;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return false;
+            }
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    public boolean addBoatToCompetition(CompetitionRegister compRegister){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionAddBoatToCompetition());
+                request.setValue(compRegister);
 
                 System.out.println("Client sends: " + request.getAction()  + " action to Server");
 

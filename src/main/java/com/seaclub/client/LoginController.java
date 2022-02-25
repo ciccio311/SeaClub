@@ -30,8 +30,11 @@ public class LoginController {
     private Button btnLogin;
 
     @FXML
+    private Button btnSignup;
+
+    @FXML
     protected void onLoginButtonClick() throws IOException {
-        btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #0000ff; -fx-background-radius: 50;");
+        btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: red; -fx-background-radius: 50;");
 
         if(username.getText().length()==0 || password.getText().length()==0)
         {
@@ -67,5 +70,18 @@ public class LoginController {
                 stage2.close();
             }
         }
+    }
+
+    @FXML
+    protected void signUpOnClick() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sign up.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        SignUpController hc = fxmlLoader.getController();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnSignup.getScene().getWindow();
+        stage2.close();
     }
 }
