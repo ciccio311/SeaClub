@@ -62,7 +62,7 @@ public class LoginController {
 
                 MenuController hc = fxmlLoader.getController();
                 //CompetitionManager.getInstance().updateList();
-                hc.showUser(clubMember);
+                hc.setClubMember(clubMember);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();

@@ -54,7 +54,7 @@ public class SignUpController {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 MenuController hc = fxmlLoader.getController();
-                hc.showUser(clubMember);
+                hc.setClubMember(clubMember);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();

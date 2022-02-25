@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.seaclub.client.BoatController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seaclub.client.BoatController">
+    <children>
+        <Label layoutX="352.0" layoutY="77.0" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="77.0" />
+        <Label alignment="CENTER" layoutX="381.0" layoutY="87.0" prefHeight="26.0" prefWidth="167.0" text="Add new boat" textAlignment="CENTER" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="87.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
 
+        <Label layoutX="35.0" layoutY="77.0" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="77.0" />
+        <Label alignment="CENTER" layoutX="64.0" layoutY="87.0" prefHeight="26.0" prefWidth="167.0" text="Your boats" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="87.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <TextField fx:id="name" layoutX="372.0" layoutY="159.0" prefHeight="26.0" prefWidth="184.0" promptText="Insert here the name..." AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="159.0">
+            <font>
+                <Font name="Verdana" size="12.0" />
+            </font>
+        </TextField>
+
+        <Label alignment="CENTER" layoutX="422.0" layoutY="133.0" prefHeight="26.0" prefWidth="83.0" text="Name" textAlignment="CENTER" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="133.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <TextField fx:id="width" layoutX="372.0" layoutY="235.0" prefHeight="26.0" prefWidth="184.0" promptText="Insert here the length..." AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="235.0">
+            <font>
+                <Font name="Verdana" size="12.0" />
+            </font>
+        </TextField>
+
+        <Label alignment="CENTER" layoutX="422.0" layoutY="209.0" prefHeight="26.0" prefWidth="83.0" text="Length" textAlignment="CENTER" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="209.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Button fx:id="btnAdd" layoutX="405.0" layoutY="330.0" mnemonicParsing="false" onAction="#addOnClick" prefHeight="55.0" prefWidth="117.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="14.799999999999997" AnchorPane.rightAnchor="77.4">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
+        <TableView fx:id="tableViewBoats" layoutX="3.0" layoutY="146.0" prefHeight="248.0" prefWidth="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <columns>
+                <!--<TableColumn fx:id="columnNome" prefWidth="147.4000152349472" text="Nome" />
+                <TableColumn fx:id="columnLunghezza" prefWidth="144.60000610351562" text="Lunghezza" /> !-->
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

@@ -6,12 +6,19 @@ import java.io.IOException;
 
 import com.seaclub.Model.ClubMember;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MenuController {
+
+        private ClubMember clubMember;
+
         @FXML
         private Label labelUser;
 
@@ -29,7 +36,15 @@ public class MenuController {
 
         @FXML
         protected void onCompetitionButtonClick()throws IOException {
-            labelUser.setText("COMPETITION");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Competition.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                CompetitionController hc = fxmlLoader.getController();
+                hc.setClubMember(clubMember);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                Stage stage2 = (Stage) competitionButton.getScene().getWindow();
+                stage2.close();
         }
 
         @FXML
@@ -39,7 +54,16 @@ public class MenuController {
 
         @FXML
         protected void buttonBoatOnClick()throws IOException {
-            labelUser.setText("BOAT");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Boat.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+
+                BoatController bc = fxmlLoader.getController();
+                bc.setClubMember(this.clubMember);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                Stage stage2 = (Stage) buttonBoat.getScene().getWindow();
+                stage2.close();
         }
 
         @FXML
@@ -47,7 +71,11 @@ public class MenuController {
             labelUser.setText("USER");
         }
 
-        public void showUser(ClubMember clubMember){
+        public void setClubMember(ClubMember clubMember) {
+                this.clubMember = clubMember;
+        }
+
+        public void showUser(){
             labelUser.setText("Ciao "+clubMember.getName());
         }
 }
