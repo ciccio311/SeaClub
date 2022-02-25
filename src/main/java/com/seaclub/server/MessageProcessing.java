@@ -1,7 +1,9 @@
 package com.seaclub.server;
 
 import com.seaclub.Communication.Message;
+import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.ClubMemberManager;
+import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 
 public class MessageProcessing {
@@ -37,6 +39,8 @@ public class MessageProcessing {
                 return addMember(mex);
             if(mex.getAction().equals(mex.getActionLogin()))
                 return login(mex);
+            if(mex.getAction().equals(mex.getActionAddBoat()))
+                return addNewBoat(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -59,5 +63,14 @@ public class MessageProcessing {
             return new Message("User logged", loggedMember);
         else
             return new Message("User doesn t exist", null);
+    }
+
+    public Message addNewBoat(Message mex){
+        if(mex.getValue() instanceof Boat == false)
+            return null;
+
+        Boat boat = (Boat) mex.getValue();
+        BoatManager.getInstance().addBoat(boat);
+        return new Message("New boat added!",null);
     }
 }

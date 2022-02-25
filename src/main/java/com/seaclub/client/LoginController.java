@@ -1,5 +1,7 @@
 package com.seaclub.client;
 
+import com.seaclub.Manager.BoatManager;
+import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

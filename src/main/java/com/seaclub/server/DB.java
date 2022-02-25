@@ -110,26 +110,44 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
 
     public void addNewMember(ClubMember member){
 
-        String insertSql = "insert into socio values (?, ?, ?, ?, ?, ?)";
+        String insertSql = "insert into socio values (?,?, ?, ?, ?, ?, ?)";
 
         try {
 
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             //configure PreparedStatement with values of new member
-            pstmt.setString(1, member.getCF());
-            pstmt.setInt(2,  member.getDipendente());
-            pstmt.setString(3, member.getName());
-            pstmt.setString(4, member.getSurname());
-            pstmt.setString(5, member.getAddress());
-            pstmt.setString(6, member.getPassword());
+            pstmt.setInt(1, member.getId());
+            pstmt.setString(2, member.getCF());
+            pstmt.setInt(3,  member.getDipendente());
+            pstmt.setString(4, member.getName());
+            pstmt.setString(5, member.getSurname());
+            pstmt.setString(6, member.getAddress());
+            pstmt.setString(7, member.getPassword());
 
             pstmt.execute();
             System.out.println("User added to DB => " + member.getName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void addNewBoat(Boat boat){
+        try {
+            String insertSql = "insert into barca values (?,?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new boat
+            pstmt.setInt(1, boat.getId());
+            pstmt.setString(2,  boat.getName());
+            pstmt.setFloat(3, boat.getWidth());
+            pstmt.setInt(4, boat.getIdClubMember());
+            pstmt.execute();
+            System.out.println("Boat added to DB => " + boat.getName());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

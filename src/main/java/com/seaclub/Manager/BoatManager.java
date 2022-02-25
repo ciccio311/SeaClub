@@ -53,4 +53,9 @@ public class BoatManager {
     public void updateList(){
         DB.getInstance().getBoats();
     }
+
+    public void addBoat(Boat boat){
+        DB.getInstance().addNewBoat(boat);
+        updateList();
+    }
 }

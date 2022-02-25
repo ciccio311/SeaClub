@@ -26,7 +26,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action add boat. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_ADD_BOAT = "addBoat";
+    private String ACTION_ADD_BOAT = "addBoat";
     /**
      *  Represents the String of the action remove boat. Used for communicating the type of action to be performed.
      **/
@@ -153,7 +153,7 @@ public class Message implements Serializable {
         return serialVersionUID;
     }
 
-    public static String getActionAddBoat() {
+    public String getActionAddBoat() {
         return ACTION_ADD_BOAT;
     }
 
