@@ -3,6 +3,7 @@ package com.seaclub.server;
 import com.seaclub.Communication.Message;
 import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.ClubMemberManager;
+import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 
@@ -41,6 +42,8 @@ public class MessageProcessing {
                 return login(mex);
             if(mex.getAction().equals(mex.getActionAddBoat()))
                 return addNewBoat(mex);
+            if(mex.getAction().equals(mex.getActionRaces()))
+                return getCompetitions(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -72,5 +75,10 @@ public class MessageProcessing {
         Boat boat = (Boat) mex.getValue();
         BoatManager.getInstance().addBoat(boat);
         return new Message("New boat added!",null);
+    }
+
+    public Message getCompetitions(Message mex){
+        CompetitionManager.getInstance().updateList();
+        return new Message("Get all competitions.",CompetitionManager.getInstance().getCompetitionList());
     }
 }

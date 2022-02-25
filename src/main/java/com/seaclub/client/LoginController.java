@@ -4,6 +4,7 @@ import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.Competition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginController {
     @FXML
@@ -45,7 +48,6 @@ public class LoginController {
 
                 SignUpController hc = fxmlLoader.getController();
                 CompetitionManager.getInstance().updateList();
-                hc.show(String.valueOf(clubMember.getBoats().size()));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();

@@ -34,7 +34,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action get all races. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_RACES = "races";
+    private String ACTION_RACES = "races";
     /**
      *  Represents the String of the action add registration of boat to a race. Used for communicating the type of action to be performed.
      **/
@@ -225,7 +225,7 @@ public class Message implements Serializable {
         return ACTION_PAYMENT;
     }
 
-    public static String getActionRaces() {
+    public String getActionRaces() {
         return ACTION_RACES;
     }
 
