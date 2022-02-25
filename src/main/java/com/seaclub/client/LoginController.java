@@ -16,11 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class LoginController {
@@ -34,11 +30,14 @@ public class LoginController {
     private Button btnLogin;
 
     @FXML
-    protected void onLoginButtonClick() throws IOException, ParseException {
+    protected void onLoginButtonClick() throws IOException {
+        btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #0000ff; -fx-background-radius: 50;");
+
         if(username.getText().length()==0 || password.getText().length()==0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Inserisci tutti i campi!");
             alert.showAndWait();
+            btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;");
         }
         else
         {
@@ -55,15 +54,15 @@ public class LoginController {
             Client.getInstance().addNewCompetition(cp);*/
 
             if(clubMember!=null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sign up.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
 
-                SignUpController hc = fxmlLoader.getController();
-                CompetitionManager.getInstance().updateList();
+                MenuController hc = fxmlLoader.getController();
+                //CompetitionManager.getInstance().updateList();
+                hc.showUser(clubMember);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-
                 Stage stage2 = (Stage) btnLogin.getScene().getWindow();
                 stage2.close();
             }
