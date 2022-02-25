@@ -1,8 +1,10 @@
 package com.seaclub.server;
 import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.ClubMemberManager;
+import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.Competition;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -75,6 +77,31 @@ public class DB {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method used to get the whole competition table
+     */
+    public void getCompetition(){
+
+        try {
+            String selectString = "SELECT * FROM gara;";
+            ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
+
+            List<Competition> competitions = new ArrayList<Competition>();
+
+            while(rset.next()) {
+                Competition competition = new Competition(rset.getInt("IDGara"),
+                        rset.getFloat("Prezzo"),rset.getDate("Data"));
+                competitions.add(competition);
+            }
+
+            CompetitionManager.getInstance().setCompetitionList(competitions);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Method used to get the whole clubMember table
