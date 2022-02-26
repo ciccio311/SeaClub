@@ -259,5 +259,21 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
         }
     }
 
+    public void updateUser(ClubMember cm){
+        try {
+            String insertSql = "UPDATE socio SET Indirizzo = ?, Password = ? WHERE socio.ID="+cm.getId()+";";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new competition register
+            pstmt.setString(1, cm.getAddress());
+            pstmt.setString(2,  cm.getPassword());
+
+            pstmt.execute();
+            System.out.println("Update value in DB for user => " + cm.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -106,6 +106,8 @@ public class Message implements Serializable {
 
     private String ACTION_GET_COMPETITION_REGISTER = "GetCompetitionRegister";
 
+    private String ACTION_UPDATE_MEMBER = "UpdateMember";
+
     private static final long serialVersionUID = 1L;
 
 
@@ -179,6 +181,10 @@ public class Message implements Serializable {
 
     public String getActionAddRace() {
         return ACTION_ADD_RACE;
+    }
+
+    public String getACTION_UPDATE_MEMBER() {
+        return ACTION_UPDATE_MEMBER;
     }
 
     public static String getActionAddRegistration() {

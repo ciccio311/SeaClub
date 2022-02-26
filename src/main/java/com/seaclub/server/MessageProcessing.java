@@ -55,6 +55,8 @@ public class MessageProcessing {
                 return getActionCompetitionRegisterByMemberId(mex);
             if(mex.getAction().equals(mex.getACTION_GET_COMPETITION_REGISTER()))
                 return getCompetitionRegister(mex);
+            if(mex.getAction().equals(mex.getACTION_UPDATE_MEMBER()))
+                return updateMemberInfo(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -120,5 +122,12 @@ public class MessageProcessing {
     public Message getCompetitionRegister(Message mex){
         CompetitionRegisterManager.getInstance().updateList();
         return new Message("Get all competition register",CompetitionRegisterManager.getInstance().getCompetitionRegisters());
+    }
+
+    public Message updateMemberInfo(Message mex){
+        if(mex.getValue() instanceof ClubMember == false)
+            return null;
+        DB.getInstance().updateUser((ClubMember) mex.getValue());
+        return new Message("User modified", null);
     }
 }
