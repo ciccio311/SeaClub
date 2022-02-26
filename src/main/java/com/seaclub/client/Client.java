@@ -330,4 +330,51 @@ public class Client {
 
         return false;
     }
+
+
+    public List<String> getCompetitionRegisterByMemberId(int id){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionCompetitionRegisterByMemberId());
+                request.setValue(id);
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+
+                    client.close();
+                    return (List<String>) response.getValue();
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return null;
+            }
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

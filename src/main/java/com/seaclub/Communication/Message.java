@@ -99,6 +99,10 @@ public class Message implements Serializable {
      *  Represents the String of the action add boat to competition. Used for communicating the type of action to be performed.
      **/
     private String ACTION_ADD_BOAT_TO_COMPETITION = "AddBoatToCompetition";
+    /**
+     *  Represents the String of the action add boat to competition. Used for communicating the type of action to be performed.
+     **/
+    private String ACTION_COMPETITION_REGISTER_BY_MEMBER_ID = "GetCompetitionRegisterByMemberId";
 
     private static final long serialVersionUID = 1L;
     /**
@@ -159,6 +163,10 @@ public class Message implements Serializable {
 
     public String getActionAddBoat() {
         return ACTION_ADD_BOAT;
+    }
+
+    public String getActionCompetitionRegisterByMemberId() {
+        return ACTION_COMPETITION_REGISTER_BY_MEMBER_ID;
     }
 
     public String getActionAddBoatToCompetition() { return ACTION_ADD_BOAT_TO_COMPETITION; }

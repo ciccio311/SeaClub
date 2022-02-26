@@ -50,6 +50,8 @@ public class MessageProcessing {
                 return addNewCompetition(mex);
             if(mex.getAction().equals(mex.getActionAddBoatToCompetition()))
                 return addBoatToCompetition(mex);
+            if(mex.getAction().equals(mex.getActionCompetitionRegisterByMemberId()))
+                return getActionCompetitionRegisterByMemberId(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -104,5 +106,11 @@ public class MessageProcessing {
         CompetitionRegister cp = (CompetitionRegister) mex.getValue();
         CompetitionManager.getInstance().addBoatToCompetition(cp);
         return new Message("New boat to competition added!",null);
+    }
+
+    public Message getActionCompetitionRegisterByMemberId(Message mex){
+
+        DB.getInstance().getCompetitionRegisterByMemberId((int)mex.getValue());
+        return new Message("New boat to competition added!",CompetitionManager.getInstance().getcRegister());
     }
 }

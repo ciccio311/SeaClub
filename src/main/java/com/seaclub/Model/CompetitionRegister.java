@@ -1,7 +1,6 @@
 package com.seaclub.Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -114,4 +113,7 @@ public class CompetitionRegister implements Serializable {
      *
      **/
     public String getPaymentMethod() { return paymentMethod; }
+
+    public int getId() { return this.id; }
+
 }

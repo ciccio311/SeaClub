@@ -209,5 +209,26 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
         }
     }
 
+    public void getCompetitionRegisterByMemberId(int id){
+        try {
+            String insertSql = "SELECT gara.IDGara, gara.Data, barca.Nome\n" +
+                    "FROM gara, socio, barca, registro_gare\n" +
+                    "WHERE socio.ID = barca.IDProprietario AND socio.ID = registro_gare.IDSocio AND gara.IDGara = registro_gare.IDGara AND barca.IDBarca = registro_gare.IDBarca AND socio.ID = "+id+";";
+
+            List<String> info = new ArrayList<String>();
+
+            ResultSet rset = ((java.sql.Statement) stmt).executeQuery(insertSql);
+
+            while(rset.next()) {
+                String riga = rset.getInt("IDGara") + ", " + rset.getString("Data") + ", " + rset.getString("Nome");
+                info.add(riga);
+            }
+            CompetitionManager.getInstance().setcRegister(info);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

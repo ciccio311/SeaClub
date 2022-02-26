@@ -6,50 +6,58 @@
 
 <AnchorPane prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seaclub.client.CompetitionController">
     <children>
-        <Label layoutX="63.0" layoutY="65.0" prefHeight="72.0" prefWidth="473.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="65.0" />
-        <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="46.0" prefWidth="413.0" text="Competition" textAlignment="CENTER" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="77.0">
-            <font>
-                <Font name="Verdana Bold" size="36.0" />
-            </font>
-        </Label>
-        <Label fx:id="DateLabel" alignment="CENTER" layoutX="63.0" layoutY="151.0" prefHeight="26.0" prefWidth="121.0" text="Date:" textAlignment="CENTER" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="151.0">
+        <Label layoutX="352.0" layoutY="77.0" prefHeight="44.0" prefWidth="239.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="77.0" />
+        <Label alignment="CENTER" layoutX="344.0" layoutY="86.0" prefHeight="26.0" prefWidth="226.0" text="Subscribe competition" textAlignment="CENTER" AnchorPane.rightAnchor="29.600000000000023" AnchorPane.topAnchor="86.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="64.0" layoutY="201.0" prefHeight="26.0" prefWidth="121.0" text="Boat:" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="201.0">
+
+        <Label layoutX="35.0" layoutY="77.0" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="77.0" />
+        <Label alignment="CENTER" layoutX="47.0" layoutY="87.0" prefHeight="26.0" prefWidth="177.0" text="Your competition" textAlignment="CENTER" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="87.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="SubmitButton" layoutX="221.0" layoutY="377.0" mnemonicParsing="false" onAction="#SubmitOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Submit" textFill="WHITE" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="377.0">
+        <Label fx:id="DateLabel" alignment="CENTER" layoutX="314.0" layoutY="150.0" prefHeight="26.0" prefWidth="121.0" text="Date:" textAlignment="CENTER" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="150.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="314.0" layoutY="200.0" prefHeight="26.0" prefWidth="121.0" text="Boat:" textAlignment="CENTER" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="200.0">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="SubmitButton" layoutX="387.0" layoutY="379.0" mnemonicParsing="false" onAction="#SubmitOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Submit" textFill="WHITE" AnchorPane.leftAnchor="387.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="379.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-      <ComboBox fx:id="DateComboBox" layoutX="216.0" layoutY="151.0" onAction="#OnClickDate" prefWidth="150.0" />
-      <ComboBox fx:id="BoatComboBox" layoutX="216.0" layoutY="202.0" onAction="#OnClickBoat" prefWidth="150.0" />
-      <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="93.0" layoutY="301.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
+      <ComboBox fx:id="DateComboBox" layoutX="435.0" layoutY="151.0" onAction="#OnClickDate" prefWidth="150.0" />
+      <ComboBox fx:id="BoatComboBox" layoutX="435.0" layoutY="201.0" onAction="#OnClickBoat" prefWidth="150.0" />
+      <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="318.0" layoutY="300.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="PriceLabel" alignment="CENTER" layoutX="70.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER">
+      <Label fx:id="PriceLabel" alignment="CENTER" layoutX="313.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="RacePriceLabel" alignment="CENTER" layoutX="216.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
+      <Label fx:id="RacePriceLabel" alignment="CENTER" layoutX="449.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="CardRadioButton" layoutX="216.0" layoutY="305.0" mnemonicParsing="false" text="Card" />
-      <RadioButton fx:id="BanckTransferRadioButton" layoutX="300.0" layoutY="305.0" mnemonicParsing="false" text="Bank transfer" />
-        <Button fx:id="btnBack" onAction="#backOnClick" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="BACK" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <RadioButton fx:id="CardRadioButton" layoutX="434.0" layoutY="305.0" mnemonicParsing="false" text="Card" />
+      <RadioButton fx:id="BanckTransferRadioButton" layoutX="494.0" layoutY="305.0" mnemonicParsing="false" text="Bank transfer" />
+        <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="BACK" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font name="Verdana Bold" size="12.0" />
             </font>
         </Button>
+      <ListView fx:id="listViewCompetition" layoutY="191.0" prefHeight="275.0" prefWidth="263.0" />
     </children>
 </AnchorPane>

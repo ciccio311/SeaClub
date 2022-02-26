@@ -4,12 +4,17 @@ import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
 import com.seaclub.Model.CompetitionRegister;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -24,6 +29,7 @@ public class CompetitionController {
     private ClubMember clubMember;
     private Boat boatSelected = new Boat();
     private Competition competitionSelected = new Competition();
+    private ObservableList<String> items = FXCollections.observableArrayList();
 
     @FXML
     private Label RacePriceLabel;
@@ -42,6 +48,9 @@ public class CompetitionController {
 
     @FXML
     private Button btnBack;
+
+    @FXML
+    private ListView listViewCompetition;
 
     public void setClubMember(ClubMember clubMember) {
         try {
@@ -62,15 +71,14 @@ public class CompetitionController {
 
                     String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
                     DateComboBox.getItems().add(info);
-                } /*else {
-                    competitions.remove(comp);
-                }*/
+                }
             }
 
             for (var boat : clubMember.getBoats()) {
                 String boatInfo = boat.getId() + " " + boat.getName();
                 BoatComboBox.getItems().add(boatInfo);
             }
+            setListView();
         }
         catch(Exception e){
 
@@ -96,16 +104,20 @@ public class CompetitionController {
     @FXML
     protected void OnClickDate(){
         String selectedItem = (String) DateComboBox.getSelectionModel().getSelectedItem();
-        String words[] = selectedItem.split(" ");
-        RacePriceLabel.setText(words[2]);
-        competitionSelected.setId(Integer.valueOf(words[0]));
+        if(selectedItem!=null) {
+            String words[] = selectedItem.split(" ");
+            RacePriceLabel.setText(words[2]);
+            competitionSelected.setId(Integer.valueOf(words[0]));
+        }
     }
 
     @FXML
     protected void OnClickBoat(){
         String selectedItem = (String) BoatComboBox.getSelectionModel().getSelectedItem();
-        String words[] = selectedItem.split(" ");
-        boatSelected.setId(Integer.valueOf(words[0]));
+        if(selectedItem!=null) {
+            String words[] = selectedItem.split(" ");
+            boatSelected.setId(Integer.valueOf(words[0]));
+        }
     }
 
     @FXML
@@ -126,9 +138,30 @@ public class CompetitionController {
             if(BanckTransferRadioButton.isSelected())
                 competitionRegister.setPaymentMethod("Bank transfer");
             Client.getInstance().addBoatToCompetition(competitionRegister);
+
+            DateComboBox.valueProperty().set(null);
+            BoatComboBox.valueProperty().set(null);
+            CardRadioButton.setSelected(false);
+            BanckTransferRadioButton.setSelected(false);
+            RacePriceLabel.setText("NA");
+
+            setListView();
+            listViewCompetition.refresh();
         }
     }
 
+    private void setListView(){
+        listViewCompetition.getItems().clear();
 
+        List<String> register = new ArrayList<String>();
+        register = Client.getInstance().getCompetitionRegisterByMemberId(this.clubMember.getId());
+
+
+        listViewCompetition.setItems(items);
+        items.add("ID,  DATE,        BOAT");
+        for(var x : register){
+            items.add(x);
+        }
+    }
 
 }

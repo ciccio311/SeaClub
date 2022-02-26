@@ -5,6 +5,7 @@ import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
+import com.seaclub.server.DB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,6 +56,8 @@ public class LoginController {
             cp.setDate(sqlDate);
             cp.setPrice((float) 6.35);
             Client.getInstance().addNewCompetition(cp);*/
+
+            DB.getInstance().getCompetitionRegisterByMemberId(1);
 
             if(clubMember!=null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));

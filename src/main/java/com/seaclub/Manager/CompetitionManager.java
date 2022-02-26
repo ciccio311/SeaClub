@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CompetitionManager {
     private List<Competition> competitionList;
+    private List<String> cRegister;
 
     private static CompetitionManager instance = null;
 
@@ -38,6 +39,14 @@ public class CompetitionManager {
 
     public void setCompetitionList(List<Competition> competitionList) {
         this.competitionList = competitionList;
+    }
+
+    public void setcRegister(List<String> cRegister) {
+        this.cRegister = cRegister;
+    }
+
+    public List<String> getcRegister() {
+        return cRegister;
     }
 
     public void updateList(){

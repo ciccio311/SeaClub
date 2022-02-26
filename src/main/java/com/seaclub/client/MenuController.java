@@ -84,7 +84,16 @@ public class MenuController {
 
         @FXML
         protected void buttonUserOnClick()throws IOException {
-            labelUser.setText("USER");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("User.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+
+                UserController uc = fxmlLoader.getController();
+                uc.setClubMember(this.clubMember);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                Stage stage2 = (Stage) buttonUser.getScene().getWindow();
+                stage2.close();
         }
 
         public void setClubMember(ClubMember clubMember) {
