@@ -52,33 +52,12 @@ public class CompetitionController {
     @FXML
     private ListView listViewCompetition;
 
+    private List<String> register;
+
     public void setClubMember(ClubMember clubMember) {
         try {
             this.clubMember = clubMember;
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            List<Competition> competitions = new ArrayList<Competition>();
-            competitions = Client.getInstance().getAllCompetition();
-
-            //default time zone
-            ZoneId defaultZoneId = ZoneId.systemDefault();
-
-            LocalDate now = LocalDate.now();
-
-            Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
-
-            for (var comp : competitions) {
-                if (comp.getDate().after(dateNow)) {
-
-                    String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
-                    DateComboBox.getItems().add(info);
-                }
-            }
-
-            for (var boat : clubMember.getBoats()) {
-                String boatInfo = boat.getId() + " " + boat.getName();
-                BoatComboBox.getItems().add(boatInfo);
-            }
-            setListView();
+            setView();
         }
         catch(Exception e){
 
@@ -147,13 +126,14 @@ public class CompetitionController {
 
             setListView();
             listViewCompetition.refresh();
+            setView();
         }
     }
 
     private void setListView(){
         listViewCompetition.getItems().clear();
 
-        List<String> register = new ArrayList<String>();
+        register = new ArrayList<String>();
         register = Client.getInstance().getCompetitionRegisterByMemberId(this.clubMember.getId());
 
 
@@ -161,6 +141,52 @@ public class CompetitionController {
         items.add("ID,  DATE,        BOAT");
         for(var x : register){
             items.add(x);
+        }
+    }
+
+    private List<Competition> getCompetitionAvailable(List<Competition> list){
+        List<Integer> ids = new ArrayList<Integer>();
+        for(var x:register){
+            String word[] = x.split(", ");
+            ids.add(Integer.valueOf(word[0]));
+        }
+
+        for(var id:ids){
+            list.removeIf(n -> n.getId()==id);
+        }
+
+        return list;
+    }
+
+    public void setView(){
+        try{
+            DateComboBox.getItems().clear();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            setListView();
+            List<Competition> competitions = new ArrayList<Competition>();
+            competitions = getCompetitionAvailable(Client.getInstance().getAllCompetition());
+
+            //default time zone
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+
+            LocalDate now = LocalDate.now();
+
+            Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
+
+            for (var comp : competitions) {
+                if (comp.getDate().after(dateNow)) {
+
+                    String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
+                    DateComboBox.getItems().add(info);
+                }
+            }
+
+            for (var boat : clubMember.getBoats()) {
+                String boatInfo = boat.getId() + " " + boat.getName();
+                BoatComboBox.getItems().add(boatInfo);
+            }
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 

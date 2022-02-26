@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seaclub.client.MembershipQuoteController">
+    <children>
+        <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="BACK" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font name="Verdana Bold" size="12.0" />
+            </font>
+        </Button>
+        <Label layoutX="63.0" layoutY="65.0" prefHeight="72.0" prefWidth="473.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="65.0" />
+        <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="46.0" prefWidth="413.0" text="Membership" textAlignment="CENTER" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="77.0">
+            <font>
+                <Font name="Verdana Bold" size="36.0" />
+            </font>
+        </Label>
+        <Label fx:id="priceLabel" alignment="CENTER" layoutX="14.0" layoutY="268.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="expirationLabel" alignment="CENTER" layoutX="40.0" layoutY="174.0" prefHeight="39.0" prefWidth="342.0" text="Your membership will expire on:" textAlignment="CENTER">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="membershipPriceLabel" alignment="CENTER" layoutX="129.0" layoutY="268.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="paymentLabel" alignment="CENTER" layoutX="291.0" layoutY="268.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
+            <font>
+                <Font name="Verdana Bold" size="18.0" />
+            </font>
+        </Label>
+        <RadioButton fx:id="CardRadioButton" layoutX="410.0" layoutY="272.0" mnemonicParsing="false" text="Card" />
+        <RadioButton fx:id="BanckTransferRadioButton" layoutX="478.0" layoutY="272.0" mnemonicParsing="false" text="Bank transfer" />
+        <Button fx:id="buttonStorageQuote" layoutX="64.0" layoutY="430.0" mnemonicParsing="false" onAction="#onStorageQuoteButtonClick" prefHeight="55.0" prefWidth="473.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Storage quote" textFill="WHITE" AnchorPane.bottomAnchor="14.800000000000011" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="63.0">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
+        <Button fx:id="paymentButton" layoutX="229.0" layoutY="313.0" mnemonicParsing="false" onAction="#onPaymentButtonClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Pay" textFill="WHITE" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="313.0">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

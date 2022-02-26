@@ -104,11 +104,17 @@ public class Message implements Serializable {
      **/
     private String ACTION_COMPETITION_REGISTER_BY_MEMBER_ID = "GetCompetitionRegisterByMemberId";
 
+    private String ACTION_GET_COMPETITION_REGISTER = "GetCompetitionRegister";
+
     private static final long serialVersionUID = 1L;
+
+
     /**
      * Represents the action to be performed.
      */
     private String action;
+
+
     /**
      * Represents the value to used in the action.
      */
@@ -259,4 +265,7 @@ public class Message implements Serializable {
         return ACTION_USER_INFORMATION;
     }
 
+    public String getACTION_GET_COMPETITION_REGISTER() {
+        return ACTION_GET_COMPETITION_REGISTER;
+    }
 }

@@ -2,6 +2,7 @@ package com.seaclub.server;
 import com.seaclub.Manager.BoatManager;
 import com.seaclub.Manager.ClubMemberManager;
 import com.seaclub.Manager.CompetitionManager;
+import com.seaclub.Manager.CompetitionRegisterManager;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
@@ -68,6 +69,34 @@ public class DB {
             }
 
             BoatManager.getInstance().setBoats(boats);
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method used to get the whole CompetitionRegister table
+     */
+    public void getCompetitionRegister(){
+        String selectString = "SELECT * FROM registro_gare;";
+        try {
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+            List<CompetitionRegister> registers = new ArrayList<CompetitionRegister>();
+
+            while(rset.next()) {
+                CompetitionRegister competitionRegister = new CompetitionRegister(rset.getInt(""),rset.getInt(""),
+                        rset.getInt(""),rset.getInt(""),rset.getString(""));
+
+                registers.add(competitionRegister);
+            }
+
+            CompetitionRegisterManager.getInstance().setCompetitionRegisters(registers);
+
             stmt2.close();
         } catch (SQLException e) {
             e.printStackTrace();
