@@ -38,7 +38,7 @@ public class LoginController {
 
         if(username.getText().length()==0 || password.getText().length()==0)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Inserisci tutti i campi!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
             alert.showAndWait();
             btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;");
         }

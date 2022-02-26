@@ -35,6 +35,22 @@ public class MenuController {
         private Button buttonUser;
 
         @FXML
+        private Button btnLogout;
+
+        @FXML
+        protected void logoutOnClick() throws IOException {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+                stage2.close();
+
+        }
+
+        @FXML
         protected void onCompetitionButtonClick()throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Competition.fxml"));
                 Parent root = (Parent) fxmlLoader.load();

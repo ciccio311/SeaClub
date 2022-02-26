@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seaclub.client.UserController">
+   <children>
+      <Label layoutX="64.0" layoutY="64.0" prefHeight="72.0" prefWidth="473.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="64.0" />
+      <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="46.0" prefWidth="413.0" text="User information" textAlignment="CENTER" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="77.0">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="149.0" prefHeight="26.0" prefWidth="121.0" text="Username ID:" textAlignment="CENTER" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="149.0">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="189.0" prefHeight="26.0" prefWidth="121.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="189.0">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="modifyButton" layoutX="220.0" layoutY="420.0" mnemonicParsing="false" onAction="#modifyOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Modify" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="420.0">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Label fx:id="cfLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="266.0" prefHeight="26.0" prefWidth="121.0" text="CF:" textAlignment="CENTER">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="surnameLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="228.0" prefHeight="26.0" prefWidth="121.0" text="Surname:" textAlignment="CENTER">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="341.0" prefHeight="26.0" prefWidth="121.0" text="Password:" textAlignment="CENTER">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="addressLabel" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="301.0" prefHeight="26.0" prefWidth="121.0" text="Address:" textAlignment="CENTER">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="memberUsernameLabel" alignment="CENTER" layoutX="256.0" layoutY="149.0" prefHeight="26.0" prefWidth="121.0" text="1" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="memberNameLabel" alignment="CENTER" layoutX="256.0" layoutY="189.0" prefHeight="26.0" prefWidth="121.0" text="2" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="memberSurnameLabel" alignment="CENTER" layoutX="256.0" layoutY="228.0" prefHeight="26.0" prefWidth="121.0" text="3" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="memberSCfLabel" alignment="CENTER" layoutX="256.0" layoutY="266.0" prefHeight="26.0" prefWidth="121.0" text="4" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="AddressTextField" layoutX="255.0" layoutY="301.0" prefHeight="26.0" prefWidth="142.0" promptText="address" AnchorPane.rightAnchor="203.0" AnchorPane.topAnchor="301.0">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="PasswordTextField" layoutX="256.0" layoutY="341.0" prefHeight="26.0" prefWidth="141.0" promptText="psw" AnchorPane.rightAnchor="203.0" AnchorPane.topAnchor="341.0">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="BACK" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

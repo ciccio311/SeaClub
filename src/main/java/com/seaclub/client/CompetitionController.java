@@ -5,8 +5,13 @@ import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
 import com.seaclub.Model.CompetitionRegister;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,36 +40,58 @@ public class CompetitionController {
     @FXML
     private RadioButton CardRadioButton;
 
+    @FXML
+    private Button btnBack;
+
     public void setClubMember(ClubMember clubMember) {
-        this.clubMember = clubMember;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        List<Competition>competitions = new ArrayList<Competition>();
-        competitions = Client.getInstance().getAllCompetition();
+        try {
+            this.clubMember = clubMember;
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            List<Competition> competitions = new ArrayList<Competition>();
+            competitions = Client.getInstance().getAllCompetition();
 
-        //default time zone
-        ZoneId defaultZoneId = ZoneId.systemDefault();
+            //default time zone
+            ZoneId defaultZoneId = ZoneId.systemDefault();
 
-        LocalDate now = LocalDate.now();
+            LocalDate now = LocalDate.now();
 
-        Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
+            Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
 
-        for(var comp:competitions){
-            if(comp.getDate().after(dateNow)){
+            for (var comp : competitions) {
+                if (comp.getDate().after(dateNow)) {
 
-                String info =comp.getId()+" "+dateFormat.format(comp.getDate())+" "+comp.getPrice()+"€";
-                DateComboBox.getItems().add(info);
-            }else{
-                competitions.remove(comp);
+                    String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
+                    DateComboBox.getItems().add(info);
+                } /*else {
+                    competitions.remove(comp);
+                }*/
+            }
+
+            for (var boat : clubMember.getBoats()) {
+                String boatInfo = boat.getId() + " " + boat.getName();
+                BoatComboBox.getItems().add(boatInfo);
             }
         }
+        catch(Exception e){
 
-        for(var boat:clubMember.getBoats()){
-            String boatInfo = boat.getId()+" "+boat.getName();
-            BoatComboBox.getItems().add(boatInfo);
+            System.out.println(e);
         }
-
     }
 
+    @FXML
+    protected void backOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        MenuController mc = fxmlLoader.getController();
+        mc.setClubMember(this.clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnBack.getScene().getWindow();
+        stage2.close();
+
+    }
 
     @FXML
     protected void OnClickDate(){

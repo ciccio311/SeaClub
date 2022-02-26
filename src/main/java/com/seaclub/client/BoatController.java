@@ -26,6 +26,9 @@ public class BoatController {
     private TextField width;
 
     @FXML
+    private Button btnBack;
+
+    @FXML
     private TableView<Boat> tableViewBoats;
 
     private ClubMember clubMember;
@@ -34,7 +37,7 @@ public class BoatController {
     protected void addOnClick()throws IOException {
         if(name.getText().length()==0 || width.getText().length()==0)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Inserisci tutti i campi!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
             alert.showAndWait();
         }
         else
@@ -54,6 +57,21 @@ public class BoatController {
         }
     }
 
+    @FXML
+    protected void backOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        MenuController mc = fxmlLoader.getController();
+        mc.setClubMember(this.clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnBack.getScene().getWindow();
+        stage2.close();
+
+    }
+
     public void setClubMember(ClubMember cm){
         this.clubMember = cm;
 
@@ -63,7 +81,7 @@ public class BoatController {
 
         TableColumn<Boat, String> column2 = new TableColumn<>("Width");
         column2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getWidth())));
-        column2.setStyle("-fx-alignment: CENTER; -fx-pref-width: 108px;");
+        column2.setStyle("-fx-alignment: CENTER; -fx-pref-width: 100px;");
 
         tableViewBoats.getColumns().add(column1);
         tableViewBoats.getColumns().add(column2);
