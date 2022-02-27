@@ -113,10 +113,10 @@ public class MembershipQuoteController {
 
     @FXML
     protected void onStorageQuoteButtonClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageRegister.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageQuote.fxml"));
         Parent root = (Parent) fxmlLoader.load();
 
-        StorageRegisterController mc = fxmlLoader.getController();
+        StorageQuoteController mc = fxmlLoader.getController();
         mc.setClubMember(clubMember);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -126,7 +126,19 @@ public class MembershipQuoteController {
     }
 
     @FXML
-    protected void onHistoryButtonClick(){}
+    protected void onHistoryButtonClick() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipRegister.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        MembershipRegisterController mc = fxmlLoader.getController();
+        mc.setClubMember(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnBack.getScene().getWindow();
+        stage2.close();
+    }
 
     @FXML
     protected void backOnClick() throws IOException {

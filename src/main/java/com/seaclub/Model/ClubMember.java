@@ -221,4 +221,12 @@ public class ClubMember implements Serializable {
             return  null;
         }
     }
+
+    public Boat getBoatById(int id){
+        for(var x:boats){
+            if(x.getId()==id)
+                return x;
+        }
+        return null;
+    }
 }

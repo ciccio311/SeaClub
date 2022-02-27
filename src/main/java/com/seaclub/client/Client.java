@@ -141,6 +141,55 @@ public class Client {
         return null;
     }
 
+
+    public StorageRegister getLastStorageRegister(Boat boat){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getACTION_GET_LAST_STORAGE_REGISTER());
+                request.setValue(boat);
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+                    client.close();
+                    if(response.getValue()!=null){
+                        StorageRegister storageRegister = (StorageRegister) response.getValue();
+                        return storageRegister;
+                    }else
+                        return null;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return null;
+            }
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ClubMember updateClubMember(ClubMember cm){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);

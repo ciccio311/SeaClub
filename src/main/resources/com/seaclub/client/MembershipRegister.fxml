@@ -17,6 +17,9 @@
             <Font name="Verdana Bold" size="12.0" />
          </font>
       </Button>
-      <ListView fx:id="listViewRegister" layoutY="179.0" prefHeight="321.0" prefWidth="600.0" />
+      <TableView fx:id="tableViewRegister" layoutY="179.0" prefHeight="322.0" prefWidth="600.0">
+         <columns>
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

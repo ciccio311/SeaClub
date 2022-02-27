@@ -1,7 +1,9 @@
 package com.seaclub.client;
 
+import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.StorageRegister;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,14 +22,12 @@ import java.util.List;
 
 public class StorageRegisterController {
     private ClubMember clubMember;
-    private ObservableList<String> items = FXCollections.observableArrayList();
-    private List<String> register;
 
     @FXML
     private Button btnBack;
 
     @FXML
-    private ListView listViewRegister;
+    private TableView tableViewRegister;
 
 
     @FXML
@@ -45,34 +47,40 @@ public class StorageRegisterController {
 
     public void setClubMember(ClubMember cm){
         this.clubMember = cm;
-        setListView();
+        setTableView();
     }
 
-    private void setListView(){
-        listViewRegister.getItems().clear();
-        register = new ArrayList<String>();
-        List<StorageRegister> reg = new ArrayList<StorageRegister>();
+    private void setTableView(){
+        tableViewRegister.getItems().clear();
+
+        TableColumn<StorageRegister, String> C1 = new TableColumn("ID BARCA");
+        C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdBoat())));
+        C1.setStyle("-fx-alignment: CENTER;");
+        TableColumn<StorageRegister, String> C2 = new TableColumn("ID SOCIO");
+        C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdClubMember())));
+        C2.setStyle("-fx-alignment: CENTER;");
+        TableColumn<StorageRegister, String> C3 = new TableColumn("PAGAMENTO");
+        C3.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getPaymentMethod()));
+        C3.setStyle("-fx-alignment: CENTER;");
+        TableColumn<StorageRegister, String> C4 = new TableColumn(" DATA PAGAMENTO");
+        C4.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDatePayment())));
+        C4.setStyle("-fx-alignment: CENTER;");
+        TableColumn<StorageRegister, String> C5 = new TableColumn("PREZZO");
+        C5.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getPrice()+"€")));
+        C5.setStyle("-fx-alignment: CENTER;");
 
         if(this.clubMember.getDipendente() == 1){
             //SE DIPENDENTE GET ALL STORAGE REGISTER
+            tableViewRegister.getColumns().addAll(C1, C2, C3, C4, C5);
 
-            reg = Client.getInstance().getAllStorageRegisterQuote();
-            listViewRegister.setItems(items);
-            items.add("ID BARCA,  ID SOCIO, PAGAMENTO,  DATA PAGAMENTO,  PREZZO");
+            tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
 
-            for (var x : reg) {
-                String item = x.getIdBoat() + ", " + x.getIdClubMember() + ", " + x.getPaymentMethod() + ", " + x.getDatePayment().toString() + ", " + String.valueOf(x.getPrice());
-                items.add(item);
-            }
         }
         else {
             //SE club member GET STORAGE REGISTER BY CLUB MEMBER ID
+            tableViewRegister.getColumns().addAll(C1, C3, C4, C5);
 
-            listViewRegister.setItems(items);
-            items.add("ID BARCA,  PAGAMENTO,  DATA PAGAMENTO,  PREZZO");
-            for (var x : register) {
-                items.add(x);
-            }
+            //tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
         }
     }
 }

@@ -100,6 +100,36 @@ public class DB {
     }
 
     /**
+     * Method used to get Last row Storage Quote register table
+     */
+    public void getLastBoatStorageQuote(Boat boat){
+        String selectString = "SELECT * " +
+                "FROM registro_rimessaggi r " +
+                "WHERE r.IDBarca=" +boat.getId()+" "+
+                "ORDER BY r.Data_pagamento DESC " +
+                "LIMIT 1;";
+        try {
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+            while(rset.next()) {
+                StorageRegister storage = new StorageRegister(rset.getInt("IDRegistro_rim"),
+                        rset.getInt("IDQuota_rim"),rset.getInt("IDBarca"),
+                        rset.getInt("IDSocio"), rset.getString("Metodo_pag"),rset.getDate("Data_pagamento"),
+                        rset.getFloat("Prezzo"));
+
+                StorageRegisterManager.getInstance().setLastStorageRegister(storage);
+            }
+
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method used to get the whole CompetitionRegister table
      */
     public void getCompetitionRegister(){

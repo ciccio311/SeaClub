@@ -9,6 +9,7 @@ import java.util.List;
 
 public class StorageRegisterManager {
     private List<StorageRegister> registers;
+    private StorageRegister lastStorageRegister;
 
     private static StorageRegisterManager instance = null;
 
@@ -31,6 +32,10 @@ public class StorageRegisterManager {
         return instance;
     }
 
+    public void setLastStorageRegister(StorageRegister lastStorageRegister) {
+        this.lastStorageRegister = lastStorageRegister;
+    }
+
     public List<StorageRegister> getRegisters() {
         return registers;
     }
@@ -41,5 +46,10 @@ public class StorageRegisterManager {
 
     public void updateList(){
         DB.getInstance().getBoatStorageQuote();
+    }
+
+    public StorageRegister getLastStorageRegisterBoat(Boat boat){
+        DB.getInstance().getLastBoatStorageQuote(boat);
+        return lastStorageRegister;
     }
 }

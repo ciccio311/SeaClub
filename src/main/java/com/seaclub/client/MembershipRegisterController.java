@@ -1,6 +1,9 @@
 package com.seaclub.client;
 
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.MembershipRegister;
+import com.seaclub.Model.StorageRegister;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,14 +22,12 @@ import java.util.List;
 
 public class MembershipRegisterController {
     private ClubMember clubMember;
-    private ObservableList<String> items = FXCollections.observableArrayList();
-    private List<String> register;
 
     @FXML
     private Button btnBack;
 
     @FXML
-    private ListView listViewRegister;
+    private TableView tableViewRegister;
 
 
     @FXML
@@ -44,31 +47,32 @@ public class MembershipRegisterController {
 
     public void setClubMember(ClubMember cm){
         this.clubMember = cm;
-        setListView();
+        setTableView();
     }
 
-    private void setListView(){
-        listViewRegister.getItems().clear();
-        register = new ArrayList<String>();
+    private void setTableView(){
+        tableViewRegister.getItems().clear();
+
+        TableColumn<MembershipRegister, String> C1 = new TableColumn("ID SOCIO");
+        C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdClubMember())));
+        C1.setStyle("-fx-alignment: CENTER;");
+        TableColumn<MembershipRegister, String> C2 = new TableColumn("PAGAMENTO");
+        C2.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getPaymentMethod()));
+        C2.setStyle("-fx-alignment: CENTER;");
+        TableColumn<MembershipRegister, String> C3 = new TableColumn(" DATA PAGAMENTO");
+        C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDatePayment())));
+        C3.setStyle("-fx-alignment: CENTER;");
 
         if(this.clubMember.getDipendente() == 1){
             //SE DIPENDENTE GET ALL MEMBERSHIP REGISTER
-
-
-            listViewRegister.setItems(items);
-            items.add("ID SOCIO, PAGAMENTO,  DATA PAGAMENTO");
-            for (var x : register) {
-                items.add(x);
-            }
+            tableViewRegister.getColumns().addAll(C1, C2, C3);
+            tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllMembershipQuoteRegister())));
         }
         else {
             //SE club member GET MEMBERSHIP REGISTER BY CLUB MEMBER ID
+            tableViewRegister.getColumns().addAll(C2, C3);
 
-            listViewRegister.setItems(items);
-            items.add("PAGAMENTO,  DATA PAGAMENTO");
-            for (var x : register) {
-                items.add(x);
-            }
+            //tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
         }
     }
 }

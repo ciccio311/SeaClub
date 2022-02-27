@@ -59,6 +59,8 @@ public class MessageProcessing {
                 return updateUserInfo(mex);
             if(mex.getAction().equals(mex.getACTION_GET_STORAGE_REGISTER_QUOTE()))
                 return getStorageRegisterQuote(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_LAST_STORAGE_REGISTER()))
+                return getLastStorageRegister(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -154,5 +156,11 @@ public class MessageProcessing {
     public Message getStorageRegisterQuote(Message mex){
         StorageRegisterManager.getInstance().updateList();
         return new Message("Get all Storage Register Quote!",StorageRegisterManager.getInstance().getRegisters());
+    }
+
+    public Message getLastStorageRegister(Message mex){
+        if(mex.getValue() instanceof Boat == false)
+            return null;
+        return new Message("Get last storage register!",StorageRegisterManager.getInstance().getLastStorageRegisterBoat((Boat) mex.getValue()));
     }
 }
