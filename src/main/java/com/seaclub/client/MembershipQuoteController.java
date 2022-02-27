@@ -82,7 +82,7 @@ public class MembershipQuoteController {
             mr.setDatePayment(sqlDate);
 
             mr.setIdClubMember(clubMember.getId());
-            mr.setIDQuote(1);
+            mr.setIDQuote(2);
 
             if(Client.getInstance().addMembershipRegisterQuote(mr))
                 System.out.println("FUNZIONA");
@@ -96,7 +96,7 @@ public class MembershipQuoteController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
             Parent root = (Parent) fxmlLoader.load();
 
-            MenuController mc = new MenuController();
+            MenuController mc = fxmlLoader.getController();
             mc.setClubMember(clubMember);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -111,11 +111,11 @@ public class MembershipQuoteController {
 
     @FXML
     protected void backOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root = (Parent) fxmlLoader.load();
 
-        MenuController mc = new MenuController();
-        mc.setClubMember(clubMember);
+        MenuController mc = fxmlLoader.getController();
+        mc.setClubMember(this.clubMember);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
