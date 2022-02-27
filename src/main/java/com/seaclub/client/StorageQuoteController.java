@@ -75,7 +75,18 @@ public class StorageQuoteController {
     }
 
     @FXML
-    protected void onHistoryButtonClick(){}
+    protected void onHistoryButtonClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageRegister.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        StorageRegisterController uc = fxmlLoader.getController();
+        uc.setClubMember(this.clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnBack.getScene().getWindow();
+        stage2.close();
+    }
 
     @FXML
     protected void backOnClick() throws IOException {
