@@ -15,7 +15,7 @@ public class StorageRegister implements Serializable {
     private int idClubMember;
     private String paymentMethod;
     private Date datePayment;
-    private double price;
+    private float price;
 
     /**
      * First class constructor
@@ -31,7 +31,7 @@ public class StorageRegister implements Serializable {
      * @param datePayment the date of the payment.
      * @param price the price of the storage
      */
-    public StorageRegister(int id, int idQuote, int idBoat, int idClubMember, String paymentMethod, Date datePayment, double price){
+    public StorageRegister(int id, int idQuote, int idBoat, int idClubMember, String paymentMethod, Date datePayment, float price){
         this.id = id;
         this.idQuote = idQuote;
         this.idBoat = idBoat;
@@ -143,7 +143,7 @@ public class StorageRegister implements Serializable {
      * @param price the price of the storage.
      *
      **/
-    public void setPrice(double price) { this.price = price; }
+    public void setPrice(float price) { this.price = price; }
 
     /**
      * Gets the price of the storage.
@@ -151,5 +151,5 @@ public class StorageRegister implements Serializable {
      * @return the price of the storage.
      *
      **/
-    public double getPrice() { return price; }
+    public float getPrice() { return price; }
 }

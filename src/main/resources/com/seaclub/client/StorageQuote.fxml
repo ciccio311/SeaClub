@@ -38,7 +38,7 @@
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="storageQuotePriceLabel" alignment="CENTER" layoutX="296.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
+        <Label fx:id="storageQuotePriceLabel" alignment="CENTER" layoutX="284.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>

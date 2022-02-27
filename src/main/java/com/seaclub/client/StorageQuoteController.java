@@ -18,9 +18,6 @@ public class StorageQuoteController {
     private Button payButton;
 
     @FXML
-    private ListView listViewStorage;
-
-    @FXML
     private ComboBox boatComboBox;
 
     @FXML
