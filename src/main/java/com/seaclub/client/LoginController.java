@@ -57,8 +57,6 @@ public class LoginController {
             cp.setPrice((float) 6.35);
             Client.getInstance().addNewCompetition(cp);*/
 
-            DB.getInstance().getCompetitionRegisterByMemberId(1);
-
             if(clubMember!=null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
                 Parent root = (Parent) fxmlLoader.load();

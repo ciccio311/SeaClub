@@ -155,12 +155,6 @@ public class DB {
      */
     public void getClubMembers() {
         String selectString = "SELECT * FROM socio;";
-        /*
-        *
-        * SELECT socio.CF, socio.Dipendente, socio.Nome, socio.Cognome, socio.Indirizzo, socio.Password
-FROM socio,quota_associazione,registro_associazioni
-WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_ass = registro_associazioni.IDQuota_ass AND DATEDIFF(NOW(),registro_associazioni.Data_pagamento)<365; * */
-
         try {
 
             ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);

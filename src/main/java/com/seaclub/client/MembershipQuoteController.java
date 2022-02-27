@@ -84,14 +84,19 @@ public class MembershipQuoteController {
             mr.setIdClubMember(clubMember.getId());
             mr.setIDQuote(2);
 
-            if(Client.getInstance().addMembershipRegisterQuote(mr))
-                System.out.println("FUNZIONA");
-            else
-                System.out.println("NON FUNX");
+            if(Client.getInstance().addMembershipRegisterQuote(mr)) {
 
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment success!");
-            alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment success!");
+                alert.showAndWait();
+
+
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                alert.showAndWait();
+
+            }
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
             Parent root = (Parent) fxmlLoader.load();

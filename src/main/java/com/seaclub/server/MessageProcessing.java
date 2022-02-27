@@ -55,6 +55,8 @@ public class MessageProcessing {
                 return getMembershipQuoteRegister(mex);
             if(mex.getAction().equals(mex.getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE()))
                 return addMembershipRegisterQuote(mex);
+            if(mex.getAction().equals(mex.getACTION_UPDATE_USER_INFO()))
+                return updateUserInfo(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -139,5 +141,11 @@ public class MessageProcessing {
             return null;
         MembershipRegisterManager.getInstance().addMembershipRegisterQuote((MembershipRegister) mex.getValue());
         return new Message("New membership quote added", null);
+    }
+
+    public Message updateUserInfo(Message mex){
+        if(mex.getValue() instanceof ClubMember == false)
+            return null;
+        return new Message("User info updated!",ClubMemberManager.getInstance().updateClubMember((ClubMember) mex.getValue()));
     }
 }

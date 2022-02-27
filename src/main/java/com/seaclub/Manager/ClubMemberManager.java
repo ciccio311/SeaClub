@@ -68,5 +68,14 @@ public class ClubMemberManager {
         return null;
     }
 
+    public ClubMember updateClubMember(ClubMember clubMember){
+        updateList();
+        for(var x:this.members){
+            if(x.getId() == clubMember.getId())
+                return x;
+        }
+        return null;
+    }
+
 }
 

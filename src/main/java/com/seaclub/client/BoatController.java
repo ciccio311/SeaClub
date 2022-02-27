@@ -48,7 +48,8 @@ public class BoatController {
             b.setIdClubMember(this.clubMember.getId());
             Client.getInstance().addNewBoat(b);
 
-            this.clubMember.getBoats().add(b);
+            this.clubMember = Client.getInstance().updateClubMember(clubMember);
+
             tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
             tableViewBoats.refresh();
 
