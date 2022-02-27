@@ -1,10 +1,7 @@
 package com.seaclub.server;
 
 import com.seaclub.Communication.Message;
-import com.seaclub.Manager.BoatManager;
-import com.seaclub.Manager.ClubMemberManager;
-import com.seaclub.Manager.CompetitionManager;
-import com.seaclub.Manager.CompetitionRegisterManager;
+import com.seaclub.Manager.*;
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Competition;
@@ -57,6 +54,8 @@ public class MessageProcessing {
                 return getCompetitionRegister(mex);
             if(mex.getAction().equals(mex.getACTION_UPDATE_MEMBER()))
                 return updateMemberInfo(mex);
+            if(mex.getAction().equals(mex.getActionGetMembershipFee()))
+                return getMembershipQuoteRegister(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -129,5 +128,10 @@ public class MessageProcessing {
             return null;
         DB.getInstance().updateUser((ClubMember) mex.getValue());
         return new Message("User modified", null);
+    }
+
+    public Message getMembershipQuoteRegister(Message mex){
+        MembershipRegisterManager.getInstance().updateList();
+        return new Message("Get all MembershipQuoteRegister", MembershipRegisterManager.getInstance().getMembershipRegisters());
     }
 }

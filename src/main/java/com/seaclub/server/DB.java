@@ -1,12 +1,6 @@
 package com.seaclub.server;
-import com.seaclub.Manager.BoatManager;
-import com.seaclub.Manager.ClubMemberManager;
-import com.seaclub.Manager.CompetitionManager;
-import com.seaclub.Manager.CompetitionRegisterManager;
-import com.seaclub.Model.Boat;
-import com.seaclub.Model.ClubMember;
-import com.seaclub.Model.Competition;
-import com.seaclub.Model.CompetitionRegister;
+import com.seaclub.Manager.*;
+import com.seaclub.Model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -97,6 +91,34 @@ public class DB {
 
             CompetitionRegisterManager.getInstance().setCompetitionRegisters(registers);
 
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method used to get the whole MembershipQuote table
+     */
+    public void getMembershipQuoteRegister(){
+        String selectString = "SELECT * FROM registro_associazioni;";
+        try {
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+            List<MembershipRegister> registers = new ArrayList<MembershipRegister>();
+
+            while(rset.next()) {
+                MembershipRegister membershipRegister = new MembershipRegister(rset.getInt("IDRegistro_ass"),
+                        rset.getInt("IDQuota_ass"),rset.getInt("IDSocio"),rset.getString("Metodo_pag"),
+                        rset.getDate("Data_pagamento"));
+
+               registers.add(membershipRegister);
+            }
+
+            MembershipRegisterManager.getInstance().setMembershipRegisters(registers);
             stmt2.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -2,10 +2,7 @@ package com.seaclub.client;
 
 import com.seaclub.Communication.Message;
 import com.seaclub.Manager.CompetitionManager;
-import com.seaclub.Model.Boat;
-import com.seaclub.Model.ClubMember;
-import com.seaclub.Model.Competition;
-import com.seaclub.Model.CompetitionRegister;
+import com.seaclub.Model.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -221,6 +218,56 @@ public class Client {
                     client.close();
                     if(response.getValue()!=null){
                         List<CompetitionRegister> registers = (List<CompetitionRegister>) response.getValue();
+                        return registers;
+                    }else
+                        return null;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return null;
+            }
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @return All Membership's Register
+     */
+    public List<MembershipRegister> getAllMembershipQuoteRegister(){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionGetMembershipFee());
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+                    client.close();
+                    if(response.getValue()!=null){
+                        List<MembershipRegister> registers = (List<MembershipRegister>) response.getValue();
                         return registers;
                     }else
                         return null;

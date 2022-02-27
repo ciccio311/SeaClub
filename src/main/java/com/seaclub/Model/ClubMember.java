@@ -205,4 +205,15 @@ public class ClubMember implements Serializable {
     public void setBoats(List<Boat> boats) {
         this.boats = boats;
     }
+
+    public MembershipRegister getLastPaymentQuote(List<MembershipRegister> registers){
+        List<MembershipRegister> myMembershipRegister = new ArrayList<MembershipRegister>();
+
+        for(var x:registers){
+            if(x.getIdClubMember()==id){
+                myMembershipRegister.add(x);
+            }
+        }
+        return  myMembershipRegister.get(myMembershipRegister.size()-1);
+    }
 }

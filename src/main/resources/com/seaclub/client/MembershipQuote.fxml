@@ -22,7 +22,7 @@
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="expirationLabel" alignment="CENTER" layoutX="40.0" layoutY="174.0" prefHeight="39.0" prefWidth="342.0" text="Your membership will expire on:" textAlignment="CENTER">
+        <Label fx:id="expirationLabel" layoutX="40.0" layoutY="174.0" prefHeight="39.0" prefWidth="552.0" text="Your membership will expire on:" textAlignment="CENTER">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>

@@ -82,7 +82,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action get membership fee of partner. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_GET_MEMBERSHIP_FEE = "getMembershipFee";
+    private String ACTION_GET_MEMBERSHIP_FEE = "getMembershipFee";
     /**
      *  Represents the String of the action get subscription fee of partner. Used for communicating the type of action to be performed.
      **/
@@ -207,7 +207,7 @@ public class Message implements Serializable {
         return ACTION_GET_ALL_SUBSCRIBERS_OF_RACE;
     }
 
-    public static String getActionGetMembershipFee() {
+    public String getActionGetMembershipFee() {
         return ACTION_GET_MEMBERSHIP_FEE;
     }
 

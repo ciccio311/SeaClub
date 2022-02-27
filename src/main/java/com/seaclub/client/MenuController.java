@@ -65,8 +65,15 @@ public class MenuController {
 
         @FXML
         protected void buttonQuotOnClick()throws IOException {
-            labelUser.setText("Quote");
-        }
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipQuote.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                MembershipQuoteController hc = fxmlLoader.getController();
+                hc.setClubMember(clubMember);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                Stage stage2 = (Stage) buttonQuote.getScene().getWindow();
+                stage2.close();        }
 
         @FXML
         protected void buttonBoatOnClick()throws IOException {
