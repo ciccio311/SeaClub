@@ -43,4 +43,9 @@ public class MembershipRegisterManager {
     public void updateList(){
         DB.getInstance().getMembershipQuoteRegister();
     }
+
+    public void addMembershipRegisterQuote(MembershipRegister mr) {
+        DB.getInstance().addMembershipRegisterQuote(mr);
+        updateList();
+    }
 }

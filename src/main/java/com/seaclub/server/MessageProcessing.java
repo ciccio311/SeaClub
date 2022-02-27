@@ -2,10 +2,7 @@ package com.seaclub.server;
 
 import com.seaclub.Communication.Message;
 import com.seaclub.Manager.*;
-import com.seaclub.Model.Boat;
-import com.seaclub.Model.ClubMember;
-import com.seaclub.Model.Competition;
-import com.seaclub.Model.CompetitionRegister;
+import com.seaclub.Model.*;
 
 public class MessageProcessing {
 
@@ -56,6 +53,8 @@ public class MessageProcessing {
                 return updateMemberInfo(mex);
             if(mex.getAction().equals(mex.getActionGetMembershipFee()))
                 return getMembershipQuoteRegister(mex);
+            if(mex.getAction().equals(mex.getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE()))
+                return addMembershipRegisterQuote(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -133,5 +132,12 @@ public class MessageProcessing {
     public Message getMembershipQuoteRegister(Message mex){
         MembershipRegisterManager.getInstance().updateList();
         return new Message("Get all MembershipQuoteRegister", MembershipRegisterManager.getInstance().getMembershipRegisters());
+    }
+
+    public Message addMembershipRegisterQuote(Message mex){
+        if(mex.getValue() instanceof MembershipRegister == false)
+            return null;
+        MembershipRegisterManager.getInstance().addMembershipRegisterQuote((MembershipRegister) mex.getValue());
+        return new Message("New membership quote added", null);
     }
 }

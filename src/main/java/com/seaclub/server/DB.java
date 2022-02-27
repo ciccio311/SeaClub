@@ -298,4 +298,23 @@ WHERE socio.CF = registro_associazioni.IDSocio AND quota_associazione.IDQuota_as
         }
     }
 
+    public void addMembershipRegisterQuote(MembershipRegister mr){
+        try {
+            String insertSql = "insert into registro_associazioni values (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new competition register
+            pstmt.setInt(1, mr.getID());
+            pstmt.setInt(2,  mr.getIDQuote());
+            pstmt.setInt(3, mr.getIdClubMember());
+            pstmt.setString(4, mr.getPaymentMethod());
+            pstmt.setDate(5, (Date) mr.getDatePayment());
+            pstmt.execute();
+            System.out.println("Membership quote added to DB");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

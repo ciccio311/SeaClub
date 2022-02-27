@@ -108,6 +108,8 @@ public class Message implements Serializable {
 
     private String ACTION_UPDATE_MEMBER = "UpdateMember";
 
+    private String ACTION_ADD_MEMBERSHIP_REGISTER_QUOTE = "AddMembershipRegisterQuote";
+
     private static final long serialVersionUID = 1L;
 
 
@@ -273,5 +275,9 @@ public class Message implements Serializable {
 
     public String getACTION_GET_COMPETITION_REGISTER() {
         return ACTION_GET_COMPETITION_REGISTER;
+    }
+
+    public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {
+        return ACTION_ADD_MEMBERSHIP_REGISTER_QUOTE;
     }
 }
