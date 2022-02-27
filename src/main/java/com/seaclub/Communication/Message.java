@@ -112,6 +112,8 @@ public class Message implements Serializable {
 
     private String ACTION_UPDATE_USER_INFO ="UpdateUserInfo";
 
+    private String ACTION_GET_STORAGE_REGISTER_QUOTE = "GetStorageRegisterQuote";
+
     private static final long serialVersionUID = 1L;
 
 
@@ -281,6 +283,10 @@ public class Message implements Serializable {
 
     public String getACTION_UPDATE_USER_INFO() {
         return ACTION_UPDATE_USER_INFO;
+    }
+
+    public String getACTION_GET_STORAGE_REGISTER_QUOTE() {
+        return ACTION_GET_STORAGE_REGISTER_QUOTE;
     }
 
     public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {

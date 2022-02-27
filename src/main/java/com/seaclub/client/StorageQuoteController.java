@@ -1,6 +1,7 @@
 package com.seaclub.client;
 
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.StorageRegister;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StorageQuoteController {
     @FXML
@@ -57,6 +60,11 @@ public class StorageQuoteController {
     }
 
     protected void setView(){
+        boatComboBox.getItems().clear();
+
+        List<StorageRegister> registers = new ArrayList<StorageRegister>();
+
+        registers = Client.getInstance().getAllStorageRegisterQuote();
 
     }
 }

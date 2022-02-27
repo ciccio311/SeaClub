@@ -70,6 +70,36 @@ public class DB {
     }
 
     /**
+     * Method used to get the whole Storage Quote register table
+     */
+    public void getBoatStorageQuote(){
+        String selectString = "SELECT * FROM registro_rimessaggi;";
+        try {
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+            List<StorageRegister> registers = new ArrayList<StorageRegister>();
+
+            while(rset.next()) {
+                StorageRegister storage = new StorageRegister(rset.getInt("IDRegistro_rim"),
+                        rset.getInt("IDQuota_rim"),rset.getInt("IDBarca"),
+                        rset.getInt("IDSocio"), rset.getString("Metodo_pag"),rset.getDate("Data_pagamento"),
+                        rset.getFloat("Prezzo"));
+
+                registers.add(storage);
+            }
+
+            StorageRegisterManager.getInstance().setRegisters(registers);
+
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method used to get the whole CompetitionRegister table
      */
     public void getCompetitionRegister(){

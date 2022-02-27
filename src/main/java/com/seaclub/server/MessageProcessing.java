@@ -57,6 +57,8 @@ public class MessageProcessing {
                 return addMembershipRegisterQuote(mex);
             if(mex.getAction().equals(mex.getACTION_UPDATE_USER_INFO()))
                 return updateUserInfo(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_STORAGE_REGISTER_QUOTE()))
+                return getStorageRegisterQuote(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -147,5 +149,10 @@ public class MessageProcessing {
         if(mex.getValue() instanceof ClubMember == false)
             return null;
         return new Message("User info updated!",ClubMemberManager.getInstance().updateClubMember((ClubMember) mex.getValue()));
+    }
+
+    public Message getStorageRegisterQuote(Message mex){
+        StorageRegisterManager.getInstance().updateList();
+        return new Message("Get all Storage Register Quote!",StorageRegisterManager.getInstance().getRegisters());
     }
 }
