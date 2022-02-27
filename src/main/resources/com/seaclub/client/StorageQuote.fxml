@@ -17,34 +17,38 @@
                 <Font name="Verdana Bold" size="36.0" />
             </font>
         </Label>
-        <ListView fx:id="listViewStorage" layoutY="179.0" prefHeight="320.0" prefWidth="280.0" />
-        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="314.0" layoutY="200.0" prefHeight="26.0" prefWidth="121.0" text="Boat:" textAlignment="CENTER" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="200.0">
+        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="56.0" layoutY="200.0" prefHeight="26.0" prefWidth="154.0" text="Boat expired:" textAlignment="CENTER" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="200.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="payButton" layoutX="387.0" layoutY="379.0" mnemonicParsing="false" onAction="#payOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Pay" textFill="WHITE" AnchorPane.leftAnchor="387.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="379.0">
+        <Button fx:id="payButton" layoutX="220.0" layoutY="351.0" mnemonicParsing="false" onAction="#payOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Pay" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="351.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <ComboBox fx:id="BoatComboBox" layoutX="435.0" layoutY="201.0" onAction="#OnClickBoat" prefWidth="150.0" />
-        <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="318.0" layoutY="300.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
+        <ComboBox fx:id="BoatComboBox" layoutX="243.0" layoutY="200.0" onAction="#OnClickBoat" prefHeight="26.0" prefWidth="203.0" />
+        <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="98.0" layoutY="299.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="PriceLabel" alignment="CENTER" layoutX="313.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER">
+        <Label fx:id="PriceLabel" alignment="CENTER" layoutX="124.0" layoutY="253.0" prefHeight="26.0" prefWidth="91.0" text="Price:" textAlignment="CENTER">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="storageQuotePriceLabel" alignment="CENTER" layoutX="449.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
+        <Label fx:id="storageQuotePriceLabel" alignment="CENTER" layoutX="296.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <RadioButton fx:id="cardRadioButton" layoutX="434.0" layoutY="305.0" mnemonicParsing="false" text="Card" />
-        <RadioButton fx:id="banckTransferRadioButton" layoutX="494.0" layoutY="305.0" mnemonicParsing="false" text="Bank transfer" />
+        <RadioButton fx:id="cardRadioButton" layoutX="243.0" layoutY="304.0" mnemonicParsing="false" text="Card" />
+        <RadioButton fx:id="banckTransferRadioButton" layoutX="357.0" layoutY="304.0" mnemonicParsing="false" text="Bank transfer" />
+        <Button fx:id="buttonHistory" layoutX="64.0" layoutY="430.0" mnemonicParsing="false" onAction="#onHistoryButtonClick" prefHeight="55.0" prefWidth="473.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Payment history" textFill="WHITE" AnchorPane.bottomAnchor="14.800000000000011" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="63.0">
+            <font>
+                <Font name="Verdana Bold" size="25.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>
