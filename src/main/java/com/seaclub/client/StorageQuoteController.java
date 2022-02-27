@@ -51,13 +51,9 @@ public class StorageQuoteController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
             alert.showAndWait();
         }else{
-            if(isDateExpired()){
-                //add new StorageRegister
 
-            }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Date doesn't expired!");
-                alert.showAndWait();
-            }
+            System.out.println("PAGA!");
+
         }
     }
 
@@ -92,7 +88,8 @@ public class StorageQuoteController {
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipQuote.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-
+        MembershipQuoteController mc = fxmlLoader.getController();
+        mc.setClubMember(this.clubMember);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -114,14 +111,23 @@ public class StorageQuoteController {
 
     protected void setView(){
         //boatComboBox.getItems().clear();
-        for(var i:clubMember.getBoats()){
+
+        List<Boat> expiredBoat = new ArrayList<Boat>();
+
+        for(var x:clubMember.getBoats()){
+            if(isDateExpired(x)){
+                expiredBoat.add(x);
+            }
+        }
+
+        for(var i:expiredBoat){
             String infoItem = i.getId()+" "+i.getName();
             BoatComboBox.getItems().add(infoItem);
         }
 
     }
 
-    private boolean isDateExpired(){
+    private boolean isDateExpired(Boat boat){
         //default time zone
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
@@ -129,7 +135,7 @@ public class StorageQuoteController {
         LocalDate dateMinusYear = now.minusYears(1);
         Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
         StorageRegister storageRegister = new StorageRegister();
-        storageRegister = Client.getInstance().getLastStorageRegister(boatSelected);
+        storageRegister = Client.getInstance().getLastStorageRegister(boat);
 
         if(storageRegister!=null){
             if(storageRegister.getDatePayment().before(dateNow)){
