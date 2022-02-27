@@ -114,14 +114,17 @@ public class DB {
 
             ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
 
-            while(rset.next()) {
+            if(rset.next()) {
                 StorageRegister storage = new StorageRegister(rset.getInt("IDRegistro_rim"),
-                        rset.getInt("IDQuota_rim"),rset.getInt("IDBarca"),
-                        rset.getInt("IDSocio"), rset.getString("Metodo_pag"),rset.getDate("Data_pagamento"),
-                        rset.getFloat("Prezzo"));
+                        rset.getInt("IDQuota_rim"), rset.getInt("IDBarca"),
+                        rset.getInt("IDSocio"), rset.getString("Metodo_pag"),
+                        rset.getDate("Data_pagamento"), rset.getFloat("Prezzo"));
+
 
                 StorageRegisterManager.getInstance().setLastStorageRegister(storage);
             }
+            else
+                StorageRegisterManager.getInstance().setLastStorageRegister(null);
 
             stmt2.close();
         } catch (SQLException e) {
