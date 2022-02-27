@@ -207,13 +207,18 @@ public class ClubMember implements Serializable {
     }
 
     public MembershipRegister getLastPaymentQuote(List<MembershipRegister> registers){
-        List<MembershipRegister> myMembershipRegister = new ArrayList<MembershipRegister>();
+        try {
+            List<MembershipRegister> myMembershipRegister = new ArrayList<MembershipRegister>();
 
-        for(var x:registers){
-            if(x.getIdClubMember()==id){
-                myMembershipRegister.add(x);
+            for (var x : registers) {
+                if (x.getIdClubMember() == id) {
+                    myMembershipRegister.add(x);
+                }
             }
+            return myMembershipRegister.get(myMembershipRegister.size() - 1);
+        }catch(Exception e){
+            System.out.println(e);
+            return  null;
         }
-        return  myMembershipRegister.get(myMembershipRegister.size()-1);
     }
 }

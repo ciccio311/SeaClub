@@ -64,29 +64,34 @@ public class MembershipQuoteController {
     }
 
     private void setView(){
-       MembershipRegister membershipRegister = clubMember.getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        //default time zone
-        ZoneId defaultZoneId = ZoneId.systemDefault();
+        MembershipRegister membershipRegister = clubMember.getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
+        if(membershipRegister != null) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        LocalDate now = LocalDate.now();
-        LocalDate dateMinusYear = now.minusYears(1);
-        Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
-       if(membershipRegister.getDatePayment().before(dateNow)){
-            //expired
-           expirationLabel.setText("Your membership is expired!");
+            //default time zone
+            ZoneId defaultZoneId = ZoneId.systemDefault();
 
-       }else{
-           priceLabel.setVisible(false);
-           membershipPriceLabel.setVisible(false);
-           paymentLabel.setVisible(false);
-           CardRadioButton.setVisible(false);
-           BanckTransferRadioButton.setVisible(false);
-           paymentButton.setVisible(false);
-           Date date = membershipRegister.getDatePayment();
-           date.setYear(date.getYear()+1);
-           expirationLabel.setText("Your membership will expire on: "+date.toString());
-       }
+            LocalDate now = LocalDate.now();
+            LocalDate dateMinusYear = now.minusYears(1);
+            Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
+            if (membershipRegister.getDatePayment().before(dateNow)) {
+                //expired
+                expirationLabel.setText("Your membership is expired!");
+
+            } else {
+                priceLabel.setVisible(false);
+                membershipPriceLabel.setVisible(false);
+                paymentLabel.setVisible(false);
+                CardRadioButton.setVisible(false);
+                BanckTransferRadioButton.setVisible(false);
+                paymentButton.setVisible(false);
+                Date date = membershipRegister.getDatePayment();
+                date.setYear(date.getYear() + 1);
+                expirationLabel.setText("Your membership will expire on: " + date.toString());
+            }
+        }else{
+            expirationLabel.setText("You have to pay a Membership Fee!");
+        }
     }
 }
