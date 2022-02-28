@@ -1,6 +1,8 @@
 package com.seaclub.Model;
 
-public class Notification {
+import java.io.Serializable;
+
+public class Notification implements Serializable {
     private int id;
     private String name;
 

@@ -1,14 +1,19 @@
 package com.seaclub.client;
 
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.NotificationsRegister;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuEmployeeController {
     private ClubMember clubMember;
@@ -66,7 +71,26 @@ public class MenuEmployeeController {
 
     @FXML
     protected void buttonNotificationOnClick(){
+        List<ClubMember> memberExpired = new ArrayList<ClubMember>();
+        memberExpired = Client.getInstance().getMemberExpired();
+        for(var x:memberExpired){
+            NotificationsRegister notificationsRegister = new NotificationsRegister();
+            notificationsRegister.setIdNotification(1);
+            notificationsRegister.setIdMember(x.getId());
+            notificationsRegister.setInfo("");
+            Date date = new Date(System.currentTimeMillis());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
+            notificationsRegister.setDateSender(sqlDate);
+
+            if(Client.getInstance().addNotificationRegister(notificationsRegister)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications send!");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML

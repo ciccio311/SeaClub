@@ -124,6 +124,8 @@ public class Message implements Serializable {
 
     private String ACTION_GET_NOTIFICATION = "GetNotification";
 
+    private String ACTION_GET_CLUBMEMBER_EXPIRED = "GetMemberExpired";
+
 
     private static final long serialVersionUID = 1L;
 
@@ -318,6 +320,10 @@ public class Message implements Serializable {
 
     public String getACTION_GET_NOTIFICATION() {
         return ACTION_GET_NOTIFICATION;
+    }
+
+    public String getACTION_GET_CLUBMEMBER_EXPIRED() {
+        return ACTION_GET_CLUBMEMBER_EXPIRED;
     }
 
     public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {

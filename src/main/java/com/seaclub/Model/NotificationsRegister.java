@@ -1,14 +1,17 @@
 package com.seaclub.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class NotificationsRegister {
+public class NotificationsRegister implements Serializable {
 
     private int id;
     private int idMember;
     private int idNotification;
     private Date dateSender;
     private String info;
+
+    public NotificationsRegister(){}
 
     public NotificationsRegister(int id, String info, Date dates,int idmember,int idnotify){
         this.id=id;

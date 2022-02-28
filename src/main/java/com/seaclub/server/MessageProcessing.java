@@ -69,6 +69,10 @@ public class MessageProcessing {
                 return getNotificationRegister(mex);
             if(mex.getAction().equals(mex.getACTION_GET_NOTIFICATION()))
                 return getNotification(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_CLUBMEMBER_EXPIRED()))
+                return getMemberExpired(mex);
+            if(mex.getAction().equals(mex.getACTION_ADD_NOTIFICATION_REGISTER()))
+                return addNewNotificationRegister(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -195,5 +199,16 @@ public class MessageProcessing {
         if(mex.getValue()instanceof Integer == false)
             return null;
         return new Message("Get notification to client!",NotificationsRegisterManager.getInstance().getNotificationById((Integer)mex.getValue()));
+    }
+
+    public Message getMemberExpired(Message mex){
+        return new Message("Get member expired!",ClubMemberManager.getInstance().clubMemberExpired());
+    }
+
+    public Message addNewNotificationRegister(Message mex){
+        if(mex.getValue() instanceof NotificationsRegister == false)
+            return null;
+        NotificationsRegisterManager.getInstance().addNewNotificationRegister((NotificationsRegister) mex.getValue());
+        return new Message("New notification register added!",null);
     }
 }
