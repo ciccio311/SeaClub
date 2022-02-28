@@ -54,12 +54,19 @@ public class ClubMemberManager {
         DB.getInstance().getClubMembers();
     }
 
-    public void addMember(ClubMember member){
+    public boolean addMember(ClubMember member){
         try{
-            DB.getInstance().addNewMember(member);
-            updateList();
+            if(checkCFalreadyExist(member))
+                throw new Exception("CF already exist!");
+            else{
+                DB.getInstance().addNewMember(member);
+                updateList();
+                return true;
+            }
         }catch (Exception e){
+
             System.out.println(e);
+            return false;
         }
     }
 
@@ -113,6 +120,15 @@ public class ClubMemberManager {
             expired.removeIf(n -> (n.getId() == notify.getIdMember() && notify.getIdNotification()==1));
         }
         return expired;
+    }
+
+    public boolean checkCFalreadyExist(ClubMember clubMember){
+        updateList();
+        for(var x:members){
+            if(x.getCF().equals(clubMember.getCF()))
+                return true;
+        }
+        return false;
     }
 
 }

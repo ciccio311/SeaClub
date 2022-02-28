@@ -109,4 +109,8 @@ public class LoginController {
         Stage stage2 = (Stage) btnSignup.getScene().getWindow();
         stage2.close();
     }
+
+    public void isFirstLogin(ClubMember clubMember,int id){
+
+    }
 }

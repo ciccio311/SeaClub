@@ -61,7 +61,7 @@ public class SignUpController {
                 Stage stage2 = (Stage) btnSignUp.getScene().getWindow();
                 stage2.close();
             }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Comunication's error :( try later!");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Already exist an user with the same CF!");
                 alert.showAndWait();
             }
         }

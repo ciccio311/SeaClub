@@ -83,9 +83,11 @@ public class MessageProcessing {
     public Message addMember(Message mex){
         ClubMember member = (ClubMember) mex.getValue();
 
-        ClubMemberManager.getInstance().addMember(member);
+        if(ClubMemberManager.getInstance().addMember(member))
+            return new Message("Aggiunto new member", true);
+        else
+            return new Message("member doesn' t added!", false);
 
-        return new Message("Aggiunto new member", null);
     }
 
     public Message login(Message mex){

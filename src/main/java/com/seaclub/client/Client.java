@@ -73,10 +73,15 @@ public class Client {
                 if(o instanceof Message) {
                     Message response = (Message) o;
 
+
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+
+                    if((Boolean) response.getValue()==false){
+                        return false;
+                    }else
+                        return true;
                 }
             }
 
