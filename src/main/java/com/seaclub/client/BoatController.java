@@ -42,19 +42,24 @@ public class BoatController {
         }
         else
         {
-            Boat b = new Boat();
-            b.setName(name.getText());
-            b.setWidth(Float.valueOf(width.getText()));
-            b.setIdClubMember(this.clubMember.getId());
-            Client.getInstance().addNewBoat(b);
+            try {
+                Boat b = new Boat();
+                b.setName(name.getText());
+                b.setWidth(Float.valueOf(width.getText()));
+                b.setIdClubMember(this.clubMember.getId());
+                Client.getInstance().addNewBoat(b);
 
-            this.clubMember = Client.getInstance().updateClubMember(clubMember);
+                this.clubMember = Client.getInstance().updateClubMember(clubMember);
 
-            tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
-            tableViewBoats.refresh();
+                tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
+                tableViewBoats.refresh();
 
-            name.setText("");
-            width.setText("");
+                name.setText("");
+                width.setText("");
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Insert length with dot!");
+                alert.showAndWait();
+            }
         }
     }
 
