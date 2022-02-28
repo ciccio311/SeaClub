@@ -30,7 +30,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action remove boat. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_REMOVE_BOAT = "removeBoat";
+    private String ACTION_REMOVE_BOAT = "removeBoat";
     /**
      *  Represents the String of the action get all races. Used for communicating the type of action to be performed.
      **/
@@ -265,7 +265,7 @@ public class Message implements Serializable {
         return ACTION_RACES;
     }
 
-    public static String getActionRemoveBoat() {
+    public String getActionRemoveBoat() {
         return ACTION_REMOVE_BOAT;
     }
 

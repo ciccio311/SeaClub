@@ -63,6 +63,8 @@ public class MessageProcessing {
                 return getLastStorageRegister(mex);
             if(mex.getAction().equals(mex.getACTION_ADD_STORAGE_REGISTER()))
                 return addNewStorageRegister(mex);
+            if(mex.getAction().equals(mex.getActionRemoveBoat()))
+                return deleteBoat(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -171,5 +173,12 @@ public class MessageProcessing {
             return null;
         StorageRegisterManager.getInstance().addNewStorageRegister((StorageRegister) mex.getValue());
         return new Message("New storage register added!",null);
+    }
+
+    public Message deleteBoat(Message mex){
+        if(mex.getValue()instanceof Boat==false)
+            return null;
+        BoatManager.getInstance().removeBoat((Boat) mex.getValue());
+        return new Message("Boat removed!",null);
     }
 }

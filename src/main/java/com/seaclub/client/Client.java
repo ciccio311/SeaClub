@@ -93,6 +93,58 @@ public class Client {
         return false;
     }
 
+
+    /**
+     * Used to remove specific boat.
+     * @param boat Represents the boat to delete.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean deleteBoat(Boat boat) {
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionRemoveBoat());
+                request.setValue(boat);
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+
+                    client.close();
+                    return true;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return false;
+            }
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     /**
      * Used add new Storage register to database.
      * @param storageRegister Represents the new storage register to add.

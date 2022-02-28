@@ -68,4 +68,9 @@ public class BoatManager {
         }
         return null;
     }
+
+    public void removeBoat(Boat boat){
+        DB.getInstance().deleteBoat(boat);
+        updateList();
+    }
 }

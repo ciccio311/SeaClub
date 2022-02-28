@@ -96,7 +96,7 @@ public class BoatController {
     }
 
 
-    private static void addButtonsToTable(TableView<Boat> tableViewBoats) {
+    private void addButtonsToTable(TableView<Boat> tableViewBoats) {
         TableColumn<Boat, Void> colBtnDelete = new TableColumn("Delete");
         colBtnDelete.setStyle("-fx-alignment: CENTER;");
         colBtnDelete.prefWidthProperty().bind(tableViewBoats.widthProperty().divide(3));
@@ -115,11 +115,14 @@ public class BoatController {
                             public void handle(javafx.event.ActionEvent arg0) {
                                 Boat boat = getTableView().getItems().get(getIndex());
 
-                                //UserManager.getInstance().removeBoat(boat);
-                                //AlertManager.getInstance().showInfoMessage("Boat " + boat.getName() + " has been deleted!");
-
-                                //update tableView
-                                //tableViewBoats.setItems(FXCollections.observableList(((Partner) UserManager.getInstance().getPerson()).getBoats()));
+                                if(Client.getInstance().deleteBoat(boat)){
+                                    updateClubmember(boat);
+                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Boat removed!");
+                                    alert.showAndWait();
+                                }else{
+                                    Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                                    alert.showAndWait();
+                                }
                                 tableViewBoats.refresh();
                             }
                         });
@@ -147,5 +150,9 @@ public class BoatController {
 
         colBtnDelete.setCellFactory(cellFactoryDelete);
         tableViewBoats.getColumns().add(colBtnDelete);
+    }
+
+    private void updateClubmember(Boat boat){
+        clubMember.getBoats().remove(boat);
     }
 }
