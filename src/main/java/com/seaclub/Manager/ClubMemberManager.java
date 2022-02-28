@@ -131,5 +131,13 @@ public class ClubMemberManager {
         return false;
     }
 
+    public ClubMember getMemberByCF(ClubMember clubMember){
+        for(var x:this.members){
+            if(x.getCF().equals(clubMember.getCF()))
+                return x;
+        }
+        return null;
+    }
+
 }
 

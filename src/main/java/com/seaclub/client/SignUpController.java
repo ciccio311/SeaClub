@@ -51,10 +51,10 @@ public class SignUpController {
             clubMember.setDipendente(0);
             if(Client.getInstance().addMember(clubMember)){
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
-                MenuController hc = fxmlLoader.getController();
-                hc.setClubMember(clubMember);
+                LoginController hc = fxmlLoader.getController();
+                hc.isFirstLogin(Client.getInstance().getMemberByCF(clubMember));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();

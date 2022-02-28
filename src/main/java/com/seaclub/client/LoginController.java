@@ -110,7 +110,7 @@ public class LoginController {
         stage2.close();
     }
 
-    public void isFirstLogin(ClubMember clubMember,int id){
-
+    public void isFirstLogin(ClubMember clubMember){
+        username.setText(String.valueOf(clubMember.getId()));
     }
 }
