@@ -58,21 +58,21 @@ public class NotificationsRegisterManager {
 
     public String getNotificationById(int id){
         updateList();
+        String notify1="";
+        String notify2="";
         for(var x:registers){
             if(x.getIdMember()==id){
                 DB.getInstance().getNotification(x.getIdNotification());
                 if(notification.getId()==1){
-                    String notify = x.getDateSender().toString()+" "+notification.getName();
-                    return notify;
+                     notify1 = x.getDateSender().toString()+" "+notification.getName()+" ";
                 }
                 if(notification.getId()==2){
-                    String notify = x.getDateSender().toString()+" "+notification.getName()+" "+
+                     notify2 = x.getDateSender().toString()+" "+notification.getName()+" "+
                             x.getInfo();
-                    return notify;
                 }
             }
         }
-        return null;
+        return notify1+notify2;
     }
 
     public Notification getNotification() {

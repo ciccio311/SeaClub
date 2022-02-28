@@ -139,5 +139,26 @@ public class ClubMemberManager {
         return null;
     }
 
+    public void sendNotificationBoatExpired() {
+        try {
+            String idBoat = "";
+            java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            for (var member : members) {
+                for (var boat : member.getBoatExpired()) {
+                    idBoat = idBoat + String.valueOf(boat.getId()) + " - ";
+                }
+                NotificationsRegister notificationsRegister = new NotificationsRegister();
+                notificationsRegister.setIdNotification(2);
+                notificationsRegister.setIdMember(member.getId());
+                notificationsRegister.setInfo(idBoat);
+                notificationsRegister.setDateSender(sqlDate);
+                NotificationsRegisterManager.getInstance().addNewNotificationRegister(notificationsRegister);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
 }
 

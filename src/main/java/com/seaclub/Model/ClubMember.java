@@ -1,7 +1,12 @@
 package com.seaclub.Model;
 
+import com.seaclub.client.Client;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -228,5 +233,31 @@ public class ClubMember implements Serializable {
                 return x;
         }
         return null;
+    }
+
+    public List<Boat> getBoatExpired(){
+
+        List<Boat> expiredBoat = new ArrayList<Boat>();
+
+        //default time zone
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        LocalDate now = LocalDate.now();
+        LocalDate dateMinusYear = now.minusYears(1);
+        Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
+        StorageRegister storageRegister = new StorageRegister();
+
+        for(var boat:boats){
+            storageRegister = Client.getInstance().getLastStorageRegister(boat);
+            if(storageRegister!=null){
+                if(storageRegister.getDatePayment().before(dateNow)){
+                    //expired
+                    expiredBoat.add(boat);
+                }
+            }else
+                expiredBoat.add(boat);
+        }
+        return expiredBoat;
+
     }
 }

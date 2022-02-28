@@ -101,6 +101,9 @@ public class MenuEmployeeController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "There aren't member with quote expired!");
             alert.showAndWait();
         }
+
+        Client.getInstance().SendNotificationBoatExpired();
+
     }
 
     @FXML
