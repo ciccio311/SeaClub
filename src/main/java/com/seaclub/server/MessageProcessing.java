@@ -65,6 +65,10 @@ public class MessageProcessing {
                 return addNewStorageRegister(mex);
             if(mex.getAction().equals(mex.getActionRemoveBoat()))
                 return deleteBoat(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_NOTIFICATION_REGISTER()))
+                return getNotificationRegister(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_NOTIFICATION()))
+                return getNotification(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -180,5 +184,16 @@ public class MessageProcessing {
             return null;
         BoatManager.getInstance().removeBoat((Boat) mex.getValue());
         return new Message("Boat removed!",null);
+    }
+
+    public Message getNotificationRegister(Message mex){
+        NotificationsRegisterManager.getInstance().updateList();
+        return new Message("Get all Notification Register!",NotificationsRegisterManager.getInstance().getRegisters());
+    }
+
+    public Message getNotification(Message mex){
+        if(mex.getValue()instanceof Integer == false)
+            return null;
+        return new Message("Get notification to client!",NotificationsRegisterManager.getInstance().getNotificationById((Integer)mex.getValue()));
     }
 }

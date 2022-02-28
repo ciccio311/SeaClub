@@ -118,6 +118,13 @@ public class Message implements Serializable {
 
     private String ACTION_ADD_STORAGE_REGISTER = "AddStorageRegister";
 
+    private String ACTION_GET_NOTIFICATION_REGISTER = "ActionGetNotificationRegister";
+
+    private String ACTION_ADD_NOTIFICATION_REGISTER = "ActionAddNotificationRegister";
+
+    private String ACTION_GET_NOTIFICATION = "GetNotification";
+
+
     private static final long serialVersionUID = 1L;
 
 
@@ -299,6 +306,18 @@ public class Message implements Serializable {
 
     public String getACTION_ADD_STORAGE_REGISTER() {
         return ACTION_ADD_STORAGE_REGISTER;
+    }
+
+    public String getACTION_GET_NOTIFICATION_REGISTER() {
+        return ACTION_GET_NOTIFICATION_REGISTER;
+    }
+
+    public String getACTION_ADD_NOTIFICATION_REGISTER() {
+        return ACTION_ADD_NOTIFICATION_REGISTER;
+    }
+
+    public String getACTION_GET_NOTIFICATION() {
+        return ACTION_GET_NOTIFICATION;
     }
 
     public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {

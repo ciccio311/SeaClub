@@ -17,17 +17,17 @@
             <Font name="Verdana Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="buttonUserList" layoutX="39.0" layoutY="171.0" mnemonicParsing="false" onAction="#buttonUserListOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Users" textFill="WHITE">
+      <Button fx:id="buttonUsers" layoutX="39.0" layoutY="171.0" mnemonicParsing="false" onAction="#buttonUsersOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Users" textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="buttonBoatList" layoutX="39.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonBoatListOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Boats" textFill="WHITE">
+      <Button fx:id="buttonBoats" layoutX="39.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonBoatsOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Boats" textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="buttonCompetitionList" layoutX="39.0" layoutY="329.0" mnemonicParsing="false" onAction="#buttonCompetitionListOnClick" prefHeight="55.0" prefWidth="224.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Competitions" textFill="WHITE">
+      <Button fx:id="buttonCompetitions" layoutX="39.0" layoutY="329.0" mnemonicParsing="false" onAction="#buttonCompetitionsOnClick" prefHeight="55.0" prefWidth="224.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Competitions" textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="25.0" />
          </font>

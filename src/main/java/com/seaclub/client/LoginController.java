@@ -55,19 +55,44 @@ public class LoginController {
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             cp.setDate(sqlDate);
             cp.setPrice((float) 6.35);
-            Client.getInstance().addNewCompetition(cp);*/
+            Client.getInstance().addNewCompetition(cp);
+            */
+
 
             if(clubMember!=null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
 
-                MenuController hc = fxmlLoader.getController();
-                hc.setClubMember(clubMember);
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-                Stage stage2 = (Stage) btnLogin.getScene().getWindow();
-                stage2.close();
+                if(clubMember.getDipendente() == 1){
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+
+                    MenuEmployeeController mec = fxmlLoader.getController();
+                    mec.setClubMember(clubMember);
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Stage stage2 = (Stage) btnLogin.getScene().getWindow();
+                    stage2.close();
+                }
+                else{
+
+                    String notify = Client.getInstance().getNotification(clubMember.getId());
+
+                    if(notify != null){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, notify);
+                        alert.showAndWait();
+                    }
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+
+                    MenuController hc = fxmlLoader.getController();
+                    hc.setClubMember(clubMember);
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Stage stage2 = (Stage) btnLogin.getScene().getWindow();
+                    stage2.close();
+                }
             }
         }
     }

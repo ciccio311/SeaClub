@@ -70,6 +70,66 @@ public class DB {
     }
 
     /**
+     * Method used to get notification with specific id
+     */
+    public void getNotification(int id){
+
+        try {
+
+            String selectString = "SELECT * " +
+                    "FROM notifica " +
+                    "WHERE notifica.ID = "+id+";";
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+
+            while(rset.next()) {
+               Notification notification = new Notification(rset.getInt("ID"),rset.getString("Nome"));
+               NotificationsRegisterManager.getInstance().setNotification(notification);
+            }
+
+
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Method used to get the whole NotificationRegister table
+     */
+    public void getNotificatioinRegister(){
+        String selectString = "SELECT * FROM registro_notifiche;";
+        try {
+
+            Statement stmt2 = (Statement) conn.createStatement();
+
+            ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
+
+            List<NotificationsRegister> registers = new ArrayList<NotificationsRegister>();
+
+            while(rset.next()) {
+
+                NotificationsRegister notificationsRegister = new NotificationsRegister(rset.getInt("ID"),
+                        rset.getString("Info"),rset.getDate("DataInvio"),
+                        rset.getInt("IDSocio"),rset.getInt("IDNotifica"));
+                registers.add(notificationsRegister);
+            }
+
+            NotificationsRegisterManager.getInstance().setRegisters(registers);
+
+            stmt2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /**
      * Method used to get the whole Storage Quote register table
      */
     public void getBoatStorageQuote(){
@@ -410,6 +470,26 @@ public class DB {
             pstmt.setDate(5, (Date) mr.getDatePayment());
             pstmt.execute();
             System.out.println("Membership quote added to DB");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addNotificationRegister(NotificationsRegister notificationsRegister){
+        try {
+            String insertSql = "insert into registro_notifiche values (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new Notification register
+            pstmt.setInt(1,notificationsRegister.getId());
+            pstmt.setString(2, notificationsRegister.getInfo());
+            pstmt.setDate(3, (Date) notificationsRegister.getDateSender());
+            pstmt.setInt(4, notificationsRegister.getIdMember());
+            pstmt.setInt(5, notificationsRegister.getIdNotification());
+
+            pstmt.execute();
+            System.out.println("Notification register added to DB!");
 
         } catch (SQLException e) {
             e.printStackTrace();

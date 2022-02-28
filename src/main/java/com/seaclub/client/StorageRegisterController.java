@@ -33,17 +33,29 @@ public class StorageRegisterController {
 
     @FXML
     protected void backOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-
-        MenuController mc = fxmlLoader.getController();
-        mc.setClubMember(this.clubMember);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-        Stage stage2 = (Stage) btnBack.getScene().getWindow();
-        stage2.close();
-
+        if(clubMember.getDipendente()==1){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            MenuEmployeeController mec = fxmlLoader.getController();
+            mec.setClubMember(this.clubMember);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            Stage stage2 = (Stage) btnBack.getScene().getWindow();
+            stage2.close();
+        }
+        else
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            MenuController mc = fxmlLoader.getController();
+            Parent root = (Parent) fxmlLoader.load();
+            mc.setClubMember(this.clubMember);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            Stage stage2 = (Stage) btnBack.getScene().getWindow();
+            stage2.close();
+        }
     }
 
     public void setClubMember(ClubMember cm){
