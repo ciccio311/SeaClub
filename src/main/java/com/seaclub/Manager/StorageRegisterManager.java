@@ -52,4 +52,13 @@ public class StorageRegisterManager {
         DB.getInstance().getLastBoatStorageQuote(boat);
         return lastStorageRegister;
     }
+
+    public void addNewStorageRegister(StorageRegister storageRegister){
+        try{
+            DB.getInstance().addNewStorageRegister(storageRegister);
+            updateList();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 }

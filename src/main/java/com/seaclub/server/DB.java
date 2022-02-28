@@ -263,6 +263,32 @@ public class DB {
         }
     }
 
+    public void addNewStorageRegister(StorageRegister storageRegister){
+
+        String insertSql = "insert into registro_rimessaggi values (?,?, ?, ?, ?, ?, ?)";
+
+        try {
+
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            //configure PreparedStatement with values of new storage register
+            pstmt.setInt(1, storageRegister.getID());
+            pstmt.setInt(2, storageRegister.getIdQuote());
+            pstmt.setInt(3,  storageRegister.getIdBoat());
+            pstmt.setInt(4,storageRegister.getIdClubMember());
+            pstmt.setString(5, storageRegister.getPaymentMethod());
+            pstmt.setDate(6, (Date) storageRegister.getDatePayment());
+            pstmt.setFloat(7, storageRegister.getPrice());
+
+
+            pstmt.execute();
+            System.out.println("Storage register added to DB!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void addNewBoat(Boat boat){
         try {
             String insertSql = "insert into barca values (?,?, ?, ?)";

@@ -20,6 +20,7 @@ import java.util.List;
 public class StorageQuoteController {
 
     private Boat boatSelected = new Boat();
+    private float price;
 
     @FXML
     private Button btnBack;
@@ -43,7 +44,7 @@ public class StorageQuoteController {
 
 
     @FXML
-    protected void payOnClick(){
+    protected void payOnClick() throws IOException {
         if(BoatComboBox.getSelectionModel().isEmpty() ||
                 (!cardRadioButton.isSelected()) && !banckTransferRadioButton.isSelected()
                 ||
@@ -52,7 +53,38 @@ public class StorageQuoteController {
             alert.showAndWait();
         }else{
 
-            System.out.println("PAGA!");
+            StorageRegister storageRegister = new StorageRegister();
+            storageRegister.setIdBoat(boatSelected.getId());
+            storageRegister.setIdQuote(1);
+            storageRegister.setIdClubMember(clubMember.getId());
+            storageRegister.setPrice(price);
+            if(cardRadioButton.isSelected())
+                storageRegister.setPaymentMethod("Card");
+            if(banckTransferRadioButton.isSelected())
+                storageRegister.setPaymentMethod("Bank transfer");
+            Date date = new Date(System.currentTimeMillis());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+            storageRegister.setDatePayment(sqlDate);
+
+            if(Client.getInstance().addStorageRegister(storageRegister)){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment successfull!");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                alert.showAndWait();
+            }
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipQuote.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            MembershipQuoteController mc = fxmlLoader.getController();
+            mc.setClubMember(this.clubMember);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            Stage stage2 = (Stage) btnBack.getScene().getWindow();
+            stage2.close();
+
 
         }
     }
@@ -65,7 +97,7 @@ public class StorageQuoteController {
             //boatSelected.setId(Integer.valueOf(words[0]));
 
             boatSelected = clubMember.getBoatById(Integer.valueOf(words[0]));
-            float price = boatSelected.getWidth()*10;
+            price = boatSelected.getWidth()*10;
             storageQuotePriceLabel.setText(price+"€");
         }
     }

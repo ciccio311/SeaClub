@@ -116,6 +116,8 @@ public class Message implements Serializable {
 
     private String ACTION_GET_LAST_STORAGE_REGISTER = "GetLastStorageRegister";
 
+    private String ACTION_ADD_STORAGE_REGISTER = "AddStorageRegister";
+
     private static final long serialVersionUID = 1L;
 
 
@@ -293,6 +295,10 @@ public class Message implements Serializable {
 
     public String getACTION_GET_LAST_STORAGE_REGISTER() {
         return ACTION_GET_LAST_STORAGE_REGISTER;
+    }
+
+    public String getACTION_ADD_STORAGE_REGISTER() {
+        return ACTION_ADD_STORAGE_REGISTER;
     }
 
     public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {

@@ -65,14 +65,25 @@ public class MembershipRegisterController {
 
         if(this.clubMember.getDipendente() == 1){
             //SE DIPENDENTE GET ALL MEMBERSHIP REGISTER
+            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
+            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
+            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
             tableViewRegister.getColumns().addAll(C1, C2, C3);
             tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllMembershipQuoteRegister())));
         }
         else {
             //SE club member GET MEMBERSHIP REGISTER BY CLUB MEMBER ID
+            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
+            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
             tableViewRegister.getColumns().addAll(C2, C3);
+            List<MembershipRegister> reg = new ArrayList<MembershipRegister>();
+            for(var x : Client.getInstance().getAllMembershipQuoteRegister()){
+                if(x.getIdClubMember() == this.clubMember.getId()){
+                    reg.add(x);
+                }
+            }
 
-            //tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
+            tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
         }
     }
 }

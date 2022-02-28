@@ -2,6 +2,7 @@ package com.seaclub.client;
 
 import com.seaclub.Model.Boat;
 import com.seaclub.Model.ClubMember;
+import com.seaclub.Model.MembershipRegister;
 import com.seaclub.Model.StorageRegister;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -71,6 +72,11 @@ public class StorageRegisterController {
 
         if(this.clubMember.getDipendente() == 1){
             //SE DIPENDENTE GET ALL STORAGE REGISTER
+            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+            C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+            C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
             tableViewRegister.getColumns().addAll(C1, C2, C3, C4, C5);
 
             tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
@@ -78,9 +84,20 @@ public class StorageRegisterController {
         }
         else {
             //SE club member GET STORAGE REGISTER BY CLUB MEMBER ID
+            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+            C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+            C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
             tableViewRegister.getColumns().addAll(C1, C3, C4, C5);
 
-            //tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
+            List<StorageRegister> reg = new ArrayList<StorageRegister>();
+            for(var x : Client.getInstance().getAllStorageRegisterQuote()){
+                if(x.getIdClubMember() == this.clubMember.getId()){
+                    reg.add(x);
+                }
+            }
+
+            tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
         }
     }
 }

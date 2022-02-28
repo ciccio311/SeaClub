@@ -1,9 +1,6 @@
 package com.seaclub.client;
 
-import com.seaclub.Model.Boat;
-import com.seaclub.Model.ClubMember;
-import com.seaclub.Model.Competition;
-import com.seaclub.Model.CompetitionRegister;
+import com.seaclub.Model.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -50,13 +47,28 @@ public class CompetitionController {
     private Button btnBack;
 
     @FXML
-    private ListView listViewCompetition;
+    private TableView tableViewCompetition;
 
     private List<String> register;
 
     public void setClubMember(ClubMember clubMember) {
         try {
             this.clubMember = clubMember;
+            TableColumn<String, String> C1 = new TableColumn("ID");
+            C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(split(c.getValue(), 0))));
+            C1.setStyle("-fx-alignment: CENTER;");
+            TableColumn<String, String> C2 = new TableColumn("DATE");
+            C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(split(c.getValue(), 1))));
+            C2.setStyle("-fx-alignment: CENTER;");
+            TableColumn<String, String> C3 = new TableColumn("BOAT");
+            C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(split(c.getValue(), 2))));
+            C3.setStyle("-fx-alignment: CENTER;");
+
+            C1.prefWidthProperty().bind(tableViewCompetition.widthProperty().divide(3));
+            C2.prefWidthProperty().bind(tableViewCompetition.widthProperty().divide(3));
+            C3.prefWidthProperty().bind(tableViewCompetition.widthProperty().divide(3));
+
+            tableViewCompetition.getColumns().addAll(C1, C2, C3);
             setView();
         }
         catch(Exception e){
@@ -125,23 +137,20 @@ public class CompetitionController {
             RacePriceLabel.setText("NA");
 
             setListView();
-            listViewCompetition.refresh();
+            tableViewCompetition.refresh();
             setView();
         }
     }
 
     private void setListView(){
-        listViewCompetition.getItems().clear();
+        tableViewCompetition.getItems().clear();
 
         register = new ArrayList<String>();
         register = Client.getInstance().getCompetitionRegisterByMemberId(this.clubMember.getId());
 
 
-        listViewCompetition.setItems(items);
-        items.add("ID,  DATE,        BOAT");
-        for(var x : register){
-            items.add(x);
-        }
+        tableViewCompetition.setItems((FXCollections.observableArrayList(register)));
+
     }
 
     private List<Competition> getCompetitionAvailable(List<Competition> list){
@@ -185,9 +194,15 @@ public class CompetitionController {
                 String boatInfo = boat.getId() + " " + boat.getName();
                 BoatComboBox.getItems().add(boatInfo);
             }
+
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    private String split(String s, int i){
+        String word[] = s.split(", ");
+        return word[i];
     }
 
 }

@@ -78,11 +78,13 @@ public class BoatController {
 
         TableColumn<Boat, String> column1 = new TableColumn<>("Name");
         column1.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getName()));
-        column1.setStyle("-fx-alignment: CENTER; -fx-pref-width: 120px;");
+        column1.setStyle("-fx-alignment: CENTER;");
+        column1.prefWidthProperty().bind(tableViewBoats.widthProperty().divide(3));
 
         TableColumn<Boat, String> column2 = new TableColumn<>("Width");
         column2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getWidth())));
-        column2.setStyle("-fx-alignment: CENTER; -fx-pref-width: 100px;");
+        column2.setStyle("-fx-alignment: CENTER;");
+        column2.prefWidthProperty().bind(tableViewBoats.widthProperty().divide(3));
 
         tableViewBoats.getColumns().add(column1);
         tableViewBoats.getColumns().add(column2);
@@ -96,7 +98,8 @@ public class BoatController {
 
     private static void addButtonsToTable(TableView<Boat> tableViewBoats) {
         TableColumn<Boat, Void> colBtnDelete = new TableColumn("Delete");
-        colBtnDelete.setStyle("-fx-alignment: CENTER; -fx-pref-width: 60px;");
+        colBtnDelete.setStyle("-fx-alignment: CENTER;");
+        colBtnDelete.prefWidthProperty().bind(tableViewBoats.widthProperty().divide(3));
 
         Callback<TableColumn<Boat, Void>, TableCell<Boat, Void>> cellFactoryDelete = new Callback<TableColumn<Boat, Void>, TableCell<Boat, Void>>() {
             @Override
@@ -143,7 +146,6 @@ public class BoatController {
         };
 
         colBtnDelete.setCellFactory(cellFactoryDelete);
-
         tableViewBoats.getColumns().add(colBtnDelete);
     }
 }
