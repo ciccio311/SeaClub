@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seaclub.client.MenuEmployeeController">
+   <children>
+      <Label layoutX="63.0" layoutY="65.0" prefHeight="72.0" prefWidth="473.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="65.0" />
+      <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="46.0" prefWidth="413.0" text="Menu employee" textAlignment="CENTER" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="77.0">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLogout" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="LOGOUT" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonUserList" layoutX="39.0" layoutY="171.0" mnemonicParsing="false" onAction="#buttonUserListOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Users" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonBoatList" layoutX="39.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonBoatListOnClick" prefHeight="55.0" prefWidth="154.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Boats" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonCompetitionList" layoutX="39.0" layoutY="329.0" mnemonicParsing="false" onAction="#buttonCompetitionListOnClick" prefHeight="55.0" prefWidth="224.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Competitions" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonNotification" layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#buttonNotificationOnClick" prefHeight="55.0" prefWidth="278.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Send notification" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonMembershipList" layoutX="296.0" layoutY="172.0" mnemonicParsing="false" onAction="#buttonMembershipListOnClick" prefHeight="55.0" prefWidth="258.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Membership list" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonStorageList" layoutX="296.0" layoutY="250.0" mnemonicParsing="false" onAction="#buttonStorageListOnClick" prefHeight="55.0" prefWidth="258.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Storage list" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonCompetitionRegisterList" layoutX="296.0" layoutY="330.0" mnemonicParsing="false" onAction="#buttonCompetitionRegisterListOnClick" prefHeight="55.0" prefWidth="258.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Comp. register" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

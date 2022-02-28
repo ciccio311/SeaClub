@@ -386,7 +386,7 @@ public class DB {
      */
     public void deleteBoat(Boat boat){
         try {
-            String insertSql = "UPDATE barca SET IDProprietario = 5 WHERE barca.IDBarca="+boat.getId()+";";
+            String insertSql = "UPDATE barca SET IDProprietario = 1 WHERE barca.IDBarca="+boat.getId()+";";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             pstmt.execute();
