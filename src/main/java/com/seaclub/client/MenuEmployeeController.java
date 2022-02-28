@@ -18,6 +18,8 @@ import java.util.List;
 public class MenuEmployeeController {
     private ClubMember clubMember;
 
+    private boolean check;
+
     @FXML
     private Button btnLogout;
 
@@ -73,23 +75,31 @@ public class MenuEmployeeController {
     protected void buttonNotificationOnClick(){
         List<ClubMember> memberExpired = new ArrayList<ClubMember>();
         memberExpired = Client.getInstance().getMemberExpired();
-        for(var x:memberExpired){
-            NotificationsRegister notificationsRegister = new NotificationsRegister();
-            notificationsRegister.setIdNotification(1);
-            notificationsRegister.setIdMember(x.getId());
-            notificationsRegister.setInfo("");
-            Date date = new Date(System.currentTimeMillis());
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        if(!(memberExpired.size()==0)) {
+            for (var x : memberExpired) {
+                NotificationsRegister notificationsRegister = new NotificationsRegister();
+                notificationsRegister.setIdNotification(1);
+                notificationsRegister.setIdMember(x.getId());
+                notificationsRegister.setInfo("");
+                Date date = new Date(System.currentTimeMillis());
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-            notificationsRegister.setDateSender(sqlDate);
+                notificationsRegister.setDateSender(sqlDate);
 
-            if(Client.getInstance().addNotificationRegister(notificationsRegister)){
+                check=Client.getInstance().addNotificationRegister(notificationsRegister);
+            }
+
+            if (check) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications send!");
                 alert.showAndWait();
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.showAndWait();
             }
+
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "There aren't member with quote expired!");
+            alert.showAndWait();
         }
     }
 
