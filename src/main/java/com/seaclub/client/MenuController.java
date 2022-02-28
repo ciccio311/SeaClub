@@ -105,6 +105,7 @@ public class MenuController {
 
         public void setClubMember(ClubMember clubMember) {
                 this.clubMember = clubMember;
+                showUser();
         }
 
         public void showUser(){
