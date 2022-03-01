@@ -161,6 +161,7 @@ public class ClubMemberManager {
                     }
                     idBoat = idBoat.replaceFirst(".$","");
                     idBoat = idBoat.replaceFirst(".$","");
+                    idBoat = idBoat.replaceFirst(".$","");
                     NotificationsRegister notificationsRegister = new NotificationsRegister();
                     notificationsRegister.setIdNotification(2);
                     notificationsRegister.setIdMember(member.getId());

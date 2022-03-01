@@ -114,6 +114,7 @@ public class NotificationsRegisterManager {
             }
             info = info.replaceFirst(".$", "");
             info = info.replaceFirst(".$", "");
+            info = info.replaceFirst(".$", "");
             DB.getInstance().updateNotificationRegisterStorage(clubMember.getId(), info);
             return true;
         }
