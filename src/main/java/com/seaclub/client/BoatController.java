@@ -119,7 +119,7 @@ public class BoatController {
                                 Boat boat = getTableView().getItems().get(getIndex());
 
                                 if(Client.getInstance().deleteBoat(boat)){
-                                    updateClubmember(boat);
+                                    clubMember.getBoats().remove(boat);;
                                     Client.getInstance().updateNotificationStorage(clubMember);
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat removed!");
                                     alert.showAndWait();
@@ -153,9 +153,5 @@ public class BoatController {
 
         colBtnDelete.setCellFactory(cellFactoryDelete);
         tableViewBoats.getColumns().add(colBtnDelete);
-    }
-
-    private void updateClubmember(Boat boat){
-        clubMember.getBoats().remove(boat);
     }
 }
