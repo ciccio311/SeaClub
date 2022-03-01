@@ -83,6 +83,10 @@ public class MessageProcessing {
                 return deleteNotificationMembership(mex);
             if(mex.getAction().equals(mex.getActionGetAllPartners()))
                 return getAllPartners(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_ALL_BOATS()))
+                return getAllBoats(mex);
+            if(mex.getAction().equals(mex.getACTION_GET_ALL_COMPETITIONS()))
+                return getCompetitions(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -246,6 +250,16 @@ public class MessageProcessing {
     public Message getAllPartners(Message mex){
         ClubMemberManager.getInstance().updateList();
         return new Message("Club members list update", ClubMemberManager.getInstance().getMembers());
+    }
+
+    public Message getAllBoats(Message mex){
+        BoatManager.getInstance().updateList();
+        return new Message("Boats list update", BoatManager.getInstance().getBoats());
+    }
+
+    public Message getAllCompetitions(Message mex){
+        CompetitionManager.getInstance().updateList();
+        return new Message("Boats list update", CompetitionManager.getInstance().getCompetitionList());
     }
 
 }

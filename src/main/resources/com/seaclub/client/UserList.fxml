@@ -17,9 +17,11 @@
                 <Font name="Verdana Bold" size="12.0" />
             </font>
         </Button>
-        <TableView fx:id="tableViewUsers" layoutY="168.0" prefHeight="332.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <TableView fx:id="tableViewUsers" layoutY="168.0" prefHeight="271.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <columns>
             </columns>
         </TableView>
+        <Button fx:id="searchButton" layoutX="172.0" layoutY="197.0" mnemonicParsing="false" onAction="#searchOnClick" text="Search" />
+        <TextField fx:id="idSearchTextFIeld" layoutX="14.0" layoutY="197.0" />
     </children>
 </AnchorPane>

@@ -132,7 +132,11 @@ public class Message implements Serializable {
 
     private String ACTION_UPDATE_NOTIFICATION_STORAGE = "getUpdateNotificationStorage";
 
-    private String ACTION_DELETE_NOTIFICATION_MEMBERSHIP = "geDeleteNotificationMembership";
+    private String ACTION_DELETE_NOTIFICATION_MEMBERSHIP = "getDeleteNotificationMembership";
+
+    private String ACTION_GET_ALL_BOATS = "getAllBoats";
+
+    private String ACTION_GET_ALL_COMPETITIONS = "getAllCompetitions";
 
     private static final long serialVersionUID = 1L;
 
@@ -353,4 +357,11 @@ public class Message implements Serializable {
         return ACTION_UPDATE_NOTIFICATION_STORAGE;
     }
 
+    public String getACTION_GET_ALL_BOATS() {
+        return ACTION_GET_ALL_BOATS;
+    }
+
+    public String getACTION_GET_ALL_COMPETITIONS() {
+        return ACTION_GET_ALL_COMPETITIONS;
+    }
 }

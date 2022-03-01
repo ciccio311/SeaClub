@@ -71,13 +71,31 @@ public class MenuEmployeeController {
     }
 
     @FXML
-    protected void buttonBoatsOnClick(){
+    protected void buttonBoatsOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoatList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
 
+        BoatListController blc = fxmlLoader.getController();
+        blc.setClubMember(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML
-    protected void buttonCompetitionsOnClick(){
+    protected void buttonCompetitionsOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CompetitionList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
 
+        CompetitionListController clc = fxmlLoader.getController();
+        clc.setClubMember(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML
