@@ -97,7 +97,6 @@ public class BoatController {
         addButtonsToTable(tableViewBoats);
 
         tableViewBoats.setItems(FXCollections.observableList((cm.getBoats())));
-
     }
 
 
@@ -112,7 +111,6 @@ public class BoatController {
                 final TableCell<Boat, Void> cell = new TableCell<Boat, Void>() {
 
                     private final Button btn = new Button("Delete");
-
                     {
                         btn.setOnAction(new EventHandler<>() {
 
@@ -125,11 +123,11 @@ public class BoatController {
                                     Client.getInstance().updateNotificationStorage(clubMember);
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat removed!");
                                     alert.showAndWait();
+                                    tableViewBoats.getItems().remove(boat);
                                 }else{
                                     Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                                     alert.showAndWait();
                                 }
-                                tableViewBoats.refresh();
                             }
                         });
 
@@ -137,7 +135,6 @@ public class BoatController {
                         btn.setMaxWidth(Double.MAX_VALUE);
                         btn.setStyle("-fx-background-color: RED;"
                                 + "-fx-text-fill: WHITE;");
-
                     }
 
                     @Override
