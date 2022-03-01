@@ -83,17 +83,13 @@ public class MembershipQuoteController {
             mr.setIDQuote(1);
 
             if(Client.getInstance().addMembershipRegisterQuote(mr)) {
-
-
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment success!");
                 alert.showAndWait();
-
-
+                Client.getInstance().deleteNotificationMembership(clubMember);
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.showAndWait();
-
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));

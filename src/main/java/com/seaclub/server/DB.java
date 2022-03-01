@@ -496,4 +496,44 @@ public class DB {
         }
     }
 
+    public void updateNotificationRegisterStorage(int idSocio, String info){
+        try {
+            String insertSql = "UPDATE registro_notifiche SET Info = '"+info+"' WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=2;";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            pstmt.execute();
+            System.out.println("Update notification!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteNotificationRegisterMembership(int idSocio){
+        try {
+            String insertSql = "DELETE FROM registro_notifiche WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=1;";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            pstmt.execute();
+            System.out.println("Delete notification membership for id => " + idSocio);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void deleteNotificationRegisterStorage(int idSocio){
+        try {
+            String insertSql = "DELETE FROM registro_notifiche WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=2;";
+            PreparedStatement pstmt = conn.prepareStatement(insertSql);
+
+            pstmt.execute();
+            System.out.println("Delete notification storage for id => " + idSocio);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -130,7 +130,9 @@ public class Message implements Serializable {
 
     private String ACTION_SEND_NOTIFICATIONS_BOAT_EXPIRED = "GetNotificationBoatExpired";
 
+    private String ACTION_UPDATE_NOTIFICATION_STORAGE = "getUpdateNotificationStorage";
 
+    private String ACTION_DELETE_NOTIFICATION_MEMBERSHIP = "geDeleteNotificationMembership";
 
     private static final long serialVersionUID = 1L;
 
@@ -339,8 +341,16 @@ public class Message implements Serializable {
         return ACTION_SEND_NOTIFICATIONS_BOAT_EXPIRED;
     }
 
-
     public String getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE() {
         return ACTION_ADD_MEMBERSHIP_REGISTER_QUOTE;
     }
+
+    public String getACTION_DELETE_NOTIFICATION_MEMBERSHIP() {
+        return ACTION_DELETE_NOTIFICATION_MEMBERSHIP;
+    }
+
+    public String getACTION_UPDATE_NOTIFICATION_STORAGE() {
+        return ACTION_UPDATE_NOTIFICATION_STORAGE;
+    }
+
 }

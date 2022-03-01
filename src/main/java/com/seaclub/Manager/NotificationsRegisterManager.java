@@ -1,5 +1,6 @@
 package com.seaclub.Manager;
 
+import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.Notification;
 import com.seaclub.Model.NotificationsRegister;
 import com.seaclub.Model.StorageRegister;
@@ -84,5 +85,59 @@ public class NotificationsRegisterManager {
 
     public void setNotification(Notification notification) {
         this.notification = notification;
+    }
+
+    public Boolean updateNotificationStorage(ClubMember clubMember){
+        try {
+            updateList();
+            String info = "";
+            int idSocio = clubMember.getId();
+            for (var x : registers) {
+                if (x.getIdMember() == idSocio && x.getIdNotification() == 2) {
+                    info = x.getInfo();
+                    String boats[] = info.split(" - ");
+                    //If there are some boats with storage expired, it update the info, else it delete the notification
+                    if(boats.length>1){
+                        for (var id : boats) {
+                            clubMember.getBoatExpired().removeIf(n -> n.getId() == Integer.valueOf(id));
+                        }
+                    }
+                    else{
+                        DB.getInstance().deleteNotificationRegisterStorage(idSocio);
+                        return true;
+                    }
+                }
+            }
+            info = "";
+            for (var x : clubMember.getBoatExpired()) {
+                info = info + x.getId() + " - ";
+            }
+            info = info.replaceFirst(".$", "");
+            info = info.replaceFirst(".$", "");
+            DB.getInstance().updateNotificationRegisterStorage(clubMember.getId(), info);
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public Boolean deleteNotificationMembership(ClubMember clubMember){
+        try {
+            updateList();
+            int idSocio = clubMember.getId();
+            for (var x : registers) {
+                if (x.getIdMember() == idSocio && x.getIdNotification() == 1) {
+                    DB.getInstance().deleteNotificationRegisterMembership(idSocio);
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
     }
 }

@@ -58,7 +58,6 @@ public class LoginController {
             Client.getInstance().addNewCompetition(cp);
             */
 
-
             if(clubMember!=null) {
 
                 if(clubMember.getDipendente() == 1){

@@ -77,6 +77,10 @@ public class MessageProcessing {
                 return getMemberByCF(mex);
             if(mex.getAction().equals(mex.getACTION_SEND_NOTIFICATIONS_BOAT_EXPIRED()))
                 return sendNotificationBoatExpired(mex);
+            if(mex.getAction().equals(mex.getACTION_UPDATE_NOTIFICATION_STORAGE()))
+                return updateNotificationStorage(mex);
+            if(mex.getAction().equals(mex.getACTION_DELETE_NOTIFICATION_MEMBERSHIP()))
+                return deleteNotificationMembership(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -228,4 +232,13 @@ public class MessageProcessing {
         ClubMemberManager.getInstance().sendNotificationBoatExpired();
         return new Message("Notifications Send!",null);
     }
+
+    public Message updateNotificationStorage(Message mex){
+        return new Message("Update notification storage", NotificationsRegisterManager.getInstance().updateNotificationStorage((ClubMember) mex.getValue()));
+    }
+
+    public Message deleteNotificationMembership(Message mex){
+        return new Message("Delete notification membership", NotificationsRegisterManager.getInstance().deleteNotificationMembership((ClubMember) mex.getValue()));
+    }
+
 }

@@ -70,6 +70,7 @@ public class StorageQuoteController {
             if(Client.getInstance().addStorageRegister(storageRegister)){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment successfull!");
                 alert.showAndWait();
+                Client.getInstance().updateNotificationStorage(clubMember);
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.showAndWait();
