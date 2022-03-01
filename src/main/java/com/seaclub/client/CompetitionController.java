@@ -190,7 +190,7 @@ public class CompetitionController {
                 }
             }
 
-            for (var boat : clubMember.getBoats()) {
+            for (var boat : clubMember.getBoatAvailabe()) {
                 String boatInfo = boat.getId() + " " + boat.getName();
                 BoatComboBox.getItems().add(boatInfo);
             }

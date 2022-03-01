@@ -260,4 +260,29 @@ public class ClubMember implements Serializable {
         return expiredBoat;
 
     }
+
+    public List<Boat> getBoatAvailabe(){
+
+        List<Boat> validBoat = new ArrayList<Boat>();
+
+        //default time zone
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        LocalDate now = LocalDate.now();
+        LocalDate dateMinusYear = now.minusYears(1);
+        Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
+        StorageRegister storageRegister = new StorageRegister();
+
+        for(var boat:boats){
+            storageRegister = Client.getInstance().getLastStorageRegister(boat);
+            if(storageRegister!=null){
+                if(!(storageRegister.getDatePayment().before(dateNow))){
+                    //expired
+                    validBoat.add(boat);
+                }
+            }
+        }
+        return validBoat;
+
+    }
 }

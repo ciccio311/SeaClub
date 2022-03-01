@@ -145,14 +145,14 @@ public class StorageQuoteController {
         //boatComboBox.getItems().clear();
 
         List<Boat> expiredBoat = new ArrayList<Boat>();
-
+/*
         for(var x:clubMember.getBoats()){
             if(isDateExpired(x)){
                 expiredBoat.add(x);
             }
-        }
+        }*/
 
-        for(var i:expiredBoat){
+        for(var i:clubMember.getBoatExpired()){
             String infoItem = i.getId()+" "+i.getName();
             BoatComboBox.getItems().add(infoItem);
         }

@@ -49,6 +49,7 @@ public class StorageRegisterManager {
     }
 
     public StorageRegister getLastStorageRegisterBoat(Boat boat){
+        updateList();
         DB.getInstance().getLastBoatStorageQuote(boat);
         return lastStorageRegister;
     }
