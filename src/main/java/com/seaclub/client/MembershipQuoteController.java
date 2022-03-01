@@ -68,8 +68,6 @@ public class MembershipQuoteController {
                 mr.setPaymentMethod("Card");
             if(BanckTransferRadioButton.isSelected())
                 mr.setPaymentMethod("Bank transfer");
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
             //default time zone
             ZoneId defaultZoneId = ZoneId.systemDefault();
 
@@ -82,7 +80,7 @@ public class MembershipQuoteController {
             mr.setDatePayment(sqlDate);
 
             mr.setIdClubMember(clubMember.getId());
-            mr.setIDQuote(2);
+            mr.setIDQuote(1);
 
             if(Client.getInstance().addMembershipRegisterQuote(mr)) {
 
@@ -162,21 +160,15 @@ public class MembershipQuoteController {
 
     private void setView(){
         membershipPriceLabel.setText("900 €");
+
         MembershipRegister membershipRegister = clubMember.getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
-        if(membershipRegister != null) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-            //default time zone
-            ZoneId defaultZoneId = ZoneId.systemDefault();
-
-            LocalDate now = LocalDate.now();
-            LocalDate dateMinusYear = now.minusYears(1);
-            Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
-            if (membershipRegister.getDatePayment().before(dateNow)) {
+        Integer check = clubMember.isMembershipQuoteExpired();
+        if(check != null) {
+            if (check == 1) {
                 //expired
                 expirationLabel.setText("Your membership is expired!");
-
-            } else {
+            } else if(check==0){
+                //doesn't expired
                 priceLabel.setVisible(false);
                 membershipPriceLabel.setVisible(false);
                 paymentLabel.setVisible(false);
@@ -188,6 +180,7 @@ public class MembershipQuoteController {
                 expirationLabel.setText("Your membership will expire on: " + date.toString());
             }
         }else{
+            //never payed quote
             expirationLabel.setText("You have to pay a Membership Fee!");
         }
     }

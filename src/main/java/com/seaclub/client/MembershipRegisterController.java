@@ -46,8 +46,8 @@ public class MembershipRegisterController {
         else
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            MenuController mc = fxmlLoader.getController();
             Parent root = (Parent) fxmlLoader.load();
+            MenuController mc = fxmlLoader.getController();
             mc.setClubMember(this.clubMember);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

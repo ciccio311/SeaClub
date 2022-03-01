@@ -3,6 +3,8 @@ package com.seaclub.Model;
 import com.seaclub.client.Client;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -284,5 +286,23 @@ public class ClubMember implements Serializable {
         }
         return validBoat;
 
+    }
+
+    public Integer isMembershipQuoteExpired(){
+        MembershipRegister membershipRegister = getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
+        if(membershipRegister != null) {
+            //default time zone
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            LocalDate now = LocalDate.now();
+            LocalDate dateMinusYear = now.minusYears(1);
+            Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
+            if (membershipRegister.getDatePayment().before(dateNow)) {
+                //expired
+                return 1;
+            }
+            else
+                return 0;
+        }else
+            return null;
     }
 }
