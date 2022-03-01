@@ -80,6 +80,7 @@ public class LoginController {
                     if(notify != null){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, notify);
                         alert.showAndWait();
+                        System.out.println(notify);
                     }
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
