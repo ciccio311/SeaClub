@@ -141,6 +141,7 @@ public class ClubMemberManager {
 
     public void sendNotificationBoatExpired() {
         try {
+            updateList();
             List<NotificationsRegister> notificationsRegisters = new ArrayList<NotificationsRegister>();
             notificationsRegisters = NotificationsRegisterManager.getInstance().getRegisters();
             boolean checks=false;
@@ -153,6 +154,7 @@ public class ClubMemberManager {
                     if(member.getId() == notify.getIdMember() && notify.getIdNotification()==2){
                         checks=true;
                     }
+                    checks=false;
                 }
                 if(member.getBoatExpired().size()>0 && checks==false) {
                     for (var boat : member.getBoatExpired()) {
