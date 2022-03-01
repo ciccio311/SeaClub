@@ -122,7 +122,8 @@ public class BoatController {
 
                                 if(Client.getInstance().deleteBoat(boat)){
                                     updateClubmember(boat);
-                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Boat removed!");
+                                    Client.getInstance().updateNotificationStorage(clubMember);
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat removed!");
                                     alert.showAndWait();
                                 }else{
                                     Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
