@@ -72,7 +72,8 @@ public class NotificationsRegisterManager {
                 }
             }
         }
-
+        if(notify1.equals("") && notify2.equals(""))
+            return null;
         return notify1+"\n"+notify2;
 
     }

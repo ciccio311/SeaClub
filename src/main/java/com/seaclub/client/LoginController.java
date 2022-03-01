@@ -80,6 +80,7 @@ public class LoginController {
                     if(notify != null){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, notify);
                         alert.showAndWait();
+                        String word[] = notify.split(", ");
                         System.out.println(notify);
                     }
 
