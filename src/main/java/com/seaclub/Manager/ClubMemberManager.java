@@ -149,12 +149,12 @@ public class ClubMemberManager {
             java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             for (var member : members) {
+                checks=false;
                 //check if the notification already exist, if doesn't exist send notification
                 for(var notify:notificationsRegisters){
                     if(member.getId() == notify.getIdMember() && notify.getIdNotification()==2){
                         checks=true;
                     }
-                    checks=false;
                 }
                 if(member.getBoatExpired().size()>0 && checks==false) {
                     for (var boat : member.getBoatExpired()) {
@@ -172,6 +172,7 @@ public class ClubMemberManager {
                     NotificationsRegisterManager.getInstance().addNewNotificationRegister(notificationsRegister);
                     idBoat="";
                 }
+
             }
         }catch (Exception e){
             System.out.println(e);
