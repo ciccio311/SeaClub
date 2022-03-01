@@ -57,8 +57,17 @@ public class MenuEmployeeController {
     }
 
     @FXML
-    protected void buttonUsersOnClick(){
+    protected void buttonUsersOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
 
+        UserListController ulc = fxmlLoader.getController();
+        ulc.setClubMember(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML

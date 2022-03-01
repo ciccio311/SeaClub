@@ -81,6 +81,8 @@ public class MessageProcessing {
                 return updateNotificationStorage(mex);
             if(mex.getAction().equals(mex.getACTION_DELETE_NOTIFICATION_MEMBERSHIP()))
                 return deleteNotificationMembership(mex);
+            if(mex.getAction().equals(mex.getActionGetAllPartners()))
+                return getAllPartners(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -239,6 +241,11 @@ public class MessageProcessing {
 
     public Message deleteNotificationMembership(Message mex){
         return new Message("Delete notification membership", NotificationsRegisterManager.getInstance().deleteNotificationMembership((ClubMember) mex.getValue()));
+    }
+
+    public Message getAllPartners(Message mex){
+        ClubMemberManager.getInstance().updateList();
+        return new Message("Club members list update", ClubMemberManager.getInstance().getMembers());
     }
 
 }

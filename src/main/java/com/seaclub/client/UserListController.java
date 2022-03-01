@@ -1,5 +1,6 @@
 package com.seaclub.client;
 
+import com.seaclub.Manager.ClubMemberManager;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.StorageRegister;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,10 +29,10 @@ public class UserListController {
 
     @FXML
     protected void backOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
         Parent root = (Parent) fxmlLoader.load();
 
-        MenuController mc = fxmlLoader.getController();
+        MenuEmployeeController mc = fxmlLoader.getController();
         mc.setClubMember(this.clubMember);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -67,7 +68,6 @@ public class UserListController {
         C6.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getAddress())));
         C6.setStyle("-fx-alignment: CENTER;");
 
-        //SE DIPENDENTE GET ALL STORAGE REGISTER
         C1.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
         C2.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
         C3.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
@@ -77,6 +77,6 @@ public class UserListController {
         C6.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
         tableViewUsers.getColumns().addAll(C1, C2, C3, C4, C5, C6);
 
-        //tableViewUsers.setItems((FXCollections.observableArrayList(Client.getInstance().getA())));
+        tableViewUsers.setItems((FXCollections.observableArrayList(Client.getInstance().getAllClubMember())));
     }
 }

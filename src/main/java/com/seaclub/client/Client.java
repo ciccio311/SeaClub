@@ -1073,7 +1073,6 @@ public class Client {
     public boolean addMembershipRegisterQuote(MembershipRegister mr){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
-
             ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
             ObjectInputStream is = null;
 
@@ -1081,38 +1080,29 @@ public class Client {
                 Message request = new Message();
                 request.setAction(request.getACTION_ADD_MEMBERSHIP_REGISTER_QUOTE());
                 request.setValue(mr);
-
                 System.out.println("Client sends: " + request.getAction()  + " action to Server");
 
                 os.writeObject(request);
                 os.flush();
-
                 if(is == null) {
                     is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
                 }
-
                 Object o = is.readObject();
-
                 if(o instanceof Message) {
                     Message response = (Message) o;
-
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
                     return true;
                 }
             }
-
         } catch (IOException | ClassNotFoundException e) {
-
             if(e instanceof ConnectException) {
                 System.out.println("Server is in down! Please retry...");
                 return false;
             }
-
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -1120,7 +1110,6 @@ public class Client {
     public boolean updateNotificationStorage(ClubMember clubMember){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
-
             ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
             ObjectInputStream is = null;
 
@@ -1128,7 +1117,6 @@ public class Client {
                 Message request = new Message();
                 request.setAction(request.getACTION_UPDATE_NOTIFICATION_STORAGE());
                 request.setValue(clubMember);
-
                 System.out.println("Client sends: " + request.getAction()  + " action to Server");
 
                 os.writeObject(request);
@@ -1137,7 +1125,6 @@ public class Client {
                 if(is == null) {
                     is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
                 }
-
                 Object o = is.readObject();
 
                 if(o instanceof Message) {
@@ -1151,17 +1138,13 @@ public class Client {
                         return false;
                 }
             }
-
         } catch (IOException | ClassNotFoundException e) {
-
             if(e instanceof ConnectException) {
                 System.out.println("Server is in down! Please retry...");
                 return false;
             }
-
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -1169,7 +1152,6 @@ public class Client {
     public boolean deleteNotificationMembership(ClubMember clubMember){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
-
             ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
             ObjectInputStream is = null;
 
@@ -1177,7 +1159,6 @@ public class Client {
                 Message request = new Message();
                 request.setAction(request.getACTION_DELETE_NOTIFICATION_MEMBERSHIP());
                 request.setValue(clubMember);
-
                 System.out.println("Client sends: " + request.getAction()  + " action to Server");
 
                 os.writeObject(request);
@@ -1186,7 +1167,6 @@ public class Client {
                 if(is == null) {
                     is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
                 }
-
                 Object o = is.readObject();
 
                 if(o instanceof Message) {
@@ -1200,17 +1180,52 @@ public class Client {
                         return false;
                 }
             }
-
         } catch (IOException | ClassNotFoundException e) {
-
             if(e instanceof ConnectException) {
                 System.out.println("Server is in down! Please retry...");
                 return false;
             }
-
             e.printStackTrace();
         }
-
         return false;
+    }
+
+
+    public List<ClubMember> getAllClubMember(){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getActionGetAllPartners());
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+                    client.close();
+
+                    return (List<ClubMember>) response.getValue();
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+            }
+            e.printStackTrace();
+            return null;
+        }
     }
 }

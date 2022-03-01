@@ -50,7 +50,7 @@ public class Message implements Serializable {
     /**
      *  Represents the String of the action get all partners. Used for communicating the type of action to be performed.
      **/
-    private static final String ACTION_GET_ALL_PARTNERS = "getAllPartners";
+    private final String ACTION_GET_ALL_PARTNERS = "getAllPartners";
     /**
      *  Represents the String of the action get all subscribers of race. Used for communicating the type of action to be performed.
      **/
@@ -225,7 +225,7 @@ public class Message implements Serializable {
         return ACTION_DELETE_TO_PAY;
     }
 
-    public static String getActionGetAllPartners() {
+    public String getActionGetAllPartners() {
         return ACTION_GET_ALL_PARTNERS;
     }
 
