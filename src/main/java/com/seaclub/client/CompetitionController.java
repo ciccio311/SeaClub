@@ -112,33 +112,46 @@ public class CompetitionController {
     }
 
     @FXML
-    protected void SubmitOnClick(){
-        if(DateComboBox.getSelectionModel().isEmpty() || BoatComboBox.getSelectionModel().isEmpty() ||
-                (!CardRadioButton.isSelected()) && !BanckTransferRadioButton.isSelected()
-                ||
-                (CardRadioButton.isSelected()) && BanckTransferRadioButton.isSelected()){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
-            alert.showAndWait();
+    protected void SubmitOnClick() {
+        Integer checkQuote = clubMember.isMembershipQuoteExpired();
+        if (checkQuote!=null){
+            if(checkQuote==0) {
+
+                if (DateComboBox.getSelectionModel().isEmpty() || BoatComboBox.getSelectionModel().isEmpty() ||
+                        (!CardRadioButton.isSelected()) && !BanckTransferRadioButton.isSelected()
+                        ||
+                        (CardRadioButton.isSelected()) && BanckTransferRadioButton.isSelected()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
+                    alert.showAndWait();
+                } else {
+                    CompetitionRegister competitionRegister = new CompetitionRegister();
+                    competitionRegister.setIdBoat(boatSelected.getId());
+                    competitionRegister.setIdCompetition(competitionSelected.getId());
+                    competitionRegister.setIdClubMember(clubMember.getId());
+                    if (CardRadioButton.isSelected())
+                        competitionRegister.setPaymentMethod("Card");
+                    if (BanckTransferRadioButton.isSelected())
+                        competitionRegister.setPaymentMethod("Bank transfer");
+                    Client.getInstance().addBoatToCompetition(competitionRegister);
+
+                    DateComboBox.valueProperty().set(null);
+                    BoatComboBox.valueProperty().set(null);
+                    CardRadioButton.setSelected(false);
+                    BanckTransferRadioButton.setSelected(false);
+                    RacePriceLabel.setText("NA");
+
+                    setListView();
+                    tableViewCompetition.refresh();
+                    setView();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Membership quote expired!");
+                alert.showAndWait();
+            }
+
         }else{
-            CompetitionRegister competitionRegister = new CompetitionRegister();
-            competitionRegister.setIdBoat(boatSelected.getId());
-            competitionRegister.setIdCompetition(competitionSelected.getId());
-            competitionRegister.setIdClubMember(clubMember.getId());
-            if(CardRadioButton.isSelected())
-                competitionRegister.setPaymentMethod("Card");
-            if(BanckTransferRadioButton.isSelected())
-                competitionRegister.setPaymentMethod("Bank transfer");
-            Client.getInstance().addBoatToCompetition(competitionRegister);
-
-            DateComboBox.valueProperty().set(null);
-            BoatComboBox.valueProperty().set(null);
-            CardRadioButton.setSelected(false);
-            BanckTransferRadioButton.setSelected(false);
-            RacePriceLabel.setText("NA");
-
-            setListView();
-            tableViewCompetition.refresh();
-            setView();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You have to pay membership quote!");
+            alert.showAndWait();
         }
     }
 
