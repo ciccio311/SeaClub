@@ -141,14 +141,26 @@ public class ClubMemberManager {
 
     public void sendNotificationBoatExpired() {
         try {
+            List<NotificationsRegister> notificationsRegisters = new ArrayList<NotificationsRegister>();
+            notificationsRegisters = NotificationsRegisterManager.getInstance().getRegisters();
+            boolean checks=false;
             String idBoat = "";
             java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             for (var member : members) {
-                if(member.getBoatExpired().size()>0) {
+                //check if the notification already exist, if doesn't exist send notification
+                for(var notify:notificationsRegisters){
+                    if(member.getId() == notify.getIdMember() && notify.getIdNotification()==2){
+                        checks=true;
+                    }
+                }
+                if(member.getBoatExpired().size()>0 && checks==false) {
                     for (var boat : member.getBoatExpired()) {
                         idBoat = idBoat + String.valueOf(boat.getId()) + " - ";
+
                     }
+                    idBoat = idBoat.replaceFirst(".$","");
+                    idBoat = idBoat.replaceFirst(".$","");
                     NotificationsRegister notificationsRegister = new NotificationsRegister();
                     notificationsRegister.setIdNotification(2);
                     notificationsRegister.setIdMember(member.getId());

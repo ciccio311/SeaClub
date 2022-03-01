@@ -72,7 +72,9 @@ public class NotificationsRegisterManager {
                 }
             }
         }
-        return notify1+notify2;
+
+        return notify1+"\n"+notify2;
+
     }
 
     public Notification getNotification() {
