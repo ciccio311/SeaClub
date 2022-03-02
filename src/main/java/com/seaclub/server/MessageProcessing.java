@@ -87,6 +87,8 @@ public class MessageProcessing {
                 return getAllBoats(mex);
             if(mex.getAction().equals(mex.getACTION_GET_ALL_COMPETITIONS()))
                 return getCompetitions(mex);
+            if(mex.getAction().equals(mex.getACTION_COMPETITION_REGISTER_BY_ID_COMP()))
+                return getCompetitionRegisterByIdComp(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -263,6 +265,12 @@ public class MessageProcessing {
     public Message getAllCompetitions(Message mex){
         CompetitionManager.getInstance().updateList();
         return new Message("Boats list update", CompetitionManager.getInstance().getCompetitionList());
+    }
+
+    public Message getCompetitionRegisterByIdComp(Message mex){
+        if(mex.getValue()instanceof Integer==false)
+            return null;
+        return new Message("Get competition registers by id competition!",CompetitionRegisterManager.getInstance().getListByCompetitionId((Integer)mex.getValue()));
     }
 
 }

@@ -43,5 +43,27 @@ public class CompetitionRegisterManager {
     public void updateList(){
         DB.getInstance().getCompetitionRegister();
     }
+
+    /**
+     * @param id the id of competition that I want discover the subscribers
+     * @return the subscribers register of the specific competition
+     */
+    public List<CompetitionRegister> getListByCompetitionId(int id){
+        try {
+            List<CompetitionRegister> memberOfCompetition = new ArrayList<CompetitionRegister>();
+            updateList();
+            for (var x : competitionRegisters) {
+                if (x.getIdCompetition() == id) {
+                    memberOfCompetition.add(x);
+                }
+            }
+            return memberOfCompetition;
+        }catch(Exception e){
+
+            System.out.println("Error: "+e.toString());
+            return null;
+
+        }
+    }
 }
 

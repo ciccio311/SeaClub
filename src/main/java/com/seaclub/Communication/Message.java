@@ -138,6 +138,9 @@ public class Message implements Serializable {
 
     private String ACTION_GET_ALL_COMPETITIONS = "getAllCompetitions";
 
+    private String ACTION_COMPETITION_REGISTER_BY_ID_COMP = "getCompetitionRegisterByIdComp";
+
+
     private static final long serialVersionUID = 1L;
 
 
@@ -363,5 +366,9 @@ public class Message implements Serializable {
 
     public String getACTION_GET_ALL_COMPETITIONS() {
         return ACTION_GET_ALL_COMPETITIONS;
+    }
+
+    public String getACTION_COMPETITION_REGISTER_BY_ID_COMP() {
+        return ACTION_COMPETITION_REGISTER_BY_ID_COMP;
     }
 }

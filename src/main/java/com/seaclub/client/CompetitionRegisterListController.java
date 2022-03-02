@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompetitionRegisterListController {
     private ClubMember clubMember;
@@ -86,28 +88,27 @@ public class CompetitionRegisterListController {
     }
 
     /**
-     * Method used to search for information about a specific user
+     * Method used to search subscribers register to a specific competition
      */
     @FXML
     protected void searchOnClick(){
         if(idSearchTextFIeld.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert users id!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert competition's id!");
             alert.showAndWait();
         }else {
             try {
-                tableViewCompetitionsRegister.getItems().clear();
-                ClubMember clubMemberToSearch = new ClubMember();
-                clubMemberToSearch.setId(Integer.valueOf(idSearchTextFIeld.getText()));
-                //clubMemberToSearch = Client.getInstance().;
-                if(clubMemberToSearch!=null)
-                    tableViewCompetitionsRegister.getItems().add(clubMemberToSearch);
-                else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Doesn't exist an User with id: "+idSearchTextFIeld.getText());
+                List<CompetitionRegister> competitionRegisters = new ArrayList<CompetitionRegister>();
+                competitionRegisters = Client.getInstance().getCompetitionRegisterByIdComp(Integer.valueOf(idSearchTextFIeld.getText()));
+                if(competitionRegisters!=null && competitionRegisters.size() > 0) {
+                    tableViewCompetitionsRegister.getItems().clear();
+                    tableViewCompetitionsRegister.setItems((FXCollections.observableArrayList(competitionRegisters)));
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Doesn't exist a competition with id: "+idSearchTextFIeld.getText());
                     alert.showAndWait();
                 }
             }catch(Exception e){
                 System.out.println(e.toString());
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Enter the correct information!");
                 alert.showAndWait();
             }
 

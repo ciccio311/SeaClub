@@ -51,6 +51,10 @@ public class CompetitionController {
 
     private List<String> register;
 
+    /**
+     * First method for initialize the view.
+     * @param clubMember the member that go into this view
+     */
     public void setClubMember(ClubMember clubMember) {
         try {
             this.clubMember = clubMember;
@@ -77,6 +81,10 @@ public class CompetitionController {
         }
     }
 
+    /**
+     * Method used to go back to the previous one view
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -92,6 +100,9 @@ public class CompetitionController {
 
     }
 
+    /**
+     * Method used to find which date I have selected
+     */
     @FXML
     protected void OnClickDate(){
         String selectedItem = (String) DateComboBox.getSelectionModel().getSelectedItem();
@@ -102,6 +113,9 @@ public class CompetitionController {
         }
     }
 
+    /**
+     * Method used to find which boat I have selected
+     */
     @FXML
     protected void OnClickBoat(){
         String selectedItem = (String) BoatComboBox.getSelectionModel().getSelectedItem();
@@ -111,6 +125,9 @@ public class CompetitionController {
         }
     }
 
+    /**
+     * Method used to add to the competition register the new subscription to the competition
+     */
     @FXML
     protected void SubmitOnClick() {
         Integer checkQuote = clubMember.isMembershipQuoteExpired();
@@ -140,7 +157,7 @@ public class CompetitionController {
                     BanckTransferRadioButton.setSelected(false);
                     RacePriceLabel.setText("NA");
 
-                    setListView();
+                    setTableView();
                     tableViewCompetition.refresh();
                     setView();
                 }
@@ -155,7 +172,10 @@ public class CompetitionController {
         }
     }
 
-    private void setListView(){
+    /**
+     * Method used to set TableView cells
+     */
+    private void setTableView(){
         tableViewCompetition.getItems().clear();
 
         register = new ArrayList<String>();
@@ -166,6 +186,11 @@ public class CompetitionController {
 
     }
 
+    /**
+     * Method used to find which competition are available
+     * @param list is the list of all competition
+     * @return the list of all competition AVAILABLE
+     */
     private List<Competition> getCompetitionAvailable(List<Competition> list){
         List<Integer> ids = new ArrayList<Integer>();
         for(var x:register){
@@ -180,11 +205,14 @@ public class CompetitionController {
         return list;
     }
 
+    /**
+     * Method used to set parameters of the view
+     */
     public void setView(){
         try{
             DateComboBox.getItems().clear();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            setListView();
+            setTableView();
             List<Competition> competitions = new ArrayList<Competition>();
             competitions = getCompetitionAvailable(Client.getInstance().getAllCompetition());
 
@@ -204,6 +232,7 @@ public class CompetitionController {
             }
 
             for (var boat : clubMember.getBoatAvailabe()) {
+                BoatComboBox.getItems().clear();
                 String boatInfo = boat.getId() + " " + boat.getName();
                 BoatComboBox.getItems().add(boatInfo);
             }
@@ -213,6 +242,12 @@ public class CompetitionController {
         }
     }
 
+    /**
+     * Method used to split a string
+     * @param s string which we want to split
+     * @param i which parameter of the split result to return
+     * @return the required split value
+     */
     private String split(String s, int i){
         String word[] = s.split(", ");
         return word[i];
