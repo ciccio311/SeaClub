@@ -162,8 +162,17 @@ public class MenuEmployeeController {
     }
 
     @FXML
-    protected void buttonCompetitionRegisterListOnClick(){
+    protected void buttonCompetitionRegisterListOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CompetitionRegisterList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
 
+        CompetitionRegisterListController crlc = fxmlLoader.getController();
+        crlc.setClubMember(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+        stage2.close();
     }
 
     public void setClubMember(ClubMember clubMember) {

@@ -206,8 +206,12 @@ public class DB {
             List<CompetitionRegister> registers = new ArrayList<CompetitionRegister>();
 
             while(rset.next()) {
-                CompetitionRegister competitionRegister = new CompetitionRegister(rset.getInt(""),rset.getInt(""),
-                        rset.getInt(""),rset.getInt(""),rset.getString(""));
+                CompetitionRegister competitionRegister = new CompetitionRegister(
+                        rset.getInt("IDRegistro_gare"),
+                        rset.getInt("IDGara"),
+                        rset.getInt("IDBarca"),
+                        rset.getInt("IDSocio"),
+                        rset.getString("Metodo_pag"));
 
                 registers.add(competitionRegister);
             }
