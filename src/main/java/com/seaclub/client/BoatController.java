@@ -35,9 +35,9 @@ public class BoatController {
 
     @FXML
     protected void addOnClick()throws IOException {
-        if(name.getText().length()==0 || width.getText().length()==0)
+        if(name.getText().length()==0 || width.getText().length()==0 || Float.valueOf(width.getText())<1)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields correct!");
             alert.showAndWait();
         }
         else
@@ -121,9 +121,10 @@ public class BoatController {
                                 if(Client.getInstance().deleteBoat(boat)){
                                     clubMember.getBoats().remove(boat);;
                                     Client.getInstance().updateNotificationStorage(clubMember);
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat removed!");
-                                    alert.showAndWait();
                                     tableViewBoats.getItems().remove(boat);
+                                    tableViewBoats.refresh();
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat deleted!");
+                                    alert.showAndWait();
                                 }else{
                                     Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                                     alert.showAndWait();
@@ -137,7 +138,7 @@ public class BoatController {
                                 + "-fx-text-fill: WHITE;");
                     }
 
-                    @Override
+                   @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {

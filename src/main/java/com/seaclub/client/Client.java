@@ -885,6 +885,57 @@ public class Client {
         return null;
     }
 
+    /**
+     * @param AllCompetition All competition register by specific member's id
+     * @return Competition available
+     */
+    public List<Competition> getCompetitionAvailable(List<String> AllCompetition){
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getACTION_GE_COMPETITION_AVAILABLE());
+                request.setValue(AllCompetition);
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+                    client.close();
+                    if(response.getValue()!=null){
+                        List<Competition> registers = (List<Competition>) response.getValue();
+                        return registers;
+                    }else
+                        return null;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return null;
+            }
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public boolean addNewBoat(Boat boat){
         try {

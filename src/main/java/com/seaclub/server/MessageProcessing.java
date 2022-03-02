@@ -4,6 +4,9 @@ import com.seaclub.Communication.Message;
 import com.seaclub.Manager.*;
 import com.seaclub.Model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MessageProcessing {
 
     /*
@@ -89,6 +92,8 @@ public class MessageProcessing {
                 return getCompetitions(mex);
             if(mex.getAction().equals(mex.getACTION_COMPETITION_REGISTER_BY_ID_COMP()))
                 return getCompetitionRegisterByIdComp(mex);
+            if(mex.getAction().equals(mex.getACTION_GE_COMPETITION_AVAILABLE()))
+                return getCompetitionAvailableByMemberId(mex);
             return null;
         }catch (Exception e){
             System.out.println(e);
@@ -271,6 +276,15 @@ public class MessageProcessing {
         if(mex.getValue()instanceof Integer==false)
             return null;
         return new Message("Get competition registers by id competition!",CompetitionRegisterManager.getInstance().getListByCompetitionId((Integer)mex.getValue()));
+    }
+
+    public Message getCompetitionAvailableByMemberId(Message mex){
+        List<Competition> competitions = new ArrayList<Competition>();
+        competitions = CompetitionManager.getInstance().getCompetitionAvailable((List<String>) mex.getValue());
+        if(competitions!=null)
+            return new Message("Get competition available!",competitions);
+        else
+            return new Message("Impossible get competition available!",null);
     }
 
 }

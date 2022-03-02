@@ -82,4 +82,31 @@ public class CompetitionManager {
         }
         return null;
     }
+
+    /**
+     * Method used to find which competition are available
+     * @param registers is the list of all competition register by member's id
+     * @return the list of all competition AVAILABLE
+     */
+    public List<Competition> getCompetitionAvailable(List<String> registers){
+        try {
+            updateList();
+            List<Competition> competitionAvailable = new ArrayList<Competition>();
+            competitionAvailable = getCompetitionList();
+            List<Integer> ids = new ArrayList<Integer>();
+            for (var x : registers) {
+                String word[] = x.split(", ");
+                ids.add(Integer.valueOf(word[0]));
+            }
+
+            for (var id : ids) {
+                competitionAvailable.removeIf(n -> n.getId() == id);
+            }
+
+            return competitionAvailable;
+        }catch(Exception e){
+            System.out.println("Error: "+e.toString());
+            return null;
+        }
+    }
 }

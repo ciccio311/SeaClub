@@ -2,7 +2,6 @@ package com.seaclub.client;
 
 import com.seaclub.Model.*;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -24,7 +22,7 @@ import java.util.List;
 
 public class CompetitionController {
     private ClubMember clubMember;
-    private Boat boatSelected = new Boat();
+    private final Boat boatSelected = new Boat();
     private Competition competitionSelected = new Competition();
     private ObservableList<String> items = FXCollections.observableArrayList();
 
@@ -179,30 +177,12 @@ public class CompetitionController {
         tableViewCompetition.getItems().clear();
 
         register = new ArrayList<String>();
+
         register = Client.getInstance().getCompetitionRegisterByMemberId(this.clubMember.getId());
 
 
         tableViewCompetition.setItems((FXCollections.observableArrayList(register)));
 
-    }
-
-    /**
-     * Method used to find which competition are available
-     * @param list is the list of all competition
-     * @return the list of all competition AVAILABLE
-     */
-    private List<Competition> getCompetitionAvailable(List<Competition> list){
-        List<Integer> ids = new ArrayList<Integer>();
-        for(var x:register){
-            String word[] = x.split(", ");
-            ids.add(Integer.valueOf(word[0]));
-        }
-
-        for(var id:ids){
-            list.removeIf(n -> n.getId()==id);
-        }
-
-        return list;
     }
 
     /**
@@ -214,7 +194,7 @@ public class CompetitionController {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             setTableView();
             List<Competition> competitions = new ArrayList<Competition>();
-            competitions = getCompetitionAvailable(Client.getInstance().getAllCompetition());
+            competitions = Client.getInstance().getCompetitionAvailable(register);
 
             //default time zone
             ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -225,14 +205,12 @@ public class CompetitionController {
 
             for (var comp : competitions) {
                 if (comp.getDate().after(dateNow)) {
-
                     String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
                     DateComboBox.getItems().add(info);
                 }
             }
-
+            BoatComboBox.getItems().clear();
             for (var boat : clubMember.getBoatAvailabe()) {
-                BoatComboBox.getItems().clear();
                 String boatInfo = boat.getId() + " " + boat.getName();
                 BoatComboBox.getItems().add(boatInfo);
             }

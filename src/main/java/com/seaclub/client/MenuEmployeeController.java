@@ -117,7 +117,7 @@ public class MenuEmployeeController {
             }
 
             if (check) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications send!");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications membership send!");
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
@@ -129,8 +129,14 @@ public class MenuEmployeeController {
             alert.showAndWait();
         }
 
-        Client.getInstance().SendNotificationBoatExpired();
-
+        if(Client.getInstance().SendNotificationBoatExpired()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications storage send!");
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+            alert.showAndWait();
+        }
     }
 
     @FXML
