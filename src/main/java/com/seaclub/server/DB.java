@@ -367,7 +367,7 @@ public class DB {
         }
     }
 
-    public void addNewCompetition(Competition competition){
+    public boolean addNewCompetition(Competition competition){
         try {
             String insertSql = "insert into gara values (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -378,9 +378,11 @@ public class DB {
             pstmt.setDate(3, (Date) competition.getDate());
             pstmt.execute();
             System.out.println("Competition added to DB => " + competition.getId());
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

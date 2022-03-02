@@ -132,8 +132,11 @@ public class MessageProcessing {
             return null;
 
         Competition cp = (Competition) mex.getValue();
-        CompetitionManager.getInstance().addCompetition(cp);
-        return new Message("New competition added!",null);
+        if(CompetitionManager.getInstance().addCompetition(cp))
+            return new Message("New competition added!",true);
+        else
+            return new Message("New competition NOT added!",false);
+
     }
 
     public Message addBoatToCompetition(Message mex){

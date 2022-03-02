@@ -911,7 +911,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue())
+                        return true;
+                    else
+                        return false;
                 }
             }
 

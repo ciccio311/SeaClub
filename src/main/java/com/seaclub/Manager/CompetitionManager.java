@@ -53,9 +53,12 @@ public class CompetitionManager {
         DB.getInstance().getCompetition();
     }
 
-    public void addCompetition(Competition competition){
-        DB.getInstance().addNewCompetition(competition);
-        updateList();
+    public boolean addCompetition(Competition competition){
+        if(DB.getInstance().addNewCompetition(competition)){
+            updateList();
+            return true;
+        }else
+            return false;
     }
 
     public void updateBoatList(CompetitionRegister c) {
