@@ -44,10 +44,11 @@ public class DB {
 
     /**
      * Method used to get the whole Boat table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getBoats(){
-        String selectString = "SELECT * FROM barca;";
+    public boolean getBoats(){
         try {
+            String selectString = "SELECT * FROM barca;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -64,18 +65,20 @@ public class DB {
 
             BoatManager.getInstance().setBoats(boats);
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
      * Method used to get notification with specific id
+     * @param id is the specific ID
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getNotification(int id){
-
+    public boolean getNotification(int id){
         try {
-
             String selectString = "SELECT * " +
                     "FROM notifica " +
                     "WHERE notifica.ID = "+id+";";
@@ -84,26 +87,26 @@ public class DB {
 
             ResultSet rset = ((java.sql.Statement) stmt2).executeQuery(selectString);
 
-
             while(rset.next()) {
-               Notification notification = new Notification(rset.getInt("ID"),rset.getString("Nome"));
-               NotificationsRegisterManager.getInstance().setNotification(notification);
+                Notification notification = new Notification(rset.getInt("ID"),rset.getString("Nome"));
+                NotificationsRegisterManager.getInstance().setNotification(notification);
             }
 
-
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-
     /**
      * Method used to get the whole NotificationRegister table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getNotificatioinRegister(){
-        String selectString = "SELECT * FROM registro_notifiche;";
+    public boolean getNotificatioinRegister(){
         try {
+            String selectString = "SELECT * FROM registro_notifiche;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -122,19 +125,20 @@ public class DB {
             NotificationsRegisterManager.getInstance().setRegisters(registers);
 
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-
-
     /**
      * Method used to get the whole Storage Quote register table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getBoatStorageQuote(){
-        String selectString = "SELECT * FROM registro_rimessaggi;";
+    public boolean getBoatStorageQuote(){
         try {
+            String selectString = "SELECT * FROM registro_rimessaggi;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -154,21 +158,25 @@ public class DB {
             StorageRegisterManager.getInstance().setRegisters(registers);
 
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
-     * Method used to get Last row Storage Quote register table
+     * Method used to get Last row Storage Quote register table for a specific boat
+     * @param boat is the specific boat
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getLastBoatStorageQuote(Boat boat){
-        String selectString = "SELECT * " +
-                "FROM registro_rimessaggi r " +
-                "WHERE r.IDBarca=" +boat.getId()+" "+
-                "ORDER BY r.Data_pagamento DESC " +
-                "LIMIT 1;";
+    public boolean getLastBoatStorageQuote(Boat boat){
         try {
+            String selectString = "SELECT * " +
+                    "FROM registro_rimessaggi r " +
+                    "WHERE r.IDBarca=" +boat.getId()+" "+
+                    "ORDER BY r.Data_pagamento DESC " +
+                    "LIMIT 1;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -187,17 +195,20 @@ public class DB {
                 StorageRegisterManager.getInstance().setLastStorageRegister(null);
 
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
      * Method used to get the whole CompetitionRegister table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getCompetitionRegister(){
-        String selectString = "SELECT * FROM registro_gare;";
+    public boolean getCompetitionRegister(){
         try {
+            String selectString = "SELECT * FROM registro_gare;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -219,17 +230,20 @@ public class DB {
             CompetitionRegisterManager.getInstance().setCompetitionRegisters(registers);
 
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
      * Method used to get the whole MembershipQuote table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getMembershipQuoteRegister(){
-        String selectString = "SELECT * FROM registro_associazioni;";
+    public boolean getMembershipQuoteRegister(){
         try {
+            String selectString = "SELECT * FROM registro_associazioni;";
 
             Statement stmt2 = (Statement) conn.createStatement();
 
@@ -242,21 +256,23 @@ public class DB {
                         rset.getInt("IDQuota_ass"),rset.getInt("IDSocio"),rset.getString("Metodo_pag"),
                         rset.getDate("Data_pagamento"));
 
-               registers.add(membershipRegister);
+                registers.add(membershipRegister);
             }
 
             MembershipRegisterManager.getInstance().setMembershipRegisters(registers);
             stmt2.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
      * Method used to get the whole competition table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getCompetition(){
-
+    public boolean getCompetition(){
         try {
             String selectString = "SELECT * FROM gara;";
             ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
@@ -270,19 +286,20 @@ public class DB {
             }
 
             CompetitionManager.getInstance().setCompetitionList(competitions);
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-
     /**
      * Method used to get the whole clubMember table
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void getClubMembers() {
-        String selectString = "SELECT * FROM socio;";
+    public boolean getClubMembers() {
         try {
+            String selectString = "SELECT * FROM socio;";
 
             ResultSet rset = ((java.sql.Statement) stmt).executeQuery(selectString);
 
@@ -297,18 +314,21 @@ public class DB {
             }
 
             ClubMemberManager.getInstance().setMembers(members);
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void addNewMember(ClubMember member){
-
-        String insertSql = "insert into socio values (?,?, ?, ?, ?, ?, ?)";
-
+    /**
+     * Method used to add a new club member in the DB
+     * @param member is the added club member
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addNewMember(ClubMember member){
         try {
-
+            String insertSql = "insert into socio values (?,?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             //configure PreparedStatement with values of new member
@@ -322,17 +342,21 @@ public class DB {
 
             pstmt.execute();
             System.out.println("User added to DB => " + member.getName());
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void addNewStorageRegister(StorageRegister storageRegister){
-
-        String insertSql = "insert into registro_rimessaggi values (?,?, ?, ?, ?, ?, ?)";
-
+    /**
+     * Method used to add a storageRegister in the DB in "registro_rimessaggi"
+     * @param storageRegister is the storage register added in the DB
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addNewStorageRegister(StorageRegister storageRegister){
         try {
-
+            String insertSql = "insert into registro_rimessaggi values (?,?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             //configure PreparedStatement with values of new storage register
@@ -344,16 +368,21 @@ public class DB {
             pstmt.setDate(6, (Date) storageRegister.getDatePayment());
             pstmt.setFloat(7, storageRegister.getPrice());
 
-
             pstmt.execute();
             System.out.println("Storage register added to DB!");
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-
-    public void addNewBoat(Boat boat){
+    /**
+     * Method used to add a new boat in the DB
+     * @param boat is the added boat
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addNewBoat(Boat boat){
         try {
             String insertSql = "insert into barca values (?,?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -365,12 +394,18 @@ public class DB {
             pstmt.setInt(4, boat.getIdClubMember());
             pstmt.execute();
             System.out.println("Boat added to DB => " + boat.getName());
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
+    /**
+     * Method used to add a new competition in the DB
+     * @param competition is the added competition
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
     public boolean addNewCompetition(Competition competition){
         try {
             String insertSql = "insert into gara values (?, ?, ?)";
@@ -390,7 +425,12 @@ public class DB {
         }
     }
 
-    public void addNewBoatInCompetition(CompetitionRegister compRegister){
+    /**
+     * Method used to subscribe a new boat in a competition, updating the competitionRegister in the DB
+     * @param compRegister value to add in the "registro_gare" in the DB
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addNewBoatInCompetition(CompetitionRegister compRegister){
         try {
             String insertSql = "insert into registro_gare values (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -403,13 +443,19 @@ public class DB {
             pstmt.setString(5, compRegister.getPaymentMethod());
             pstmt.execute();
             System.out.println("Competition added to DB => " + compRegister.getID());
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void getCompetitionRegisterByMemberId(int id){
+    /**
+     * Method used to import the competition registration information for a specific club member
+     * @param id is the specific club member
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean getCompetitionRegisterByMemberId(int id){
         try {
             String insertSql = "SELECT gara.IDGara, gara.Data, barca.Nome\n" +
                     "FROM gara, socio, barca, registro_gare\n" +
@@ -424,13 +470,19 @@ public class DB {
                 info.add(riga);
             }
             CompetitionManager.getInstance().setcRegister(info);
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void updateUser(ClubMember cm){
+    /**
+     * Method used to update password and the address of the user in the DB
+     * @param cm specific club member to update
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean updateUser(ClubMember cm){
         try {
             String insertSql = "UPDATE socio SET Indirizzo = ?, Password = ? WHERE socio.ID="+cm.getId()+";";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -441,29 +493,39 @@ public class DB {
 
             pstmt.execute();
             System.out.println("Update value in DB for user => " + cm.getId());
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     /**
-     * @param boat boat that will be eliminated
+     * Method used to assign boat to user with ID=1, because if you delete the boat in the DB,
+     * you must delete also the payment storage
+     * @param boat is the boat that you want "delete"
+     * @return TRUE if the method was successful, FALSE if it was not successful
      */
-    public void deleteBoat(Boat boat){
+    public boolean deleteBoat(Boat boat){
         try {
             String insertSql = "UPDATE barca SET IDProprietario = 1 WHERE barca.IDBarca="+boat.getId()+";";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             pstmt.execute();
             System.out.println("Delete boat in DB with id => " + boat.getId());
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void addMembershipRegisterQuote(MembershipRegister mr){
+    /**
+     * Method used to add in the DB the payment of a membership quote
+     * @param mr is the membership register quote to add in the DB
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addMembershipRegisterQuote(MembershipRegister mr){
         try {
             String insertSql = "insert into registro_associazioni values (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -476,13 +538,19 @@ public class DB {
             pstmt.setDate(5, (Date) mr.getDatePayment());
             pstmt.execute();
             System.out.println("Membership quote added to DB");
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void addNotificationRegister(NotificationsRegister notificationsRegister){
+    /**
+     * Method used to add a specific notification to the notification register
+     * @param notificationsRegister specific notification added to the notification register
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean addNotificationRegister(NotificationsRegister notificationsRegister){
         try {
             String insertSql = "insert into registro_notifiche values (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
@@ -496,49 +564,68 @@ public class DB {
 
             pstmt.execute();
             System.out.println("Notification register added to DB!");
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void updateNotificationRegisterStorage(int idSocio, String info){
+    /**
+     * Method used to update the notification register storage for a specific club member, with the specific info
+     * @param idSocio id of the specific club member
+     * @param info string which contain the id of the boat expired
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean updateNotificationRegisterStorage(int idSocio, String info){
         try {
             String insertSql = "UPDATE registro_notifiche SET Info = '"+info+"' WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=2;";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             pstmt.execute();
             System.out.println("Update notification!");
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void deleteNotificationRegisterMembership(int idSocio){
+    /**
+     * Method used to delete the notification register membership for a specific club member
+     * @param idSocio id of the specific clubmember
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean deleteNotificationRegisterMembership(int idSocio){
         try {
             String insertSql = "DELETE FROM registro_notifiche WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=1;";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             pstmt.execute();
             System.out.println("Delete notification membership for id => " + idSocio);
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-
-    public void deleteNotificationRegisterStorage(int idSocio){
+    /**
+     * Method used to delete the notification register storage for a specific club member
+     * @param idSocio id of the specific club member
+     * @return TRUE if the method was successful, FALSE if it was not successful
+     */
+    public boolean deleteNotificationRegisterStorage(int idSocio){
         try {
             String insertSql = "DELETE FROM registro_notifiche WHERE registro_notifiche.IDSocio="+idSocio+" AND registro_notifiche.IDNotifica=2;";
             PreparedStatement pstmt = conn.prepareStatement(insertSql);
 
             pstmt.execute();
             System.out.println("Delete notification storage for id => " + idSocio);
-
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

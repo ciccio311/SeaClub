@@ -1,7 +1,6 @@
 package com.seaclub.client;
 
 import com.seaclub.Communication.Message;
-import com.seaclub.Manager.CompetitionManager;
 import com.seaclub.Model.*;
 
 import java.io.BufferedInputStream;
@@ -78,10 +77,10 @@ public class Client {
 
                     client.close();
 
-                    if((Boolean) response.getValue()==false){
-                        return false;
-                    }else
+                    if((Boolean) response.getValue()){
                         return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -133,7 +132,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -184,7 +186,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -203,7 +208,7 @@ public class Client {
 
 
     /**
-     * Used send all Notification boat expired to all users.
+     * Used to send all Notification boat expired to all users.
      * @return returns true if the executive was successful.
      **/
     public boolean SendNotificationBoatExpired() {
@@ -234,7 +239,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -286,7 +294,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -303,7 +314,11 @@ public class Client {
         return false;
     }
 
-
+    /**
+     * Used for login
+     * @param cm Represents the new clubMember that try to login
+     * @return returns clubmember logged if the credentials are correct otherwise return null
+     **/
     public ClubMember login(ClubMember cm){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -352,6 +367,11 @@ public class Client {
         return null;
     }
 
+    /**
+     * Used for get the clubMember by CF
+     * @param cm Represents the clubMember with the spefific CF
+     * @return if exist returns the clubmember with the CF passed otherwise return null
+     **/
     public ClubMember getMemberByCF(ClubMember cm){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -400,7 +420,11 @@ public class Client {
         return null;
     }
 
-
+    /**
+     * Used for getting the club member's notification
+     * @param id Represents clubMember's id
+     * @return if exist returns the notification of specifi clubMember otherwise return null
+     **/
     public String getNotification(int id){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -450,6 +474,11 @@ public class Client {
     }
 
 
+    /**
+     * Used for getting the last storage register of a specific boat
+     * @param boat Represents the boat that we want discover the last storage register
+     * @return if exist returns the last storage register of a specific boat otherwise return null
+     **/
     public StorageRegister getLastStorageRegister(Boat boat){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -498,6 +527,7 @@ public class Client {
         return null;
     }
 
+    /*
     public List<NotificationsRegister> getNotificationRegister(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -543,8 +573,13 @@ public class Client {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
+
+    /**
+     * Method used for getting the list of member with membership quote expired
+     * @return if exist the list of member with membership quote expired otherwise return null
+     */
     public List<ClubMember> getMemberExpired(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -593,6 +628,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting a club member with the information updated
+     * @param cm the club member with old information
+     * @return the club member with the information updated
+     */
     public ClubMember updateClubMember(ClubMember cm){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -642,6 +682,10 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting the list of all competition
+     * @return the list of all competition
+     */
     public List<Competition> getAllCompetition(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -689,6 +733,10 @@ public class Client {
         return null;
     }
 
+    /**
+     * Method used for getting the list of all storage register
+     * @return the list of all storage register
+     */
     public List<StorageRegister> getAllStorageRegisterQuote(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -737,6 +785,10 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting the list of all competition register
+     * @return the list of all competition register
+     */
     public List<CompetitionRegister> getAllCompetitionRegister(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -785,6 +837,7 @@ public class Client {
     }
 
     /**
+     * Method used for getting All Membership's Register
      * @return All Membership's Register
      */
     public List<MembershipRegister> getAllMembershipQuoteRegister(){
@@ -835,8 +888,9 @@ public class Client {
     }
 
     /**
+     * Method used for getting the list of competition register with specific competition's id
      * @param id the specific competition that I want to discover the subscribers
-     * @return Competition Register with specific competition's id
+     * @return The list of competition register with specific competition's id
      */
     public List<CompetitionRegister> getCompetitionRegisterByIdComp(int id){
         try {
@@ -886,7 +940,8 @@ public class Client {
     }
 
     /**
-     * @param AllCompetition All competition register by specific member's id
+     * Method used for getting the competition available of a specific club member
+     * @param AllCompetition all competition register by specific member's id
      * @return Competition available
      */
     public List<Competition> getCompetitionAvailable(List<String> AllCompetition){
@@ -937,6 +992,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for adding new boat
+     * @param boat the new boat
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean addNewBoat(Boat boat){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -966,7 +1026,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -984,6 +1047,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for adding new competition
+     * @param competition the new competition
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean addNewCompetition(Competition competition){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1034,6 +1102,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for register a boat to competition
+     * @param compRegister the subscription
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean addBoatToCompetition(CompetitionRegister compRegister){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1063,7 +1136,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -1081,6 +1157,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting all subscriptions at competitions of a specific club member
+     * @param id the specific club member
+     * @return list of all subscriptions at competitions of a specific club member
+     */
     public List<String> getCompetitionRegisterByMemberId(int id){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1128,6 +1209,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for updating the information about a specific club member (Password and Address)
+     * @param cm the specific club member
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean updateMemberInfo(ClubMember cm){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1157,7 +1243,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
 
@@ -1175,6 +1264,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for register a payment about membership quote
+     * @param mr the register of payment
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean addMembershipRegisterQuote(MembershipRegister mr){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1198,7 +1292,10 @@ public class Client {
                     System.out.println(" and received response: " + response.getAction() + " action from Server");
 
                     client.close();
-                    return true;
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -1212,6 +1309,12 @@ public class Client {
     }
 
 
+    /**
+     * Method used for updating notification if a club member pays an expired storage quote or
+     * remove a boat with storage quote expired
+     * @param clubMember the club member that pays the expired storage quote or remove the boat with expired quote
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean updateNotificationStorage(ClubMember clubMember){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1254,6 +1357,11 @@ public class Client {
     }
 
 
+    /**
+     * Method used for deleting the notification of membership quote expired of specific club member
+     * @param clubMember the specific club member
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean deleteNotificationMembership(ClubMember clubMember){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1296,6 +1404,10 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting the list of all club member
+     * @return the list of all club member
+     */
     public List<ClubMember> getAllClubMember(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1335,6 +1447,10 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting the list of all boat
+     * @return the list of all boat
+     */
     public List<Boat> getAllBoats(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
@@ -1374,6 +1490,10 @@ public class Client {
     }
 
 
+    /**
+     * Method used for getting the list of all competition
+     * @return the list of all competition
+     */
     public List<Competition> getAllCompetitions(){
         try {
             Socket client = new Socket(SERVER_HOST, SERVER_PORT);
