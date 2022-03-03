@@ -57,34 +57,40 @@ public class CompetitionRegisterListController {
     /**
      * Method used to set TableView cells
      */
-    private void setTableView(){
-        tableViewCompetitionsRegister.getItems().clear();
+    private void setTableView() {
+        try {
+            tableViewCompetitionsRegister.getItems().clear();
 
-        TableColumn<CompetitionRegister, String> C1 = new TableColumn("ID REGISTRO GARE");
-        C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
-        C1.setStyle("-fx-alignment: CENTER;");
-        TableColumn<CompetitionRegister, String> C2 = new TableColumn("ID GARA");
-        C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdCompetition())));
-        C2.setStyle("-fx-alignment: CENTER;");
-        TableColumn<CompetitionRegister, String> C3 = new TableColumn("ID BARCA");
-        C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdBoat())));
-        C3.setStyle("-fx-alignment: CENTER;");
-        TableColumn<CompetitionRegister, String> C4 = new TableColumn("ID SOCIO");
-        C4.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getIdClubMember())));
-        C4.setStyle("-fx-alignment: CENTER;");
-        TableColumn<CompetitionRegister, String> C5 = new TableColumn("METODO PAGAMENTO");
-        C5.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getPaymentMethod())));
-        C5.setStyle("-fx-alignment: CENTER;");
+            TableColumn<CompetitionRegister, String> C1 = new TableColumn("ID REGISTRO GARE");
+            C1.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
+            C1.setStyle("-fx-alignment: CENTER;");
+            TableColumn<CompetitionRegister, String> C2 = new TableColumn("ID GARA");
+            C2.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getIdCompetition())));
+            C2.setStyle("-fx-alignment: CENTER;");
+            TableColumn<CompetitionRegister, String> C3 = new TableColumn("ID BARCA");
+            C3.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getIdBoat())));
+            C3.setStyle("-fx-alignment: CENTER;");
+            TableColumn<CompetitionRegister, String> C4 = new TableColumn("ID SOCIO");
+            C4.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getIdClubMember())));
+            C4.setStyle("-fx-alignment: CENTER;");
+            TableColumn<CompetitionRegister, String> C5 = new TableColumn("METODO PAGAMENTO");
+            C5.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getPaymentMethod())));
+            C5.setStyle("-fx-alignment: CENTER;");
 
-        C1.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        C2.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        C3.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        C4.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        C5.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        C5.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
-        tableViewCompetitionsRegister.getColumns().addAll(C1, C2, C3, C4, C5);
+            C1.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            C2.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            C3.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            C4.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            C5.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            C5.prefWidthProperty().bind(tableViewCompetitionsRegister.widthProperty().divide(5));
+            tableViewCompetitionsRegister.getColumns().addAll(C1, C2, C3, C4, C5);
 
-        tableViewCompetitionsRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllCompetitionRegister())));
+            tableViewCompetitionsRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllCompetitionRegister())));
+        }catch (Exception e){
+            System.out.println(e.toString());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading all competition register...try later");
+            alert.showAndWait();
+        }
     }
 
     /**

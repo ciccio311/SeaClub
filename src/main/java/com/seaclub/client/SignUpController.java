@@ -54,12 +54,18 @@ public class SignUpController {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 LoginController hc = fxmlLoader.getController();
-                hc.isFirstLogin(Client.getInstance().getMemberByCF(clubMember));
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-                Stage stage2 = (Stage) btnSignUp.getScene().getWindow();
-                stage2.close();
+                clubMember = Client.getInstance().getMemberByCF(clubMember);
+                if(clubMember!=null) {
+                    hc.isFirstLogin(clubMember);
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Stage stage2 = (Stage) btnSignUp.getScene().getWindow();
+                    stage2.close();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error for uploading your information!");
+                    alert.showAndWait();
+                }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Already exist an user with the same CF!");
                 alert.showAndWait();

@@ -70,7 +70,10 @@ public class StorageQuoteController {
             if(Client.getInstance().addStorageRegister(storageRegister)){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment successfull!");
                 alert.showAndWait();
-                Client.getInstance().updateNotificationStorage(clubMember);
+                if(Client.getInstance().updateNotificationStorage(clubMember)){
+                    Alert alerts = new Alert(Alert.AlertType.ERROR, "Notification not updated!");
+                    alerts.showAndWait();
+                }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.showAndWait();
@@ -143,15 +146,7 @@ public class StorageQuoteController {
     }
 
     protected void setView(){
-        //boatComboBox.getItems().clear();
-
         List<Boat> expiredBoat = new ArrayList<Boat>();
-/*
-        for(var x:clubMember.getBoats()){
-            if(isDateExpired(x)){
-                expiredBoat.add(x);
-            }
-        }*/
 
         for(var i:clubMember.getBoatExpired()){
             String infoItem = i.getId()+" "+i.getName();

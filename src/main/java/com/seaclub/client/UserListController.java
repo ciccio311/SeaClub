@@ -63,37 +63,43 @@ public class UserListController {
      * Method used to set TableView cells
      */
     private void setTableView(){
-        tableViewUsers.getItems().clear();
+        try{
+            tableViewUsers.getItems().clear();
 
-        TableColumn<ClubMember, String> C1 = new TableColumn("ID SOCIO");
-        C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
-        C1.setStyle("-fx-alignment: CENTER;");
-        TableColumn<ClubMember, String> C2 = new TableColumn("CF");
-        C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getCF())));
-        C2.setStyle("-fx-alignment: CENTER;");
-        TableColumn<ClubMember, String> C3 = new TableColumn("DIPENDENTE");
-        C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDipendente())));
-        C3.setStyle("-fx-alignment: CENTER;");
-        TableColumn<ClubMember, String> C4 = new TableColumn("NOME");
-        C4.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getName())));
-        C4.setStyle("-fx-alignment: CENTER;");
-        TableColumn<ClubMember, String> C5 = new TableColumn("COGNOME");
-        C5.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getSurname())));
-        C5.setStyle("-fx-alignment: CENTER;");
-        TableColumn<ClubMember, String> C6 = new TableColumn("INDIRIZZO");
-        C6.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getAddress())));
-        C6.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C1 = new TableColumn("ID SOCIO");
+            C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
+            C1.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C2 = new TableColumn("CF");
+            C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getCF())));
+            C2.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C3 = new TableColumn("DIPENDENTE");
+            C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDipendente())));
+            C3.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C4 = new TableColumn("NOME");
+            C4.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getName())));
+            C4.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C5 = new TableColumn("COGNOME");
+            C5.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getSurname())));
+            C5.setStyle("-fx-alignment: CENTER;");
+            TableColumn<ClubMember, String> C6 = new TableColumn("INDIRIZZO");
+            C6.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getAddress())));
+            C6.setStyle("-fx-alignment: CENTER;");
 
-        C1.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C2.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C3.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C4.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C5.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C5.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        C6.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
-        tableViewUsers.getColumns().addAll(C1, C2, C3, C4, C5, C6);
+            C1.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C2.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C3.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C4.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C5.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C5.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            C6.prefWidthProperty().bind(tableViewUsers.widthProperty().divide(6));
+            tableViewUsers.getColumns().addAll(C1, C2, C3, C4, C5, C6);
 
-        tableViewUsers.setItems((FXCollections.observableArrayList(Client.getInstance().getAllClubMember())));
+            tableViewUsers.setItems((FXCollections.observableArrayList(Client.getInstance().getAllClubMember())));
+        }catch(Exception e){
+            System.out.println(e.toString());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading all club member...");
+            alert.showAndWait();
+        }
     }
 
     /**

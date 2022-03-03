@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -76,26 +73,39 @@ public class MembershipRegisterController {
         C3.setStyle("-fx-alignment: CENTER;");
 
         if(this.clubMember.getDipendente() == 1){
-            //SE DIPENDENTE GET ALL MEMBERSHIP REGISTER
-            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
-            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
-            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
-            tableViewRegister.getColumns().addAll(C1, C2, C3);
-            tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllMembershipQuoteRegister())));
+            try {
+                //SE DIPENDENTE GET ALL MEMBERSHIP REGISTER
+                C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
+                C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
+                C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(3));
+                tableViewRegister.getColumns().addAll(C1, C2, C3);
+
+                tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllMembershipQuoteRegister())));
+            }catch (Exception e){
+                System.out.println(e.toString());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading all membership quote register...try later!");
+                alert.showAndWait();
+            }
         }
         else {
-            //SE club member GET MEMBERSHIP REGISTER BY CLUB MEMBER ID
-            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
-            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
-            tableViewRegister.getColumns().addAll(C2, C3);
-            List<MembershipRegister> reg = new ArrayList<MembershipRegister>();
-            for(var x : Client.getInstance().getAllMembershipQuoteRegister()){
-                if(x.getIdClubMember() == this.clubMember.getId()){
-                    reg.add(x);
+            try {
+                //SE club member GET MEMBERSHIP REGISTER BY CLUB MEMBER ID
+                C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
+                C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(2));
+                tableViewRegister.getColumns().addAll(C2, C3);
+                List<MembershipRegister> reg = new ArrayList<MembershipRegister>();
+                for (var x : Client.getInstance().getAllMembershipQuoteRegister()) {
+                    if (x.getIdClubMember() == this.clubMember.getId()) {
+                        reg.add(x);
+                    }
                 }
-            }
 
-            tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
+                tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
+            }catch(Exception e){
+                System.out.println(e.toString());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading your membership quote register...try later!");
+                alert.showAndWait();
+            }
         }
     }
 }

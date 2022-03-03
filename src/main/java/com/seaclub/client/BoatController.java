@@ -47,15 +47,20 @@ public class BoatController {
                 b.setName(name.getText());
                 b.setWidth(Float.valueOf(width.getText()));
                 b.setIdClubMember(this.clubMember.getId());
-                Client.getInstance().addNewBoat(b);
+                if(Client.getInstance().addNewBoat(b)) {
 
-                this.clubMember = Client.getInstance().updateClubMember(clubMember);
+                    this.clubMember = Client.getInstance().updateClubMember(clubMember);
+                    if(this.clubMember!=null) {
+                        tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
+                        tableViewBoats.refresh();
 
-                tableViewBoats.setItems(FXCollections.observableList((this.clubMember.getBoats())));
-                tableViewBoats.refresh();
-
-                name.setText("");
-                width.setText("");
+                        name.setText("");
+                        width.setText("");
+                    }else{
+                        throw new Exception("Info not updated... try later!");
+                    }
+                }else
+                    throw new Exception("Something went wrong... try later!");
             }catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Insert length with dot!");
                 alert.showAndWait();
@@ -120,11 +125,15 @@ public class BoatController {
 
                                 if(Client.getInstance().deleteBoat(boat)){
                                     clubMember.getBoats().remove(boat);;
-                                    Client.getInstance().updateNotificationStorage(clubMember);
-                                    tableViewBoats.getItems().remove(boat);
-                                    tableViewBoats.refresh();
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat deleted!");
-                                    alert.showAndWait();
+                                    if(Client.getInstance().updateNotificationStorage(clubMember)) {
+                                        tableViewBoats.getItems().remove(boat);
+                                        tableViewBoats.refresh();
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Boat deleted!");
+                                        alert.showAndWait();
+                                    }else{
+                                        Alert alert = new Alert(Alert.AlertType.ERROR, "Notificatioin not update...");
+                                        alert.showAndWait();
+                                    }
                                 }else{
                                     Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                                     alert.showAndWait();

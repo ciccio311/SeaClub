@@ -79,6 +79,9 @@ public class CompetitionListController {
                 competition.setPrice(Float.valueOf(priceTextField.getText()));
                 if(Client.getInstance().addNewCompetition(competition)){
                     setTableView();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Competition NOT added! Try later");
+                    alert.showAndWait();
                 }
             }catch (Exception e){
                 System.out.println("Error: "+e.toString());
@@ -105,23 +108,30 @@ public class CompetitionListController {
      * Method used for setting the TableView information
      */
     private void setTableView(){
-        tableViewCompetitions.getItems().clear();
+        try {
+            tableViewCompetitions.getItems().clear();
 
-        TableColumn<Competition, String> C1 = new TableColumn("ID GARA");
-        C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
-        C1.setStyle("-fx-alignment: CENTER;");
-        TableColumn<Competition, String> C2 = new TableColumn("PREZZO");
-        C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getPrice()+"€")));
-        C2.setStyle("-fx-alignment: CENTER;");
-        TableColumn<Competition, String> C3 = new TableColumn("DATA");
-        C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDate())));
-        C3.setStyle("-fx-alignment: CENTER;");
+            TableColumn<Competition, String> C1 = new TableColumn("ID GARA");
+            C1.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getId())));
+            C1.setStyle("-fx-alignment: CENTER;");
+            TableColumn<Competition, String> C2 = new TableColumn("PREZZO");
+            C2.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getPrice()+"€")));
+            C2.setStyle("-fx-alignment: CENTER;");
+            TableColumn<Competition, String> C3 = new TableColumn("DATA");
+            C3.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getDate())));
+            C3.setStyle("-fx-alignment: CENTER;");
 
-        C1.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
-        C2.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
-        C3.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
-        tableViewCompetitions.getColumns().addAll(C1, C2, C3);
+            C1.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
+            C2.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
+            C3.prefWidthProperty().bind(tableViewCompetitions.widthProperty().divide(3));
+            tableViewCompetitions.getColumns().addAll(C1, C2, C3);
 
-        tableViewCompetitions.setItems((FXCollections.observableArrayList(Client.getInstance().getAllCompetitions())));
+
+            tableViewCompetitions.setItems((FXCollections.observableArrayList(Client.getInstance().getAllCompetitions())));
+        }catch(Exception e){
+            System.out.println(e.toString());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading all competition... try later");
+            alert.showAndWait();
+        }
     }
 }

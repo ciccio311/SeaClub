@@ -147,17 +147,21 @@ public class CompetitionController {
                         competitionRegister.setPaymentMethod("Card");
                     if (BanckTransferRadioButton.isSelected())
                         competitionRegister.setPaymentMethod("Bank transfer");
-                    Client.getInstance().addBoatToCompetition(competitionRegister);
+                    if(Client.getInstance().addBoatToCompetition(competitionRegister)) {
 
-                    DateComboBox.valueProperty().set(null);
-                    BoatComboBox.valueProperty().set(null);
-                    CardRadioButton.setSelected(false);
-                    BanckTransferRadioButton.setSelected(false);
-                    RacePriceLabel.setText("NA");
+                        DateComboBox.valueProperty().set(null);
+                        BoatComboBox.valueProperty().set(null);
+                        CardRadioButton.setSelected(false);
+                        BanckTransferRadioButton.setSelected(false);
+                        RacePriceLabel.setText("NA");
 
-                    setTableView();
-                    tableViewCompetition.refresh();
-                    setView();
+                        setTableView();
+                        tableViewCompetition.refresh();
+                        setView();
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Boat NOT registered! Try later...");
+                        alert.showAndWait();
+                    }
                 }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Membership quote expired!");
@@ -180,8 +184,12 @@ public class CompetitionController {
 
         register = Client.getInstance().getCompetitionRegisterByMemberId(this.clubMember.getId());
 
-
-        tableViewCompetition.setItems((FXCollections.observableArrayList(register)));
+        if(register!=null)
+            tableViewCompetition.setItems((FXCollections.observableArrayList(register)));
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading your competition register... try later");
+            alert.showAndWait();
+        }
 
     }
 
@@ -195,28 +203,31 @@ public class CompetitionController {
             setTableView();
             List<Competition> competitions = new ArrayList<Competition>();
             competitions = Client.getInstance().getCompetitionAvailable(register);
+            if(competitions!=null) {
+                //default time zone
+                ZoneId defaultZoneId = ZoneId.systemDefault();
 
-            //default time zone
-            ZoneId defaultZoneId = ZoneId.systemDefault();
+                LocalDate now = LocalDate.now();
 
-            LocalDate now = LocalDate.now();
+                Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
 
-            Date dateNow = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
-
-            for (var comp : competitions) {
-                if (comp.getDate().after(dateNow)) {
-                    String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
-                    DateComboBox.getItems().add(info);
+                for (var comp : competitions) {
+                    if (comp.getDate().after(dateNow)) {
+                        String info = comp.getId() + " " + dateFormat.format(comp.getDate()) + " " + comp.getPrice() + "€";
+                        DateComboBox.getItems().add(info);
+                    }
                 }
+                BoatComboBox.getItems().clear();
+                for (var boat : clubMember.getBoatAvailabe()) {
+                    String boatInfo = boat.getId() + " " + boat.getName();
+                    BoatComboBox.getItems().add(boatInfo);
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading your available competition... try later");
+                alert.showAndWait();
             }
-            BoatComboBox.getItems().clear();
-            for (var boat : clubMember.getBoatAvailabe()) {
-                String boatInfo = boat.getId() + " " + boat.getName();
-                BoatComboBox.getItems().add(boatInfo);
-            }
-
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.toString());
         }
     }
 

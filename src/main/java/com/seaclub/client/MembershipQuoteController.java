@@ -85,7 +85,10 @@ public class MembershipQuoteController {
             if(Client.getInstance().addMembershipRegisterQuote(mr)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment success!");
                 alert.showAndWait();
-                Client.getInstance().deleteNotificationMembership(clubMember);
+                if(Client.getInstance().deleteNotificationMembership(clubMember)==false){
+                    Alert alerts = new Alert(Alert.AlertType.ERROR, "Notification not updated!");
+                    alerts.showAndWait();
+                }
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
@@ -155,29 +158,33 @@ public class MembershipQuoteController {
     }
 
     private void setView(){
-        membershipPriceLabel.setText("900 €");
+        try {
+            membershipPriceLabel.setText("900 €");
 
-        MembershipRegister membershipRegister = clubMember.getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
-        Integer check = clubMember.isMembershipQuoteExpired();
-        if(check != null) {
-            if (check == 1) {
-                //expired
-                expirationLabel.setText("Your membership is expired!");
-            } else if(check==0){
-                //doesn't expired
-                priceLabel.setVisible(false);
-                membershipPriceLabel.setVisible(false);
-                paymentLabel.setVisible(false);
-                CardRadioButton.setVisible(false);
-                BanckTransferRadioButton.setVisible(false);
-                paymentButton.setVisible(false);
-                Date date = membershipRegister.getDatePayment();
-                date.setYear(date.getYear() + 1);
-                expirationLabel.setText("Your membership will expire on: " + date.toString());
+            MembershipRegister membershipRegister = clubMember.getLastPaymentQuote(Client.getInstance().getAllMembershipQuoteRegister());
+            Integer check = clubMember.isMembershipQuoteExpired();
+            if (check != null) {
+                if (check == 1) {
+                    //expired
+                    expirationLabel.setText("Your membership is expired!");
+                } else if (check == 0 && membershipRegister!=null) {
+                    //doesn't expired
+                    priceLabel.setVisible(false);
+                    membershipPriceLabel.setVisible(false);
+                    paymentLabel.setVisible(false);
+                    CardRadioButton.setVisible(false);
+                    BanckTransferRadioButton.setVisible(false);
+                    paymentButton.setVisible(false);
+                    Date date = membershipRegister.getDatePayment();
+                    date.setYear(date.getYear() + 1);
+                    expirationLabel.setText("Your membership will expire on: " + date.toString());
+                }
+            } else {
+                //never payed quote
+                expirationLabel.setText("You have to pay a Membership Fee!");
             }
-        }else{
-            //never payed quote
-            expirationLabel.setText("You have to pay a Membership Fee!");
+        }catch (Exception e){
+            System.out.println(e.toString());
         }
     }
 }

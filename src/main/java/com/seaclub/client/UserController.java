@@ -64,7 +64,7 @@ public class UserController {
         if(!Objects.equals(this.clubMember.getAddress(), AddressTextField.getText()) || !Objects.equals(this.clubMember.getPassword(), PasswordTextField.getText())){
             this.clubMember.setAddress(AddressTextField.getText());
             this.clubMember.setPassword(PasswordTextField.getText());
-            if(Client.getInstance().updateMemberInfo(this.clubMember)== true){
+            if(Client.getInstance().updateMemberInfo(this.clubMember)){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Parameters modified!");
                 alert.showAndWait();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));

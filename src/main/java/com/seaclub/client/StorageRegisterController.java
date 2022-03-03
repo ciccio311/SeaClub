@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -83,33 +80,43 @@ public class StorageRegisterController {
         C5.setStyle("-fx-alignment: CENTER;");
 
         if(this.clubMember.getDipendente() == 1){
-            //SE DIPENDENTE GET ALL STORAGE REGISTER
-            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
-            C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
-            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
-            C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
-            C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
-            tableViewRegister.getColumns().addAll(C1, C2, C3, C4, C5);
+            try {
+                //SE DIPENDENTE GET ALL STORAGE REGISTER
+                C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+                C2.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+                C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+                C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+                C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(5));
+                tableViewRegister.getColumns().addAll(C1, C2, C3, C4, C5);
 
-            tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
-
+                tableViewRegister.setItems((FXCollections.observableArrayList(Client.getInstance().getAllStorageRegisterQuote())));
+            }catch (Exception e){
+                System.out.println(e.toString());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading all storage register...");
+                alert.showAndWait();
+            }
         }
         else {
-            //SE club member GET STORAGE REGISTER BY CLUB MEMBER ID
-            C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
-            C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
-            C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
-            C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
-            tableViewRegister.getColumns().addAll(C1, C3, C4, C5);
-
-            List<StorageRegister> reg = new ArrayList<StorageRegister>();
-            for(var x : Client.getInstance().getAllStorageRegisterQuote()){
-                if(x.getIdClubMember() == this.clubMember.getId()){
-                    reg.add(x);
+            try {
+                //SE club member GET STORAGE REGISTER BY CLUB MEMBER ID
+                C1.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+                C3.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+                C4.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+                C5.prefWidthProperty().bind(tableViewRegister.widthProperty().divide(4));
+                tableViewRegister.getColumns().addAll(C1, C3, C4, C5);
+                List<StorageRegister> reg = new ArrayList<StorageRegister>();
+                for (var x : Client.getInstance().getAllStorageRegisterQuote()) {
+                    if (x.getIdClubMember() == this.clubMember.getId()) {
+                        reg.add(x);
+                    }
                 }
-            }
 
-            tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
+                tableViewRegister.setItems((FXCollections.observableArrayList(reg)));
+            }catch(Exception e){
+                System.out.println(e.toString());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error for downloading your storage register...");
+                alert.showAndWait();
+            }
         }
     }
 }

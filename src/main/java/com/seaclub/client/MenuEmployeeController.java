@@ -102,7 +102,7 @@ public class MenuEmployeeController {
     protected void buttonNotificationOnClick(){
         List<ClubMember> memberExpired = new ArrayList<ClubMember>();
         memberExpired = Client.getInstance().getMemberExpired();
-        if(!(memberExpired.size()==0)) {
+        if(!(memberExpired.size()==0) && memberExpired!=null) {
             for (var x : memberExpired) {
                 NotificationsRegister notificationsRegister = new NotificationsRegister();
                 notificationsRegister.setIdNotification(1);
