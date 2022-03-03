@@ -119,7 +119,6 @@ public class MenuEmployeeController {
 
     /**
      * Method used to manage the pressing of NOTIFICATION button
-     * @throws IOException create Input/Output exception
      */
     @FXML
     protected void buttonNotificationOnClick(){

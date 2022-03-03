@@ -101,7 +101,6 @@ public class StorageQuoteController {
 
     /**
      * Method used to manage the pressing of BOAT button
-     * @throws IOException create Input/Output exception
      */
     @FXML
     protected void OnClickBoat(){
