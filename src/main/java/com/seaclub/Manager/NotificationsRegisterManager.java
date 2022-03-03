@@ -73,11 +73,15 @@ public class NotificationsRegisterManager {
      **/
     public boolean addNewNotificationRegister(NotificationsRegister notificationsRegister){
         try {
-            if(DB.getInstance().addNotificationRegister(notificationsRegister)) {
-                updateList();
-                return true;
+            //l utente 1 è un utente X che usiamo per associare le barche elliminate dagli utenti
+            if(notificationsRegister.getIdMember()!=1) {
+                if (DB.getInstance().addNotificationRegister(notificationsRegister)) {
+                    updateList();
+                    return true;
+                } else
+                    return false;
             }else
-                return false;
+                return true;
         }catch (Exception e){
             System.out.println(e.toString());
             return false;

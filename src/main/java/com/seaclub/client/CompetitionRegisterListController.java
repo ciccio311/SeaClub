@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view CompetitionRegisterList
+ */
 public class CompetitionRegisterListController {
     private ClubMember clubMember;
 
@@ -28,7 +31,7 @@ public class CompetitionRegisterListController {
     private TableView tableViewCompetitionsRegister;
 
     /**
-     * Method used to go back to the previous one view
+     * Method used to manage the pressing of BACK button
      * @throws IOException create Input/Output exception
      */
     @FXML
@@ -46,8 +49,8 @@ public class CompetitionRegisterListController {
     }
 
     /**
-     * First method for initialize the view.
-     * @param clubMember the member that go into this view
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
      */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;

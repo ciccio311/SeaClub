@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view Login
+ */
 public class LoginController {
     @FXML
     private TextField username;
@@ -33,6 +36,10 @@ public class LoginController {
     @FXML
     private Button btnSignup;
 
+    /**
+     * Method used to manage the pressing of LOGIN button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void onLoginButtonClick() throws IOException {
         btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: red; -fx-background-radius: 50;");
@@ -96,6 +103,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of SIGN UP button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void signUpOnClick() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sign up.fxml"));
@@ -109,6 +120,10 @@ public class LoginController {
         stage2.close();
     }
 
+    /**
+     * Method used to set the new club member ID in the textField
+     * @param clubMember is the new club member
+     */
     public void isFirstLogin(ClubMember clubMember){
         username.setText(String.valueOf(clubMember.getId()));
     }

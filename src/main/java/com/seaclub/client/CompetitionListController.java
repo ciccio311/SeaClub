@@ -18,6 +18,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Class to manage the information and action about the view CompetitionList
+ */
 public class CompetitionListController {
     private ClubMember clubMember;
 
@@ -33,6 +36,10 @@ public class CompetitionListController {
     @FXML
     private TableView tableViewCompetitions;
 
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
@@ -47,6 +54,10 @@ public class CompetitionListController {
         stage2.close();
     }
 
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
         setTableView();
@@ -54,7 +65,6 @@ public class CompetitionListController {
 
 
     }
-
 
     /**
      * Method used for adding new competition

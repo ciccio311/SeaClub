@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view StorageRegister
+ */
 public class StorageRegisterController {
     private ClubMember clubMember;
 
@@ -27,7 +30,10 @@ public class StorageRegisterController {
     @FXML
     private TableView tableViewRegister;
 
-
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         if(clubMember.getDipendente()==1){
@@ -55,11 +61,18 @@ public class StorageRegisterController {
         }
     }
 
+    /**
+     * Method used to set the club member for the view
+     * @param cm is the club member
+     */
     public void setClubMember(ClubMember cm){
         this.clubMember = cm;
         setTableView();
     }
 
+    /**
+     * Method used for setting the TableView information
+     */
     private void setTableView(){
         tableViewRegister.getItems().clear();
 

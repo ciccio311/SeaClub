@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class to manage the information and action about the view BoatList
+ */
 public class BoatListController {
     private ClubMember clubMember;
 
@@ -25,6 +28,9 @@ public class BoatListController {
     @FXML
     private TableView tableViewBoats;
 
+    /**
+     * Method used to manage the pressing of BACK button
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
@@ -39,11 +45,18 @@ public class BoatListController {
         stage2.close();
     }
 
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
         setTableView();
     }
 
+    /**
+     * Method used to set the correct value in the tableViewBoats
+     */
     private void setTableView(){
         try {
             tableViewBoats.getItems().clear();

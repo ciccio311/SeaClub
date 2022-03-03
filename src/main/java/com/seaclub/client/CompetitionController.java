@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view Competition
+ */
 public class CompetitionController {
     private ClubMember clubMember;
     private final Boat boatSelected = new Boat();
@@ -50,8 +53,8 @@ public class CompetitionController {
     private List<String> register;
 
     /**
-     * First method for initialize the view.
-     * @param clubMember the member that go into this view
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
      */
     public void setClubMember(ClubMember clubMember) {
         try {
@@ -80,7 +83,7 @@ public class CompetitionController {
     }
 
     /**
-     * Method used to go back to the previous one view
+     * Method used to manage the pressing of BACK button
      * @throws IOException create Input/Output exception
      */
     @FXML
@@ -99,7 +102,7 @@ public class CompetitionController {
     }
 
     /**
-     * Method used to find which date I have selected
+     * Method used to manage the pressing of DATE combo box
      */
     @FXML
     protected void OnClickDate(){
@@ -112,7 +115,7 @@ public class CompetitionController {
     }
 
     /**
-     * Method used to find which boat I have selected
+     * Method used to manage the pressing of BOAT combo box
      */
     @FXML
     protected void OnClickBoat(){
@@ -124,7 +127,7 @@ public class CompetitionController {
     }
 
     /**
-     * Method used to add to the competition register the new subscription to the competition
+     * Method used to manage the pressing of SUBMIT button
      */
     @FXML
     protected void SubmitOnClick() {

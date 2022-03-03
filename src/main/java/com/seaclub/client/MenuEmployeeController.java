@@ -100,7 +100,7 @@ public class MenuEmployeeController {
 
     @FXML
     protected void buttonNotificationOnClick(){
-        List<ClubMember> memberExpired = new ArrayList<ClubMember>();
+        /*List<ClubMember> memberExpired = new ArrayList<ClubMember>();
         memberExpired = Client.getInstance().getMemberExpired();
         if(!(memberExpired.size()==0) && memberExpired!=null) {
             for (var x : memberExpired) {
@@ -127,14 +127,23 @@ public class MenuEmployeeController {
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "There aren't member with quote expired!");
             alert.showAndWait();
+        }*/
+        boolean notifyBoatExpired = Client.getInstance().SendNotificationBoatExpired();
+        boolean notifyMembershipExpired = Client.getInstance().SendNotificationMembershipExpired();
+        Alert alert;
+        if(notifyMembershipExpired){
+            alert = new Alert(Alert.AlertType.INFORMATION, "All new notifications membership send!");
         }
-
-        if(Client.getInstance().SendNotificationBoatExpired()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Notifications storage send!");
+        else{
+            alert = new Alert(Alert.AlertType.ERROR, "Membership notification NOT send!");
+        }
+        alert.showAndWait();
+        if(notifyBoatExpired){
+            alert = new Alert(Alert.AlertType.INFORMATION, "All new notifications boat expired send!");
             alert.showAndWait();
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+            alert = new Alert(Alert.AlertType.ERROR, "Boat notification NOT send!");
             alert.showAndWait();
         }
     }

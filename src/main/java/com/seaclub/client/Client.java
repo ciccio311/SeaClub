@@ -261,6 +261,59 @@ public class Client {
 
 
     /**
+     * Used to send all Notification about membership expired to all users.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean SendNotificationMembershipExpired() {
+        try {
+            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
+
+            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+            ObjectInputStream is = null;
+
+            while(true) {
+                Message request = new Message();
+                request.setAction(request.getACTION_SEND_NOTIFICATIONS_MEMBERSHIP_EXPIRED());
+
+                System.out.println("Client sends: " + request.getAction()  + " action to Server");
+
+                os.writeObject(request);
+                os.flush();
+
+                if(is == null) {
+                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+                }
+
+                Object o = is.readObject();
+
+                if(o instanceof Message) {
+                    Message response = (Message) o;
+
+                    System.out.println(" and received response: " + response.getAction() + " action from Server");
+
+                    client.close();
+                    if((Boolean) response.getValue()){
+                        return true;
+                    }else
+                        return false;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if(e instanceof ConnectException) {
+                System.out.println("Server is in down! Please retry...");
+                return false;
+            }
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    /**
      * Used add new Notification register to database.
      * @param notificationsRegister Represents the new Notification register to add.
      * @return returns true if the executive was successful.

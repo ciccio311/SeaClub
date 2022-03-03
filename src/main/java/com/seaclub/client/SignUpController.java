@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class to manage the information and action about the view SIGNUP
+ */
 public class SignUpController {
     @FXML
     private Button btnSignUp;
@@ -32,6 +35,10 @@ public class SignUpController {
     @FXML
     private TextField password;
 
+    /**
+     * Method used to manage the pressing of SIGNUP button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void SignUpOnClick() throws IOException {
         if(name.getText().length()==0 ||

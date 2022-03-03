@@ -33,7 +33,7 @@ public class UserListController {
     private TableView tableViewUsers;
 
     /**
-     * Method used to go back to the previous one view
+     * Method used to manage the pressing of BACK button
      * @throws IOException create Input/Output exception
      */
     @FXML
@@ -51,8 +51,8 @@ public class UserListController {
     }
 
     /**
-     * First method for initialize the view.
-     * @param clubMember the member that go into this view
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
      */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
@@ -60,7 +60,7 @@ public class UserListController {
     }
 
     /**
-     * Method used to set TableView cells
+     * Method used for setting the TableView information
      */
     private void setTableView(){
         try{

@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view MembershipQuote
+ */
 public class MembershipQuoteController {
 
     private ClubMember clubMember;
@@ -53,7 +56,10 @@ public class MembershipQuoteController {
     @FXML
     private Button paymentButton;
 
-
+    /**
+     * Method used to manage the pressing of PAYMENT button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void onPaymentButtonClick() throws IOException {
         MembershipRegister mr = new MembershipRegister();
@@ -108,6 +114,10 @@ public class MembershipQuoteController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of STORAGE button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void onStorageQuoteButtonClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageQuote.fxml"));
@@ -122,6 +132,10 @@ public class MembershipQuoteController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of HISTORY button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void onHistoryButtonClick() throws IOException {
 
@@ -137,6 +151,10 @@ public class MembershipQuoteController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -151,12 +169,18 @@ public class MembershipQuoteController {
         stage2.close();
     }
 
-
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
         setView();
     }
 
+    /**
+     * Method used to set parameters of the view
+     */
     private void setView(){
         try {
             membershipPriceLabel.setText("900 €");

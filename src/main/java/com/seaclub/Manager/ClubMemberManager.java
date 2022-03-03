@@ -3,6 +3,7 @@ package com.seaclub.Manager;
 import com.seaclub.Model.ClubMember;
 import com.seaclub.Model.MembershipRegister;
 import com.seaclub.Model.NotificationsRegister;
+import com.seaclub.client.Client;
 import com.seaclub.server.DB;
 
 import java.time.LocalDate;
@@ -120,36 +121,41 @@ public class ClubMemberManager {
      * @return the list of club member with the quote membership expired
      */
     public List<ClubMember> clubMemberExpired(){
-        updateList();
-        MembershipRegister membershipRegister = new MembershipRegister();
-        List<NotificationsRegister> notificationsRegisters = new ArrayList<NotificationsRegister>();
-        NotificationsRegisterManager.getInstance().updateList();
-        MembershipRegisterManager.getInstance().updateList();
-        List<ClubMember> expired = new ArrayList<ClubMember>();
-        notificationsRegisters = NotificationsRegisterManager.getInstance().getRegisters();
+        try {
+            updateList();
+            MembershipRegister membershipRegister = new MembershipRegister();
+            List<NotificationsRegister> notificationsRegisters = new ArrayList<NotificationsRegister>();
+            NotificationsRegisterManager.getInstance().updateList();
+            MembershipRegisterManager.getInstance().updateList();
+            List<ClubMember> expired = new ArrayList<ClubMember>();
+            notificationsRegisters = NotificationsRegisterManager.getInstance().getRegisters();
 
-        for(var x:this.members){
-            membershipRegister = x.getLastPaymentQuote(MembershipRegisterManager.getInstance().getMembershipRegisters());
-            if(membershipRegister!=null){
-                //default time zone
-                ZoneId defaultZoneId = ZoneId.systemDefault();
+            for (var x : this.members) {
+                membershipRegister = x.getLastPaymentQuote(MembershipRegisterManager.getInstance().getMembershipRegisters());
+                if (membershipRegister != null) {
+                    //default time zone
+                    ZoneId defaultZoneId = ZoneId.systemDefault();
 
-                LocalDate now = LocalDate.now();
-                LocalDate dateMinusYear = now.minusYears(1);
-                Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
+                    LocalDate now = LocalDate.now();
+                    LocalDate dateMinusYear = now.minusYears(1);
+                    Date dateNow = Date.from(dateMinusYear.atStartOfDay(defaultZoneId).toInstant());
 
-                if (membershipRegister.getDatePayment().before(dateNow)) {
-                    //expired
+                    if (membershipRegister.getDatePayment().before(dateNow)) {
+                        //expired
+                        expired.add(x);
+                    }
+                } else {
                     expired.add(x);
                 }
-            }else{
-                expired.add(x);
             }
+            for (var notify : notificationsRegisters) {
+                expired.removeIf(n -> (n.getId() == notify.getIdMember() && notify.getIdNotification() == 1));
+            }
+            return expired;
+        }catch(Exception e){
+            System.out.println(e.toString());
+            return null;
         }
-        for(var notify:notificationsRegisters){
-            expired.removeIf(n -> (n.getId() == notify.getIdMember() && notify.getIdNotification()==1));
-        }
-        return expired;
     }
 
     /**
@@ -179,6 +185,40 @@ public class ClubMemberManager {
                 return x;
         }
         return null;
+    }
+
+    /**
+     * Used to send all Notification boat expired to all users.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean sendNotificationMembershipExpired(){
+        try {
+            List<ClubMember> memberExpired = new ArrayList<ClubMember>();
+            memberExpired = clubMemberExpired();
+            boolean check = false;
+            if (!(memberExpired.size() == 0) && memberExpired != null) {
+                for (var x : memberExpired) {
+                    NotificationsRegister notificationsRegister = new NotificationsRegister();
+                    notificationsRegister.setIdNotification(1);
+                    notificationsRegister.setIdMember(x.getId());
+                    notificationsRegister.setInfo("");
+                    java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+                    notificationsRegister.setDateSender(sqlDate);
+
+                    check = NotificationsRegisterManager.getInstance().addNewNotificationRegister(notificationsRegister);
+                }
+                if (check)
+                    return true;
+                else
+                    return false;
+            } else
+                return false;
+        }catch(Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
     }
 
 

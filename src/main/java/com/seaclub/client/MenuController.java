@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class to manage the information and action about the view MENU
+ */
 public class MenuController {
 
         private ClubMember clubMember;
@@ -37,6 +40,10 @@ public class MenuController {
         @FXML
         private Button btnLogout;
 
+        /**
+         * Method used to manage the pressing of LOGOUT button
+         * @throws IOException create Input/Output exception
+         */
         @FXML
         protected void logoutOnClick() throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -50,6 +57,10 @@ public class MenuController {
 
         }
 
+        /**
+         * Method used to manage the pressing of COMPETITION button
+         * @throws IOException create Input/Output exception
+         */
         @FXML
         protected void onCompetitionButtonClick()throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Competition.fxml"));
@@ -63,6 +74,10 @@ public class MenuController {
                 stage2.close();
         }
 
+        /**
+         * Method used to manage the pressing of QUOTE button
+         * @throws IOException create Input/Output exception
+         */
         @FXML
         protected void buttonQuotOnClick()throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipQuote.fxml"));
@@ -75,6 +90,10 @@ public class MenuController {
                 Stage stage2 = (Stage) buttonQuote.getScene().getWindow();
                 stage2.close();        }
 
+        /**
+         * Method used to manage the pressing of BOAT button
+         * @throws IOException create Input/Output exception
+         */
         @FXML
         protected void buttonBoatOnClick()throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Boat.fxml"));
@@ -89,6 +108,10 @@ public class MenuController {
                 stage2.close();
         }
 
+        /**
+         * Method used to manage the pressing of USER button
+         * @throws IOException create Input/Output exception
+         */
         @FXML
         protected void buttonUserOnClick()throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("User.fxml"));
@@ -103,11 +126,18 @@ public class MenuController {
                 stage2.close();
         }
 
+        /**
+         * Method used to set the club member for the view
+         * @param clubMember is the club member
+         */
         public void setClubMember(ClubMember clubMember) {
                 this.clubMember = clubMember;
                 showUser();
         }
 
+        /**
+         * Method used to set the text of label user with the name of the club member
+         */
         public void showUser(){
             labelUser.setText("Ciao "+clubMember.getName());
         }

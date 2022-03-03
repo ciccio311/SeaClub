@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view StorageQuote
+ */
 public class StorageQuoteController {
 
     private Boat boatSelected = new Boat();
@@ -42,7 +45,10 @@ public class StorageQuoteController {
 
     private ClubMember clubMember;
 
-
+    /**
+     * Method used to manage the pressing of PAY button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void payOnClick() throws IOException {
         if(BoatComboBox.getSelectionModel().isEmpty() ||
@@ -70,7 +76,7 @@ public class StorageQuoteController {
             if(Client.getInstance().addStorageRegister(storageRegister)){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment successfull!");
                 alert.showAndWait();
-                if(Client.getInstance().updateNotificationStorage(clubMember)){
+                if(!(Client.getInstance().updateNotificationStorage(clubMember))){
                     Alert alerts = new Alert(Alert.AlertType.ERROR, "Notification not updated!");
                     alerts.showAndWait();
                 }
@@ -93,6 +99,10 @@ public class StorageQuoteController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of BOAT button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void OnClickBoat(){
         String selectedItem = (String) BoatComboBox.getSelectionModel().getSelectedItem();
@@ -106,6 +116,10 @@ public class StorageQuoteController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of HISTORY button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void onHistoryButtonClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageRegister.fxml"));
@@ -120,6 +134,10 @@ public class StorageQuoteController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipQuote.fxml"));
@@ -133,7 +151,10 @@ public class StorageQuoteController {
         stage2.close();
     }
 
-
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         try {
             this.clubMember = clubMember;
@@ -145,6 +166,9 @@ public class StorageQuoteController {
         }
     }
 
+    /**
+     * Method used to set parameters of the view
+     */
     protected void setView(){
         List<Boat> expiredBoat = new ArrayList<Boat>();
 
@@ -155,6 +179,11 @@ public class StorageQuoteController {
 
     }
 
+    /**
+     * Method used to know if the storage payment of a specific boat is expired
+     * @param boat is the specific boat
+     * @return TRUE->expired; FALSE->not expired;
+     */
     private boolean isDateExpired(Boat boat){
         //default time zone
         ZoneId defaultZoneId = ZoneId.systemDefault();

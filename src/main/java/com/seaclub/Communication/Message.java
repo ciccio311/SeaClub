@@ -30,7 +30,7 @@ public class Message implements Serializable {
 
     private String ACTION_ADD_MEMBERSHIP_REGISTER_QUOTE = "AddMembershipRegisterQuote";
 
-    private String ACTION_UPDATE_USER_INFO ="UpdateUserInfo";
+    protected final String ACTION_UPDATE_USER_INFO ="UpdateUserInfo";
 
     private String ACTION_GET_STORAGE_REGISTER_QUOTE = "GetStorageRegisterQuote";
 
@@ -61,6 +61,8 @@ public class Message implements Serializable {
     private String ACTION_COMPETITION_REGISTER_BY_ID_COMP = "getCompetitionRegisterByIdComp";
 
     private String ACTION_GE_COMPETITION_AVAILABLE = "getCompetitionAvilableByIdMember";
+
+    protected final String ACTION_SEND_NOTIFICATIONS_MEMBERSHIP_EXPIRED ="SendNotificationsMembershipExpired";
 
     private static final long serialVersionUID = 1L;
 
@@ -231,6 +233,10 @@ public class Message implements Serializable {
 
     public String getACTION_GE_COMPETITION_AVAILABLE() {
         return ACTION_GE_COMPETITION_AVAILABLE;
+    }
+
+    public String getACTION_SEND_NOTIFICATIONS_MEMBERSHIP_EXPIRED() {
+        return ACTION_SEND_NOTIFICATIONS_MEMBERSHIP_EXPIRED;
     }
 
     public String getACTION_COMPETITION_REGISTER_BY_ID_COMP() {

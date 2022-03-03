@@ -17,6 +17,9 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 
+/**
+ * Class to manage the information and action about the view Boat
+ */
 public class BoatController {
 
     @FXML
@@ -33,6 +36,10 @@ public class BoatController {
 
     private ClubMember clubMember;
 
+    /**
+     * Method used to manage the pressing of ADD button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void addOnClick()throws IOException {
         if(name.getText().length()==0 || width.getText().length()==0 || Float.valueOf(width.getText())<1)
@@ -68,6 +75,10 @@ public class BoatController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -83,6 +94,10 @@ public class BoatController {
 
     }
 
+    /**
+     * Method used to set the club member for the view
+     * @param cm is the club member
+     */
     public void setClubMember(ClubMember cm){
         this.clubMember = cm;
 
@@ -104,7 +119,10 @@ public class BoatController {
         tableViewBoats.setItems(FXCollections.observableList((cm.getBoats())));
     }
 
-
+    /**
+     * Method used to add the DELETE button in the table view
+     * @param tableViewBoats is the table view
+     */
     private void addButtonsToTable(TableView<Boat> tableViewBoats) {
         TableColumn<Boat, Void> colBtnDelete = new TableColumn("Delete");
         colBtnDelete.setStyle("-fx-alignment: CENTER;");

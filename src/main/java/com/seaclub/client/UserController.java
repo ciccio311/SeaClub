@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Class to manage the information and action about the view User
+ */
 public class UserController {
 
     @FXML
@@ -35,6 +38,10 @@ public class UserController {
 
     private ClubMember clubMember;
 
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
         memberNameLabel.setText(this.clubMember.getName());
@@ -45,6 +52,10 @@ public class UserController {
         PasswordTextField.setText(this.clubMember.getPassword());
     }
 
+    /**
+     * Method used to manage the pressing of BACK button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void backOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -59,6 +70,10 @@ public class UserController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of MODIFY button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void modifyOnClick() throws IOException {
         if(!Objects.equals(this.clubMember.getAddress(), AddressTextField.getText()) || !Objects.equals(this.clubMember.getPassword(), PasswordTextField.getText())){

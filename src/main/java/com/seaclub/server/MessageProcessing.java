@@ -102,6 +102,8 @@ public class MessageProcessing {
                 return getCompetitionRegisterByIdComp(mex);
             if(mex.getAction().equals(mex.getACTION_GE_COMPETITION_AVAILABLE()))
                 return getCompetitionAvailableByMemberId(mex);
+            if(mex.getAction().equals(mex.getACTION_SEND_NOTIFICATIONS_MEMBERSHIP_EXPIRED()))
+                return sendNotificationsMembershipExpired(mex);
             return null;
         }catch (Exception e){
             System.out.println(e.toString());
@@ -386,9 +388,12 @@ public class MessageProcessing {
      */
     public Message updateNotificationStorage(Message mex){
         if(!(mex.getValue() instanceof ClubMember))
-            return new Message("IMPOSSILE TO Update notification storage!",null);
-
-        return new Message("Update notification storage", NotificationsRegisterManager.getInstance().updateNotificationStorage((ClubMember) mex.getValue()));
+            return new Message("IMPOSSILE TO Update notification storage!",false);
+        boolean check=NotificationsRegisterManager.getInstance().updateNotificationStorage((ClubMember) mex.getValue());
+        if(check)
+            return new Message("Update notification storage",check);
+        else
+            return new Message("NOT Updated notification storage",check);
     }
 
     /**
@@ -451,6 +456,17 @@ public class MessageProcessing {
             return new Message("Get competition available!",competitions);
         else
             return new Message("Impossible get competition available!",null);
+    }
+
+    /**
+     * @param mex is the request from the client for sending a new notification membership expired
+     * @return the correct message with the value of the operation (TRUE->successfully; FALSE->not successfully)
+     */
+    public Message sendNotificationsMembershipExpired(Message mex){
+        if(ClubMemberManager.getInstance().sendNotificationMembershipExpired())
+            return new Message("Notifications send!",true);
+        else
+            return new Message("Notifications NOT send!",false);
     }
 
 }
