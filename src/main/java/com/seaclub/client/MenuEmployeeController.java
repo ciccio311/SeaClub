@@ -15,6 +15,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to manage the information and action about the view MENUEMPLOYEE
+ */
 public class MenuEmployeeController {
     private ClubMember clubMember;
 
@@ -44,6 +47,10 @@ public class MenuEmployeeController {
     @FXML
     private Button buttonCompetitionRegisterList;
 
+    /**
+     * Method used to manage the pressing of LOGOUT button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void logoutOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -56,6 +63,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of USERS button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonUsersOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserList.fxml"));
@@ -70,6 +81,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of BOATS button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonBoatsOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoatList.fxml"));
@@ -84,6 +99,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of COMPETITIONS button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonCompetitionsOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CompetitionList.fxml"));
@@ -98,6 +117,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of NOTIFICATION button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonNotificationOnClick(){
         /*List<ClubMember> memberExpired = new ArrayList<ClubMember>();
@@ -148,6 +171,10 @@ public class MenuEmployeeController {
         }
     }
 
+    /**
+     * Method used to manage the pressing of MEMBERSHIP LIST button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonMembershipListOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MembershipRegister.fxml"));
@@ -162,6 +189,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of STORAGE LIST button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonStorageListOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StorageRegister.fxml"));
@@ -176,6 +207,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to manage the pressing of COMPETITION REGISTER LIST button
+     * @throws IOException create Input/Output exception
+     */
     @FXML
     protected void buttonCompetitionRegisterListOnClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CompetitionRegisterList.fxml"));
@@ -190,6 +225,10 @@ public class MenuEmployeeController {
         stage2.close();
     }
 
+    /**
+     * Method used to set the club member for the view
+     * @param clubMember is the club member
+     */
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
     }
