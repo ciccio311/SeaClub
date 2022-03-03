@@ -8,6 +8,9 @@ import com.seaclub.server.DB;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a model for managing a list of competition
+ */
 public class CompetitionManager {
     private List<Competition> competitionList;
     private List<String> cRegister;
@@ -33,47 +36,95 @@ public class CompetitionManager {
         return instance;
     }
 
+    /**
+     * Method used to return the list of competition
+     * @return the list of competition
+     */
     public List<Competition> getCompetitionList() {
         return competitionList;
     }
 
+    /**
+     * Method used to set the competition lists
+     * @param competitionList is the list of competition
+     */
     public void setCompetitionList(List<Competition> competitionList) {
         this.competitionList = competitionList;
     }
 
+    /**
+     * Method used to set the competition register
+     * @param cRegister is the list of competition register
+     */
     public void setcRegister(List<String> cRegister) {
         this.cRegister = cRegister;
     }
 
+    /**
+     * Method used to return the competition register
+     * @return the list of competition register
+     */
     public List<String> getcRegister() {
         return cRegister;
     }
 
+    /**
+     * Method used to update the list of competition
+     */
     public void updateList(){
-        DB.getInstance().getCompetition();
+        try {
+            DB.getInstance().getCompetition();
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 
+    /**
+     * Method used for adding new competition
+     * @param competition the new competition
+     * @return true if the operation was successfully otherwise false
+     */
     public boolean addCompetition(Competition competition){
-        if(DB.getInstance().addNewCompetition(competition)){
-            updateList();
-            return true;
-        }else
+        try {
+            if (DB.getInstance().addNewCompetition(competition)) {
+                updateList();
+                return true;
+            } else
+                return false;
+        }catch (Exception e){
+            System.out.println(e.toString());
             return false;
+        }
     }
 
-    public void updateBoatList(CompetitionRegister c) {
-        Competition comp = getCompetitionById(c.getIdCompetition());
-        competitionList.remove(comp);
-        Boat boat = BoatManager.getInstance().getBoatById(c.getIdBoat());
-        comp.getBoats().add(boat);
-        competitionList.add(comp);
+    /**
+     * Method used for register a boat to competition
+     * @param competitionR the subscription
+     * @return true if the operation was successfully otherwise false
+     */
+    public boolean addBoatToCompetition(CompetitionRegister competitionR){
+        try {
+            if(DB.getInstance().addNewBoatInCompetition(competitionR)) {
+                Competition comp = getCompetitionById(competitionR.getIdCompetition());
+                competitionList.remove(comp);
+                Boat boat = BoatManager.getInstance().getBoatById(competitionR.getIdBoat());
+                comp.getBoats().add(boat);
+                competitionList.add(comp);
+                return true;
+            }else
+                return false;
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
     }
 
-    public void addBoatToCompetition(CompetitionRegister competitionR){
-        DB.getInstance().addNewBoatInCompetition(competitionR);
-        updateBoatList(competitionR);
-    }
-
+    /**
+     * Method used to return the competition with a specific ID
+     * @param id is the specific id of the competition
+     * @return the competition
+     */
     public Competition getCompetitionById(int id){
         for(var x: this.competitionList){
             if(x.getId() == id){

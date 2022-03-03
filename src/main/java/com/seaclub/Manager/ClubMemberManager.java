@@ -11,15 +11,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class implements a model for managing list of club member
+ */
 public class ClubMemberManager {
 
     private List<ClubMember> members;
 
     private static ClubMemberManager instance = null;
 
-    /*
+    /**
      * The constructor is private so it is accessible only within the class.
-     */
+     **/
     private ClubMemberManager(){
         members = new ArrayList<ClubMember>();
     }
@@ -50,10 +53,23 @@ public class ClubMemberManager {
         this.members = members;
     }
 
+
+    /**
+     * Method used for updating information about all club member in members list
+     */
     public void updateList(){
-        DB.getInstance().getClubMembers();
+        try {
+            DB.getInstance().getClubMembers();
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 
+    /**
+     * Method used for adding new club member to database.
+     * @param member Represents the new member to add.
+     * @return returns true if the executive was successful.
+     **/
     public boolean addMember(ClubMember member){
         try{
             if(checkCFalreadyExist(member))
@@ -65,11 +81,16 @@ public class ClubMemberManager {
             }
         }catch (Exception e){
 
-            System.out.println(e);
+            System.out.println(e.toString());
             return false;
         }
     }
 
+    /**
+     * Used for login
+     * @param cm Represents the new clubMember that try to login
+     * @return returns clubmember logged if the credentials are correct otherwise return null
+     **/
     public ClubMember login(ClubMember cm){
         updateList();
         for(var x:this.members){
@@ -80,6 +101,11 @@ public class ClubMemberManager {
         return null;
     }
 
+    /**
+     * Method used for getting a club member with the information updated
+     * @param clubMember the club member with old information
+     * @return the club member with the information updated
+     */
     public ClubMember updateClubMember(ClubMember clubMember){
         updateList();
         for(var x:this.members){
@@ -89,6 +115,10 @@ public class ClubMemberManager {
         return null;
     }
 
+    /**
+     * Method used for getting the list of club member with the quote membership expired
+     * @return the list of club member with the quote membership expired
+     */
     public List<ClubMember> clubMemberExpired(){
         updateList();
         MembershipRegister membershipRegister = new MembershipRegister();
@@ -122,6 +152,11 @@ public class ClubMemberManager {
         return expired;
     }
 
+    /**
+     * Method used for check if already exist a club member with a specific CF
+     * @param clubMember club member with the specific CF
+     * @return returns true if the executive was successful.
+     **/
     public boolean checkCFalreadyExist(ClubMember clubMember){
         updateList();
         for(var x:members){
@@ -131,7 +166,14 @@ public class ClubMemberManager {
         return false;
     }
 
+
+    /**
+     * Used for get the clubMember by CF
+     * @param clubMember Represents the clubMember with the spefific CF
+     * @return if exist returns the club member with the CF passed otherwise return null
+     **/
     public ClubMember getMemberByCF(ClubMember clubMember){
+        updateList();
         for(var x:this.members){
             if(x.getCF().equals(clubMember.getCF()))
                 return x;
@@ -139,7 +181,13 @@ public class ClubMemberManager {
         return null;
     }
 
-    public void sendNotificationBoatExpired() {
+
+
+    /**
+     * Used to send all Notification boat expired to all users.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean sendNotificationBoatExpired() {
         try {
             updateList();
             List<NotificationsRegister> notificationsRegisters = new ArrayList<NotificationsRegister>();
@@ -174,10 +222,11 @@ public class ClubMemberManager {
                 }
 
             }
+            return true;
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.toString());
+            return false;
         }
     }
 
 }
-

@@ -7,15 +7,18 @@ import com.seaclub.server.DB;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a model for managing list of competition register
+ */
 public class CompetitionRegisterManager {
 
     private List<CompetitionRegister> competitionRegisters;
 
     private static CompetitionRegisterManager instance = null;
 
-    /*
+    /**
      * The constructor is private so it is accessible only within the class.
-     */
+     **/
     private CompetitionRegisterManager(){
         competitionRegisters = new ArrayList<CompetitionRegister>();
     }
@@ -32,14 +35,24 @@ public class CompetitionRegisterManager {
         return instance;
     }
 
+    /**
+     * @param competitionRegisters set the list of competition register
+     */
     public void setCompetitionRegisters(List<CompetitionRegister> competitionRegisters) {
         this.competitionRegisters = competitionRegisters;
     }
 
+    /**
+     * @return the list of competition register
+     */
     public List<CompetitionRegister> getCompetitionRegisters() {
         return competitionRegisters;
     }
 
+
+    /**
+     * Method used for updating information about all competition register in the list
+     */
     public void updateList(){
         DB.getInstance().getCompetitionRegister();
     }
@@ -66,4 +79,3 @@ public class CompetitionRegisterManager {
         }
     }
 }
-

@@ -9,6 +9,9 @@ import com.seaclub.server.DB;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a model for managing a list of notification register
+ */
 public class NotificationsRegisterManager {
 
     private List<NotificationsRegister> registers;
@@ -36,14 +39,25 @@ public class NotificationsRegisterManager {
         return instance;
     }
 
+    /**
+     * Method used to return the list of notification register
+     * @return notification register lists
+     */
     public List<NotificationsRegister> getRegisters() {
         return registers;
     }
 
+    /**
+     * Method used to set the registers
+     * @param registers list of notification register to set
+     */
     public void setRegisters(List<NotificationsRegister> registers) {
         this.registers = registers;
     }
 
+    /**
+     * Method used to update the list of notification register
+     */
     public void updateList(){
         try {
             DB.getInstance().getNotificatioinRegister();
@@ -52,41 +66,80 @@ public class NotificationsRegisterManager {
         }
     }
 
-    public void addNewNotificationRegister(NotificationsRegister notificationsRegister){
-        DB.getInstance().addNotificationRegister(notificationsRegister);
-        updateList();
+    /**
+     * Used add new Notification register to database.
+     * @param notificationsRegister Represents the new Notification register to add.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean addNewNotificationRegister(NotificationsRegister notificationsRegister){
+        try {
+            if(DB.getInstance().addNotificationRegister(notificationsRegister)) {
+                updateList();
+                return true;
+            }else
+                return false;
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
     }
 
+    /**
+     * Used for getting the club member's notification
+     * @param id Represents clubMember's id
+     * @return if exist returns the notification of specific clubMember otherwise return null
+     **/
     public String getNotificationById(int id){
-        updateList();
-        String notify1="";
-        String notify2="";
-        for(var x:registers){
-            if(x.getIdMember()==id){
-                DB.getInstance().getNotification(x.getIdNotification());
-                if(notification.getId()==1){
-                     notify1 = x.getDateSender().toString()+" "+notification.getName()+" ";
-                }
-                if(notification.getId()==2){
-                     notify2 = x.getDateSender().toString()+" "+notification.getName()+" "+
-                            x.getInfo();
+        try {
+            updateList();
+            String notify1 = "";
+            String notify2 = "";
+            for (var x : registers) {
+                if (x.getIdMember() == id) {
+                    if(DB.getInstance().getNotification(x.getIdNotification())) {
+                        if (notification.getId() == 1) {
+                            notify1 = x.getDateSender().toString() + " " + notification.getName() + " ";
+                        }
+                        if (notification.getId() == 2) {
+                            notify2 = x.getDateSender().toString() + " " + notification.getName() + " " +
+                                    x.getInfo();
+                        }
+                    }
+                    else
+                        return null;
                 }
             }
-        }
-        if(notify1.equals("") && notify2.equals(""))
+            if (notify1.equals("") && notify2.equals(""))
+                return null;
+            return notify1 + "\n" + notify2;
+        }catch (Exception e){
+            System.out.println(e.toString());
             return null;
-        return notify1+"\n"+notify2;
-
+        }
     }
 
+    /**
+     * Method used to return the notification
+     * @return the notification
+     */
     public Notification getNotification() {
         return notification;
     }
 
+    /**
+     * Method used to set the notification
+     * @param notification is the notification to set
+     */
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
 
+    /**
+     * Method used for updating notification if a club member pays an expired storage quote or
+     * remove a boat with storage quote expired
+     * @param clubMember the club member that pays the expired storage quote or remove the boat with expired quote
+     * @return true if the operation was successfully otherwise false
+     */
     public Boolean updateNotificationStorage(ClubMember clubMember){
         try {
             updateList();
@@ -124,6 +177,11 @@ public class NotificationsRegisterManager {
         }
     }
 
+    /**
+     * Method used for deleting the notification of membership quote expired of specific club member
+     * @param clubMember the specific club member
+     * @return true if the operation was successfully otherwise false
+     */
     public Boolean deleteNotificationMembership(ClubMember clubMember){
         try {
             updateList();

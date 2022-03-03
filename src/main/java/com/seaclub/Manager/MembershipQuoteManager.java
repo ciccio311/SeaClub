@@ -6,6 +6,9 @@ import com.seaclub.Model.MembershipQuote;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a model for managing a list of membership quote
+ */
 public class MembershipQuoteManager {
     private List<MembershipQuote> membershipQuoteList;
 
@@ -30,13 +33,20 @@ public class MembershipQuoteManager {
         return instance;
     }
 
+    /**
+     * Method used to return the list of membership quote
+     * @return the list of membership quote
+     */
     public List<MembershipQuote> getMembershipQuoteList() {
         return membershipQuoteList;
     }
 
+    /**
+     * Method used to set the list of membership quote
+     * @param membershipQuoteList is the list to set
+     */
     public void setMembershipQuoteList(List<MembershipQuote> membershipQuoteList) {
         this.membershipQuoteList = membershipQuoteList;
     }
-
 
 }

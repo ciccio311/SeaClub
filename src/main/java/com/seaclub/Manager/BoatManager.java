@@ -8,6 +8,9 @@ import com.seaclub.server.DB;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a model for managing a list of boats
+ */
 public class BoatManager {
     private List<Boat> boats;
 
@@ -32,6 +35,11 @@ public class BoatManager {
         return instance;
     }
 
+    /**
+     * Method used to return the boats list of a specific club member
+     * @param clubMember is the specific club member
+     * @return the boats list
+     */
     public List<Boat> getMemberBoatsFromIDMember(ClubMember clubMember){
         updateList();
         List<Boat> membersBoat = new ArrayList<Boat>();
@@ -43,23 +51,59 @@ public class BoatManager {
         return membersBoat;
     }
 
+    /**
+     * Method used to return the list of all boat
+     * @return the entire list of boats
+     */
     public List<Boat> getBoats() {
         return boats;
     }
 
+    /**
+     * Method used to set the list of all boats
+     * @param boats is the list of all the boats
+     */
     public void setBoats(List<Boat> boats) {
         this.boats = boats;
     }
 
+    /**
+     * Method used to update the list of boats
+     */
     public void updateList(){
-        DB.getInstance().getBoats();
+        try {
+            DB.getInstance().getBoats();
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 
-    public void addBoat(Boat boat){
-        DB.getInstance().addNewBoat(boat);
-        updateList();
+    /**
+     * Method used for adding new boat
+     * @param boat the new boat
+     * @return true if the operation was successfully otherwise false
+     */
+    public boolean addBoat(Boat boat){
+        try{
+            if(DB.getInstance().addNewBoat(boat)) {
+                updateList();
+                return true;
+            }
+            else
+                return false;
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+
     }
 
+    /**
+     * Method used to find a boat with a specific ID
+     * @param id is the specific id of the boat
+     * @return the boat with boat.getID()=id
+     */
     public Boat getBoatById(int id){
         for(var x: this.boats){
             if(x.getId() == id){
@@ -69,8 +113,21 @@ public class BoatManager {
         return null;
     }
 
-    public void removeBoat(Boat boat){
-        DB.getInstance().deleteBoat(boat);
-        updateList();
+    /**
+     * Used to remove specific boat.
+     * @param boat Represents the boat to delete.
+     * @return returns true if the executive was successful.
+     **/
+    public boolean removeBoat(Boat boat){
+        try {
+            if(DB.getInstance().deleteBoat(boat)) {
+                updateList();
+                return true;
+            }else
+                return false;
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
     }
 }

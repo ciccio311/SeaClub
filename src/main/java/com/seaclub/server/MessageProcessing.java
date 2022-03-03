@@ -107,7 +107,7 @@ public class MessageProcessing {
         if(ClubMemberManager.getInstance().addMember(member))
             return new Message("Aggiunto new member", true);
         else
-            return new Message("member doesn' t added!", false);
+            return new Message("Member doesn' t added!", false);
 
     }
 
