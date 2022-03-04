@@ -8,11 +8,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class used for testing the principal method of Club member manager class
+ */
 class ClubMemberManagerTest {
-
-    @Test
-    void login() {
-    }
 
     /**
      * Test if return a club member with specific id and information updated

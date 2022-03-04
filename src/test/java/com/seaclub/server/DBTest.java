@@ -8,6 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class used for testing the principal method of DB class
+ */
 class DBTest {
 
     /**

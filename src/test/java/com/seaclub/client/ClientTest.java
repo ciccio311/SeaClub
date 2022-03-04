@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Class used for testing Client
+ * Class used for testing the principal method of Client class
  */
 class ClientTest {
 
