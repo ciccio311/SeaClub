@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * First class
+ */
 public class StartClient extends Application {
     @Override
     public void start(Stage stage) throws IOException {

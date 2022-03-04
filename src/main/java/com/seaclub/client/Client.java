@@ -11,6 +11,9 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Class used to manage the request from the client to the server
+ */
 public class Client {
 
     private static final int SERVER_PORT = 8080;

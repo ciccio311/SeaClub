@@ -2,6 +2,9 @@ package com.seaclub.Communication;
 
 import java.io.Serializable;
 
+/**
+ * Class used for setting message between client and server
+ */
 public class Message implements Serializable {
 
     private String ACTION_LOGIN = "login";

@@ -6,6 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to communicate with the DB
+ */
 public class DB {
 
     /* SQL DB ELEMENTS */

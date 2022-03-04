@@ -8,6 +8,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Main class of the server
+ */
 public class Server {
     private static final int COREPOOL = 5;
     private static final int MAXPOOL = 10;

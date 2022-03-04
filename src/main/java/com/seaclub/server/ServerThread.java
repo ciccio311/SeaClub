@@ -5,6 +5,9 @@ import com.seaclub.Communication.Message;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Class used to handle requests to the server on separate threads.
+ */
 public class ServerThread implements Runnable {
     private static final long SLEEPTIME = 200;
 
