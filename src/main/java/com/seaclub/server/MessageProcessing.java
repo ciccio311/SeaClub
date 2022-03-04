@@ -50,8 +50,6 @@ public class MessageProcessing {
                 return login(mex);
             if(mex.getAction().equals(mex.getActionAddBoat()))
                 return addNewBoat(mex);
-            if(mex.getAction().equals(mex.getActionRaces()))
-                return getCompetitions(mex);
             if(mex.getAction().equals(mex.getActionAddRace()))
                 return addNewCompetition(mex);
             if(mex.getAction().equals(mex.getActionAddBoatToCompetition()))

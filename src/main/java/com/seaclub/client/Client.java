@@ -689,58 +689,6 @@ public class Client {
         return null;
     }
 
-
-    /**
-     * Method used for getting the list of all competition
-     * @return the list of all competition
-     */
-    public List<Competition> getAllCompetition(){
-        try {
-            Socket client = new Socket(SERVER_HOST, SERVER_PORT);
-
-            ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
-            ObjectInputStream is = null;
-
-            while(true) {
-                Message request = new Message();
-                request.setAction(request.getActionRaces());
-
-                System.out.println("Client sends: " + request.getAction()  + " action to Server");
-
-                os.writeObject(request);
-                os.flush();
-
-                if(is == null) {
-                    is= new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
-                }
-
-                Object o = is.readObject();
-
-                if(o instanceof Message) {
-                    Message response = (Message) o;
-
-                    System.out.println(" and received response: " + response.getAction() + " action from Server");
-                    client.close();
-                    if(response.getValue()!=null){
-                        List<Competition> competitions = (List<Competition>) response.getValue();
-                        return competitions;
-                    }else
-                        return null;
-                }
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-
-            if(e instanceof ConnectException) {
-                System.out.println("Server is in down! Please retry...");
-                return null;
-            }
-
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     /**
      * Method used for getting the list of all storage register
      * @return the list of all storage register

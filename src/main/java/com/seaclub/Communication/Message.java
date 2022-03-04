@@ -15,8 +15,6 @@ public class Message implements Serializable {
 
     private String ACTION_REMOVE_BOAT = "removeBoat";
 
-    private String ACTION_RACES = "races";
-
     private final String ACTION_GET_ALL_PARTNERS = "getAllPartners";
 
     private String ACTION_GET_MEMBERSHIP_FEE = "getMembershipFee";
@@ -160,10 +158,6 @@ public class Message implements Serializable {
 
     public String getActionNewUserRegistration() {
         return ACTION_NEW_USER_REGISTRATION;
-    }
-
-    public String getActionRaces() {
-        return ACTION_RACES;
     }
 
     public String getActionRemoveBoat() {
