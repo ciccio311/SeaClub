@@ -11,6 +11,9 @@ class ClientTest {
     void getInstance() {
     }
 
+    /**
+     * Test if add new member in database
+     */
     @Test
     void addMember() {
         ClubMember testMember = new ClubMember();
