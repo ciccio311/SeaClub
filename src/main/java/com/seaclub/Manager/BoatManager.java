@@ -105,6 +105,7 @@ public class BoatManager {
      * @return the boat with boat.getID()=id
      */
     public Boat getBoatById(int id){
+        updateList();
         for(var x: this.boats){
             if(x.getId() == id){
                 return x;

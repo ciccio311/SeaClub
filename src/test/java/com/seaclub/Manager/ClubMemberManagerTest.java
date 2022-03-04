@@ -24,7 +24,7 @@ class ClubMemberManagerTest {
     }
 
     /**
-     * Test if get list of member expired
+     * Test if you get list of member expired
      */
     @Test
     void clubMemberExpired() {
@@ -43,7 +43,7 @@ class ClubMemberManagerTest {
     }
 
     /**
-     * Test if get a club member with specific CF
+     * Test if you get a club member with specific CF
      */
     @Test
     void getMemberByCF() {
