@@ -13,52 +13,52 @@
             </font>
         </Label>
 
-        <Label layoutX="35.0" layoutY="77.0" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="77.0" />
+        <Label layoutX="19.0" layoutY="77.0" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #00FA9A; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="77.0" />
         <Label alignment="CENTER" layoutX="47.0" layoutY="87.0" prefHeight="26.0" prefWidth="177.0" text="Your competition" textAlignment="CENTER" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="87.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="DateLabel" alignment="CENTER" layoutX="314.0" layoutY="150.0" prefHeight="26.0" prefWidth="121.0" text="Date:" textAlignment="CENTER" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="150.0">
+        <Label fx:id="DateLabel" alignment="CENTER" layoutX="314.0" layoutY="150.0" prefHeight="26.0" prefWidth="121.0" text="Date:" textAlignment="CENTER" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="150.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="314.0" layoutY="200.0" prefHeight="26.0" prefWidth="121.0" text="Boat:" textAlignment="CENTER" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="200.0">
+        <Label fx:id="BoatLabel" alignment="CENTER" layoutX="314.0" layoutY="200.0" prefHeight="26.0" prefWidth="121.0" text="Boat:" textAlignment="CENTER" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="200.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="SubmitButton" layoutX="387.0" layoutY="379.0" mnemonicParsing="false" onAction="#SubmitOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Submit" textFill="WHITE" AnchorPane.leftAnchor="387.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="379.0">
+        <Button fx:id="SubmitButton" layoutX="387.0" layoutY="379.0" mnemonicParsing="false" onAction="#SubmitOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Submit" textFill="WHITE" AnchorPane.bottomAnchor="34.8" AnchorPane.rightAnchor="71.4">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <ComboBox fx:id="DateComboBox" layoutX="435.0" layoutY="151.0" onAction="#OnClickDate" prefWidth="150.0" />
-        <ComboBox fx:id="BoatComboBox" layoutX="435.0" layoutY="201.0" onAction="#OnClickBoat" prefWidth="150.0" />
-        <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="318.0" layoutY="300.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER">
+        <ComboBox fx:id="DateComboBox" layoutX="435.0" layoutY="151.0" onAction="#OnClickDate" prefWidth="150.0" AnchorPane.rightAnchor="14.599999999999994" />
+        <ComboBox fx:id="BoatComboBox" layoutX="435.0" layoutY="201.0" onAction="#OnClickBoat" prefWidth="150.0" AnchorPane.rightAnchor="14.599999999999994" />
+        <Label fx:id="PaymentLabel" alignment="CENTER" layoutX="318.0" layoutY="300.0" prefHeight="26.0" prefWidth="111.0" text="Payment:" textAlignment="CENTER" AnchorPane.rightAnchor="170.8" AnchorPane.topAnchor="300.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="PriceLabel" alignment="CENTER" layoutX="313.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER">
+        <Label fx:id="PriceLabel" alignment="CENTER" layoutX="313.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="Price:" textAlignment="CENTER" AnchorPane.rightAnchor="170.8" AnchorPane.topAnchor="253.0">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="RacePriceLabel" alignment="CENTER" layoutX="449.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c">
+        <Label fx:id="RacePriceLabel" alignment="CENTER" layoutX="449.0" layoutY="253.0" prefHeight="26.0" prefWidth="121.0" text="NA" textAlignment="CENTER" textFill="#d00c0c" AnchorPane.rightAnchor="29.400000000000006">
             <font>
                 <Font name="Verdana Bold" size="18.0" />
             </font>
         </Label>
-        <RadioButton fx:id="CardRadioButton" layoutX="434.0" layoutY="305.0" mnemonicParsing="false" text="Card" />
-        <RadioButton fx:id="BanckTransferRadioButton" layoutX="494.0" layoutY="305.0" mnemonicParsing="false" text="Bank transfer" />
+        <RadioButton fx:id="CardRadioButton" layoutX="434.0" layoutY="304.0" mnemonicParsing="false" text="Card" AnchorPane.rightAnchor="119.60000000000002" />
+        <RadioButton fx:id="BanckTransferRadioButton" layoutX="493.0" layoutY="304.0" mnemonicParsing="false" text="Bank transfer" AnchorPane.rightAnchor="15.799999999999955" />
         <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="BACK" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font name="Verdana Bold" size="12.0" />
             </font>
         </Button>
-        <TableView fx:id="tableViewCompetition" layoutY="186.0" prefHeight="318.0" prefWidth="264.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0">
+        <TableView fx:id="tableViewCompetition" layoutY="186.0" prefHeight="318.0" prefWidth="264.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="147.60000000000002">
             <columns>
             </columns>
         </TableView>

@@ -47,6 +47,10 @@ public class BoatController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields correct!");
             alert.showAndWait();
         }
+        else if(name.getText().length()>15 || width.getText().length()>2){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
+            alert.showAndWait();
+        }
         else
         {
             try {
@@ -117,6 +121,7 @@ public class BoatController {
         addButtonsToTable(tableViewBoats);
 
         tableViewBoats.setItems(FXCollections.observableList((cm.getBoats())));
+
     }
 
     /**

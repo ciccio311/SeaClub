@@ -13,27 +13,30 @@
                 <Font name="Verdana Bold" size="36.0" />
             </font>
         </Label>
-        <Button fx:id="buttonQuote" layoutX="220.0" layoutY="242.0" mnemonicParsing="false" onAction="#buttonQuotOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Quote" textFill="WHITE" AnchorPane.bottomAnchor="204.66666666666669" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="239.0">
+        <Button fx:id="buttonQuote" layoutX="220.0" layoutY="242.0" mnemonicParsing="false" onAction="#buttonQuotOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Quote" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="238.4" AnchorPane.topAnchor="242.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <Button fx:id="competitionButton" layoutX="220.0" layoutY="168.0" mnemonicParsing="false" onAction="#onCompetitionButtonClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Gare" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="168.0">
+        <Button fx:id="competitionButton" layoutX="220.0" layoutY="168.0" mnemonicParsing="false" onAction="#onCompetitionButtonClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Gare" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="238.4" AnchorPane.topAnchor="168.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <Button fx:id="buttonUser" layoutX="220.0" layoutY="387.0" mnemonicParsing="false" onAction="#buttonUserOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="User" textFill="WHITE">
+        <Button fx:id="buttonUser" layoutX="220.0" layoutY="387.0" mnemonicParsing="false" onAction="#buttonUserOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="User" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="238.4" AnchorPane.topAnchor="387.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <Button fx:id="buttonBoat" layoutX="220.0" layoutY="315.0" mnemonicParsing="false" onAction="#buttonBoatOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Barche" textFill="WHITE">
+        <Button fx:id="buttonBoat" layoutX="220.0" layoutY="315.0" mnemonicParsing="false" onAction="#buttonBoatOnClick" prefHeight="55.0" prefWidth="141.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Barche" textFill="WHITE" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="238.4" AnchorPane.topAnchor="315.0">
             <font>
                 <Font name="Verdana Bold" size="25.0" />
             </font>
         </Button>
-        <Label fx:id="labelUser" layoutX="70.0" layoutY="159.0" prefHeight="12.0" prefWidth="100.0" text="Label" />
+        <Label fx:id="labelUser" layoutX="70.0" layoutY="159.0" prefHeight="12.0" prefWidth="100.0" text="Label">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font></Label>
         <Button fx:id="btnLogout" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutOnClick" style="-fx-background-color: red; -fx-background-radius: 100 100 100 100; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="LOGOUT" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font name="Verdana Bold" size="12.0" />

@@ -42,20 +42,22 @@ public class LoginController {
      */
     @FXML
     protected void onLoginButtonClick() throws IOException {
-        btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: red; -fx-background-radius: 50;");
+        try {
+            btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: red; -fx-background-radius: 50;");
 
-        if(username.getText().length()==0 || password.getText().length()==0)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
-            alert.showAndWait();
-            btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;");
-        }
-        else
-        {
-            ClubMember clubMember = new ClubMember();
-            clubMember.setId(Integer.valueOf(username.getText()));
-            clubMember.setPassword(password.getText());
-            clubMember = Client.getInstance().login(clubMember);
+            if (username.getText().length() == 0 || password.getText().length() == 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
+                alert.showAndWait();
+                btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;");
+            } else if (username.getText().length() > 10 || password.getText().length() > 17) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
+                alert.showAndWait();
+                btnLogin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;");
+            } else {
+                ClubMember clubMember = new ClubMember();
+                clubMember.setId(Integer.valueOf(username.getText()));
+                clubMember.setPassword(password.getText());
+                clubMember = Client.getInstance().login(clubMember);
 
             /*Competition cp = new Competition();
             Date date = new Date(System.currentTimeMillis());
@@ -65,41 +67,48 @@ public class LoginController {
             Client.getInstance().addNewCompetition(cp);
             */
 
-            if(clubMember!=null) {
+                if (clubMember != null) {
 
-                if(clubMember.getDipendente() == 1){
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
+                    if (clubMember.getDipendente() == 1) {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuEmployee.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
 
-                    MenuEmployeeController mec = fxmlLoader.getController();
-                    mec.setClubMember(clubMember);
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    Stage stage2 = (Stage) btnLogin.getScene().getWindow();
-                    stage2.close();
+                        MenuEmployeeController mec = fxmlLoader.getController();
+                        mec.setClubMember(clubMember);
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                        Stage stage2 = (Stage) btnLogin.getScene().getWindow();
+                        stage2.close();
+                    } else {
+
+                        String notify = Client.getInstance().getNotification(clubMember.getId());
+
+                        if (notify != null) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION, notify);
+                            alert.showAndWait();
+                        }
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
+
+                        MenuController hc = fxmlLoader.getController();
+                        hc.setClubMember(clubMember);
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                        Stage stage2 = (Stage) btnLogin.getScene().getWindow();
+                        stage2.close();
+                    }
                 }
                 else{
-
-                    String notify = Client.getInstance().getNotification(clubMember.getId());
-
-                    if(notify != null){
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION, notify);
-                        alert.showAndWait();
-                    }
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
-
-                    MenuController hc = fxmlLoader.getController();
-                    hc.setClubMember(clubMember);
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    Stage stage2 = (Stage) btnLogin.getScene().getWindow();
-                    stage2.close();
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "User doesn't exist!");
+                    alert.showAndWait();
                 }
             }
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "User doesn't exist!");
+            alert.showAndWait();
         }
     }
 

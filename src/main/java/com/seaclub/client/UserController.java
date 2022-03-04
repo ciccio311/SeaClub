@@ -76,25 +76,34 @@ public class UserController {
      */
     @FXML
     protected void modifyOnClick() throws IOException {
-        if(!Objects.equals(this.clubMember.getAddress(), AddressTextField.getText()) || !Objects.equals(this.clubMember.getPassword(), PasswordTextField.getText())){
-            this.clubMember.setAddress(AddressTextField.getText());
-            this.clubMember.setPassword(PasswordTextField.getText());
-            if(Client.getInstance().updateMemberInfo(this.clubMember)){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Parameters modified!");
-                alert.showAndWait();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-                Stage stage2 = (Stage) AddressTextField.getScene().getWindow();
-                stage2.close();
-            }
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Modify something!");
+        if(AddressTextField.getText().length() > 25 || PasswordTextField.getText().length() > 17) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
             alert.showAndWait();
+        }
+        else if(AddressTextField.getText().length() == 0 || PasswordTextField.getText().length() == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
+            alert.showAndWait();
+        }
+        else{
+            if (!Objects.equals(this.clubMember.getAddress(), AddressTextField.getText()) || !Objects.equals(this.clubMember.getPassword(), PasswordTextField.getText())) {
+                this.clubMember.setAddress(AddressTextField.getText());
+                this.clubMember.setPassword(PasswordTextField.getText());
+                if (Client.getInstance().updateMemberInfo(this.clubMember)) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Parameters modified!");
+                    alert.showAndWait();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Stage stage2 = (Stage) AddressTextField.getScene().getWindow();
+                    stage2.close();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Modify something!");
+                alert.showAndWait();
+            }
         }
     }
 }

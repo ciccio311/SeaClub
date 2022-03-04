@@ -107,10 +107,11 @@ public class UserListController {
      */
     @FXML
     protected void searchOnClick(){
-        if(idSearchTextFIeld.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert users id!");
+        if(idSearchTextFIeld.getText().length() == 0 || idSearchTextFIeld.getText().length() > 10){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert the correct user id!");
             alert.showAndWait();
-        }else {
+        }
+        else {
             try {
                 tableViewUsers.getItems().clear();
                 ClubMember clubMemberToSearch = new ClubMember();

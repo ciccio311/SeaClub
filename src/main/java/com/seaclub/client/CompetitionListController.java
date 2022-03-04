@@ -75,6 +75,10 @@ public class CompetitionListController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
             alert.showAndWait();
         }
+        else if(Float.parseFloat(priceTextField.getText()) > 10000.00){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Price too high!");
+            alert.showAndWait();
+        }
         else{
             try {
                 Competition competition = new Competition();
