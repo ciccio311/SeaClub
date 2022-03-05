@@ -71,16 +71,17 @@ public class CompetitionListController {
      */
     @FXML
     protected void addOnClick(){
-        if(datePicker.getValue() == null || datePicker.getValue().toString().equals("") || priceTextField.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
-            alert.showAndWait();
-        }
-        else if(Float.parseFloat(priceTextField.getText()) > 10000.00){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Price too high!");
-            alert.showAndWait();
-        }
-        else{
-            try {
+        try {
+            if(datePicker.getValue() == null || datePicker.getValue().toString().equals("") || priceTextField.getText().equals("")){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields!");
+                alert.showAndWait();
+            }
+            else if(Float.parseFloat(priceTextField.getText()) > 10000.00){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Price too high!");
+                alert.showAndWait();
+            }
+            else {
+
                 Competition competition = new Competition();
                 //get value from DatePicker
                 LocalDate dateFromDatePicker = datePicker.getValue();
@@ -91,17 +92,18 @@ public class CompetitionListController {
 
                 competition.setDate(sqlDate);
                 competition.setPrice(Float.valueOf(priceTextField.getText()));
-                if(Client.getInstance().addNewCompetition(competition)){
+                if (Client.getInstance().addNewCompetition(competition)) {
                     setTableView();
-                }else{
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Competition NOT added! Try later");
                     alert.showAndWait();
                 }
-            }catch (Exception e){
-                System.out.println("Error: "+e.toString());
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Enter the correct information!");
-                alert.showAndWait();
             }
+        }
+        catch (Exception e){
+            System.out.println("Error: "+e.toString());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Enter the correct information!");
+            alert.showAndWait();
         }
     }
 
