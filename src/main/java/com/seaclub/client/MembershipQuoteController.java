@@ -91,10 +91,7 @@ public class MembershipQuoteController {
             if(Client.getInstance().addMembershipRegisterQuote(mr)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Payment success!");
                 alert.showAndWait();
-                if(Client.getInstance().deleteNotificationMembership(clubMember)==false){
-                    Alert alerts = new Alert(Alert.AlertType.ERROR, "Notification not updated!");
-                    alerts.showAndWait();
-                }
+                Client.getInstance().deleteNotificationMembership(clubMember);
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
