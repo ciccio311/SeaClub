@@ -32,7 +32,7 @@
             <Font name="Verdana Bold" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="buttonNotification" layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#buttonNotificationOnClick" prefHeight="55.0" prefWidth="278.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Send notification" textFill="WHITE">
+      <Button fx:id="buttonNotification" layoutX="286.0" layoutY="405.0" mnemonicParsing="false" onAction="#buttonNotificationOnClick" prefHeight="55.0" prefWidth="278.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Send notification" textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="25.0" />
          </font>
@@ -48,6 +48,11 @@
          </font>
       </Button>
       <Button fx:id="buttonCompetitionRegisterList" layoutX="296.0" layoutY="330.0" mnemonicParsing="false" onAction="#buttonCompetitionRegisterListOnClick" prefHeight="55.0" prefWidth="258.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Comp. register" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="addEmployeeButton" layoutX="39.0" layoutY="405.0" mnemonicParsing="false" onAction="#addEmployeeOnClick" prefHeight="55.0" prefWidth="240.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #D3D3D3; -fx-background-radius: 50;" text="Add Employee" textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="25.0" />
          </font>

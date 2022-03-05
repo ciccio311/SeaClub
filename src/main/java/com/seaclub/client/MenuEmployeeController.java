@@ -231,4 +231,23 @@ public class MenuEmployeeController {
     public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
     }
+
+
+    /**
+     * Method used to manage the pressing of Add new employee button
+     * @throws IOException create Input/Output exception
+     */
+    @FXML
+    protected  void addEmployeeOnClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sign up.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+
+        SignUpController src = fxmlLoader.getController();
+        src.setClubMemberDip(clubMember);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) btnLogout.getScene().getWindow();
+        stage2.close();
+    }
 }

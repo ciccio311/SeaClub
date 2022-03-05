@@ -17,6 +17,7 @@ import java.io.IOException;
  * Class to manage the information and action about the view SIGNUP
  */
 public class SignUpController {
+    private ClubMember clubMemberDip;
     @FXML
     private Button btnSignUp;
 
@@ -44,28 +45,22 @@ public class SignUpController {
         if(name.getText().length()==0 ||
                 surname.getText().length()==0 ||
                 address.getText().length()==0 ||
-                CF.getText().length()==0 ||
-                password.getText().length()==0){
+                CF.getText().length()==0 || password.getText().length()==0){
 
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert info in all fields!");
             alert.showAndWait();
-        }
-        else if(name.getText().length() > 17 ||
-                surname.getText().length() > 17 ||
-                address.getText().length() > 25 ||
-                CF.getText().length() > 16 ||
-                password.getText().length() > 17){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
-            alert.showAndWait();
-        }
-        else{
+        }else{
             ClubMember clubMember = new ClubMember();
             clubMember.setName(name.getText());
             clubMember.setSurname(surname.getText());
             clubMember.setCF(CF.getText());
             clubMember.setAddress(address.getText());
             clubMember.setPassword(password.getText());
-            clubMember.setDipendente(0);
+            if(clubMemberDip==null)
+                clubMember.setDipendente(0);
+            else
+                clubMember.setDipendente(1);
+
             if(Client.getInstance().addMember(clubMember)){
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -90,4 +85,7 @@ public class SignUpController {
         }
     }
 
+    public void setClubMemberDip(ClubMember clubMemberDip) {
+        this.clubMemberDip = clubMemberDip;
+    }
 }
