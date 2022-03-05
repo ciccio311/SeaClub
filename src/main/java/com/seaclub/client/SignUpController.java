@@ -49,7 +49,16 @@ public class SignUpController {
 
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert info in all fields!");
             alert.showAndWait();
-        }else{
+        }
+        else if(name.getText().length() > 17 ||
+                surname.getText().length() > 17 ||
+                address.getText().length() > 25 ||
+                CF.getText().length() > 16 ||
+                password.getText().length() > 17){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
+            alert.showAndWait();
+        }
+        else{
             ClubMember clubMember = new ClubMember();
             clubMember.setName(name.getText());
             clubMember.setSurname(surname.getText());

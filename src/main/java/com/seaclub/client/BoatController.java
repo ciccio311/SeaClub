@@ -47,7 +47,7 @@ public class BoatController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert all fields correct!");
             alert.showAndWait();
         }
-        else if(name.getText().length()>15 || width.getText().length()>2){
+        else if(name.getText().length()>15 || Float.valueOf(width.getText())>100.00){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fields too long!");
             alert.showAndWait();
         }
